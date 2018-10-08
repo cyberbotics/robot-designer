@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+}
+
+.nrp-robot-designer {
+  height: 100vh;
+  display: grid;
+  grid-template-areas:
+    'header header header'
+    'menu main sidebar'
+    'menu footer sidebar';
+  grid-template-columns: 45px auto 275px;
+  grid-template-rows: 65px auto 110px;
+  grid-gap: 3px;
+  background-color: #333;
+  overflow: hidden;
+  font-family: 'Raleway', sans-serif;
+}
+
+.nrp-robot-designer > div {
+  background-color: #333;
+  color: white;
+  padding: 0;
+  overflow: hidden;
+}
+
+.header {
+  grid-area: header;
+  display: grid;
+  grid-template-areas:
+    'header'
+    'footer';
+  grid-template-rows: 50% 50%;
+}
+
+.header-top, .header-bottom {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  grid-area: menu;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.main {
+  grid-area: main;
+  background: red;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.footer {
+  grid-area: footer;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.part-icon:hover {
+  background-color: #68E;
+}
+
+[draggable=true] {
+    cursor: move;
+}
+
+.fas, .menu-item {
+  margin: 10px;
+}
+
+.fas:hover, .menu-item:hover {
+  color: #68E
+}
