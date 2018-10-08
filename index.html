@@ -6,7 +6,7 @@
     <link type="text/css" rel="stylesheet" href="https://unpkg.com/normalize.css@8.0.0/normalize.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/robot-designer/style.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/96/three.js" ></script>
     <script src="https://threejs.org/examples/js/postprocessing/EffectComposer.js"></script>
     <script src="https://threejs.org/examples/js/shaders/CopyShader.js"></script>
@@ -14,24 +14,22 @@
     <script src="https://threejs.org/examples/js/postprocessing/ShaderPass.js"></script>
     <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
     <script src="https://threejs.org/examples/js/postprocessing/OutlinePass.js"></script>
-    <script type="text/javascript" src="/scripts/controller/robot_controller.js"></script>
-    <script type="text/javascript" src="/scripts/controller/part_controller.js"></script>
-    <script type="text/javascript" src="/scripts/model/observable.js"></script>
-    <script type="text/javascript" src="/scripts/model/robot.js"></script>
-    <script type="text/javascript" src="/scripts/model/part.js"></script>
-    <script type="text/javascript" src="/scripts/view/bin/x3d.js"></script>
-    <script type="text/javascript" src="/scripts/view/dragger.js"></script>
-    <script type="text/javascript" src="/scripts/view/ghost.js"></script>
-    <script type="text/javascript" src="/scripts/view/highlightor.js"></script>
-    <script type="text/javascript" src="/scripts/view/selector.js"></script>
-    <script type="text/javascript" src="/scripts/view/mediator/part_mediator.js"></script>
-    <script type="text/javascript" src="/scripts/view/mediator/robot_mediator.js"></script>
-    <script type="text/javascript" src="/scripts/view/slot_anchors.js"></script>
-    <script type="text/javascript" src="/scripts/view/view3D.js"></script>
-    <script type="text/javascript" src="/scripts/view/views/part_view.js"></script>
-    <script type="text/javascript" src="/scripts/view/views/robot_view.js"></script>
-    <script type="text/javascript" src="/scripts/fullscreen.js"></script>
-    <script type="text/javascript" src="/scripts/robot_designer.js" defer></script>
+    <script type="text/javascript" src="/robot-designer/scripts/controller/robot_controller.js"></script>
+    <script type="text/javascript" src="/robot-designer/scripts/controller/part_controller.js"></script>
+    <script type="text/javascript" src="/robot-designer/scripts/model/observable.js"></script>
+    <script type="text/javascript" src="/robot-designer/scripts/model/robot.js"></script>
+    <script type="text/javascript" src="/robot-designer/scripts/model/part.js"></script>
+    <script type="text/javascript" src="/robot-designer/scripts/view/bin/x3d.js"></script>
+    <script type="text/javascript" src="/robot-designer/scripts/view/dragger.js"></script>
+    <script type="text/javascript" src="/robot-designer/scripts/view/ghost.js"></script>
+    <script type="text/javascript" src="/robot-designer/scripts/view/highlightor.js"></script>
+    <script type="text/javascript" src="/robot-designer/scripts/view/selector.js"></script>
+    <script type="text/javascript" src="/robot-designer/scripts/view/mediator/part_mediator.js"></script>
+    <script type="text/javascript" src="/robot-designer/scripts/view/mediator/robot_mediator.js"></script>
+    <script type="text/javascript" src="/robot-designer/scripts/view/slot_anchors.js"></script>
+    <script type="text/javascript" src="/robot-designer/scripts/view/view3D.js"></script>
+    <script type="text/javascript" src="/robot-designer/scripts/fullscreen.js"></script>
+    <script type="text/javascript" src="/robot-designer/scripts/robot_designer.js" defer></script>
   </head>
   <body>
 
@@ -59,10 +57,10 @@
       <div class="sidebar">Node view</div>
       <div class="footer">
         <div class="part-icon" draggable="true" ondragstart="dragStart(event)" part="tinkerbots/base">
-          <img draggable="false" src="/assets/models/tinkerbots/base/icon.png"/>
+          <img draggable="false" src="/robot-designer/assets/models/tinkerbots/base/icon.png"/>
         </div>
         <div class="part-icon" draggable="true" ondragstart="dragStart(event)" part="tinkerbots/cube">
-          <img draggable="false" src="/assets/models/tinkerbots/cube/icon.png"/>
+          <img draggable="false" src="/robot-designer/assets/models/tinkerbots/cube/icon.png"/>
         </div>
       </div>
     </div>

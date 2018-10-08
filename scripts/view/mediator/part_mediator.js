@@ -32,7 +32,7 @@ class PartMediator { // eslint-disable-line no-unused-vars
   makeObject3D() {
     var container = new THREE.Object3D();
 
-    var model = '/assets/models/' + this.model.modelName + '/model.x3d';
+    var model = '/robot-designer/assets/models/' + this.model.modelName + '/model.x3d';
     var loader = new THREE.X3DLoader();
     // loader.ontextureload = this.changed.bind(this);
     loader.load(model, function(object3d) {

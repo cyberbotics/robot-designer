@@ -11,7 +11,7 @@ class Ghost { // eslint-disable-line no-unused-vars
     this.ghost = new THREE.Object3D();
     this.ghost.name = 'ghost';
 
-    var model = '/assets/models/' + modelName + '/model.x3d';
+    var model = '/robot-designer/assets/models/' + modelName + '/model.x3d';
     var loader = new THREE.X3DLoader();
     // loader.ontextureload = this.changed.bind(this);
     var that = this;
