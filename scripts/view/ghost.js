@@ -30,10 +30,7 @@ class Ghost { // eslint-disable-line no-unused-vars
   }
 
   moveGhostToFloor(projection) {
-    if (this.slot) {
-      this.scene.add(this.ghost);
-      this.slot = null;
-    }
+    this.scene.add(this.ghost);
     this.ghost.position.copy(projection);
   }
 
