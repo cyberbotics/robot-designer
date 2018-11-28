@@ -34,8 +34,9 @@ function save() { // eslint-disable-line no-unused-vars
 }
 
 function mousedown(ev) { // eslint-disable-line no-unused-vars
+  var relativePosition = designer.view3D.convertMouseEventPositionToRelativePosition(ev.clientX, ev.clientY);
   var screenPosition = designer.view3D.convertMouseEventPositionToScreenPosition(ev.clientX, ev.clientY);
-  var part = designer.view3D.getPartAt(screenPosition);
+  var part = designer.view3D.getPartAt(relativePosition, screenPosition);
   if (part)
     designer.view3D.selector.toggleSelection(part);
   else
@@ -52,8 +53,9 @@ function deleteSelectedPart() { // eslint-disable-line no-unused-vars
 }
 
 function mouseMove(ev) { // eslint-disable-line no-unused-vars
+  var relativePosition = designer.view3D.convertMouseEventPositionToRelativePosition(ev.clientX, ev.clientY);
   var screenPosition = designer.view3D.convertMouseEventPositionToScreenPosition(ev.clientX, ev.clientY);
-  var part = designer.view3D.getPartAt(screenPosition);
+  var part = designer.view3D.getPartAt(relativePosition, screenPosition);
   if (part)
     designer.view3D.highlightor.highlight(part);
   else

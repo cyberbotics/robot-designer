@@ -20,6 +20,7 @@
     <script type="text/javascript" src="/robot-designer/scripts/model/robot.js"></script>
     <script type="text/javascript" src="/robot-designer/scripts/model/part.js"></script>
     <script type="text/javascript" src="/robot-designer/scripts/view/bin/x3d.js"></script>
+    <script type="text/javascript" src="/robot-designer/scripts/view/bin/GPUPicker.js"></script>
     <script type="text/javascript" src="/robot-designer/scripts/view/dragger.js"></script>
     <script type="text/javascript" src="/robot-designer/scripts/view/ghost.js"></script>
     <script type="text/javascript" src="/robot-designer/scripts/view/highlightor.js"></script>
@@ -53,7 +54,7 @@
       <div class="menu">
         <i class="fas fa-trash-alt" onclick="deleteSelectedPart()"></i>
       </div>
-      <div class="main" name="view3D" ondrop="drop(event)" ondragenter="dragEnter(event)" ondragover="dragOver(event)" ondragleave="dragLeave(event)" onmousemove="mouseMove(event)" onmousedown="mousedown(event)"></div>  
+      <div class="main" name="view3D" ondrop="drop(event)" ondragenter="dragEnter(event)" ondragover="dragOver(event)" ondragleave="dragLeave(event)" onmousemove="mouseMove(event)" onmousedown="mousedown(event)"></div>
       <div class="sidebar">Node view</div>
       <div class="footer">
         <div class="part-icon" draggable="true" ondragstart="dragStart(event)" part="tinkerbots/base">

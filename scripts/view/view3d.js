@@ -43,9 +43,6 @@ class View3D { // eslint-disable-line no-unused-vars
     this.selectionOutlinePass.renderToScreen = true;
     this.composer.addPass(this.selectionOutlinePass);
 
-    // Update listeners.
-    this.controls.addEventListener('change', this.render.bind(this)); // when a user interaction is detected.
-    // this.onchange = this.render.bind(this); // when something in the scene changed.
     window.onresize = this.resize.bind(this); // when the window has been resized.
 
     this.view3DElement.appendChild(this.renderer.domElement);
@@ -53,6 +50,9 @@ class View3D { // eslint-disable-line no-unused-vars
 
     this.highlightor = new Highlightor(this.highlightOutlinePass);
     this.selector = new Selector(this.selectionOutlinePass);
+
+    this.gpuPicker = new THREE.GPUPicker({renderer:this.renderer, debug: false});
+    this.gpuPicker.setFilter(function (object) {return object.name === 'mesh';});
 
     SlotAnchors.initialize();
 
@@ -82,7 +82,14 @@ class View3D { // eslint-disable-line no-unused-vars
     var pos = new THREE.Vector2();
     pos.x = ((eventX - rect.left) / (rect.right - rect.left)) * 2 - 1;
     pos.y = -((eventY - rect.top) / (rect.bottom - rect.top)) * 2 + 1;
+    return pos;
+  }
 
+  convertMouseEventPositionToRelativePosition(eventX, eventY) {
+    var rect = this.renderer.domElement.getBoundingClientRect();
+    var pos = new THREE.Vector2();
+    pos.x = eventX - rect.left;
+    pos.y = eventY - rect.top;
     return pos;
   }
 
@@ -131,16 +138,14 @@ class View3D { // eslint-disable-line no-unused-vars
       return intersects[0].point;
   }
 
-  getPartAt(screenPosition) {
+  getPartAt(relativePosition, screenPosition) {
+    this.gpuPicker.setScene(this.scene);
+    this.gpuPicker.setCamera(this.camera);
+
     var raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(screenPosition, this.camera);
-    var parts = [];
-    this.scene.traverse(function(obj) {
-      if (obj.name === 'part')
-        parts.push(obj);
-    });
-    var intersects = raycaster.intersectObjects(parts, true);
-    if (intersects.length > 0)
-      return intersects[0].object;
+    var intersection = this.gpuPicker.pick(relativePosition, raycaster);
+    if (intersection && intersection.faceIndex > 0 && intersection.object && intersection.object.parent && intersection.object.parent.name === 'part')
+      return intersection.object;
   }
 }
