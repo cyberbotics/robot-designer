@@ -60,11 +60,8 @@ class View3D { // eslint-disable-line no-unused-vars
   }
 
   render() {
-    var fps = 30.0;
     var that = this;
-    setTimeout(function() {
-      requestAnimationFrame(that.render.bind(that));
-    }, 1000 / fps);
+    requestAnimationFrame(that.render.bind(that));
     this.composer.render();
   }
 
