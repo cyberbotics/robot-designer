@@ -4,6 +4,7 @@ class PartMediator { // eslint-disable-line no-unused-vars
   constructor(part) {
     this.model = part;
     this.object3D = this.makeObject3D();
+    this.object3D.matrixAutoUpdate = false;
     this.object3D.mediator = this;
     this.childrenMediators = {};
     this.childrenSlots = {};

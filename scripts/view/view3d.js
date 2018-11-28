@@ -28,6 +28,7 @@ class View3D { // eslint-disable-line no-unused-vars
     this.scene.add(light2);
 
     var grid = new THREE.GridHelper(5, 50, 0x880088, 0x440044);
+    grid.matrixAutoUpdate = false;
     this.scene.add(grid);
 
     this.controls = new THREE.OrbitControls(this.camera, this.view3DElement);
@@ -59,7 +60,6 @@ class View3D { // eslint-disable-line no-unused-vars
   }
 
   render() {
-    // TODO: Could this be optimized simply?
     var fps = 30.0;
     var that = this;
     setTimeout(function() {
