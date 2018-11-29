@@ -185,8 +185,8 @@ THREE.X3DLoader.prototype = {
     var indices = getNodeAttribute(ifs, 'coordIndex', '').split(/\s/);
     var verticesStr = getNodeAttribute(coordinate, 'point', '');
     var hasTexCoord = 'texCoordIndex' in ifs.attributes;
-    var texcoordIndexStr = getNodeAttribute(ifs, 'texCoordIndex', '');
-    var texcoordsStr = getNodeAttribute(textureCoordinate, 'point', '');
+    var texcoordIndexStr = hasTexCoord ? getNodeAttribute(ifs, 'texCoordIndex', '') : '';
+    var texcoordsStr = hasTexCoord ? getNodeAttribute(textureCoordinate, 'point', '') : '';
     // var creaseAngle = parseFloat(getNodeAttribute(ifs, 'creaseAngle', '0'));
 
     var verts = verticesStr.split(/\s/);
