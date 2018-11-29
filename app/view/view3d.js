@@ -90,7 +90,7 @@ class View3D { // eslint-disable-line no-unused-vars
     return pos;
   }
 
-  getClosestSlot(screenPosition) {
+  getClosestSlot(screenPosition, slotType) {
     var raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(screenPosition, this.camera);
     var ray = raycaster.ray;
@@ -101,7 +101,7 @@ class View3D { // eslint-disable-line no-unused-vars
     if (!robotObject)
       return;
     robotObject.traverse(function(obj) {
-      if (obj.name === 'slot') {
+      if (obj.name === 'slot' && obj.userdata.slotType === slotType) {
         var slot = obj;
         var slotGlobalPosition = slot.localToWorld(new THREE.Vector3());
         var sqDistance = ray.distanceSqToPoint(slotGlobalPosition);

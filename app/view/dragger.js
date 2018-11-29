@@ -25,7 +25,7 @@ class Dragger { // eslint-disable-line no-unused-vars
 
     var projection = this.view3D.projectScreenPositionOnSlotsAnchors(screenPosition);
     if (projection) {
-      var closestSlot = this.view3D.getClosestSlot(screenPosition);
+      var closestSlot = this.view3D.getClosestSlot(screenPosition, this.slotType);
       if (closestSlot) {
         SlotAnchors.highlight(closestSlot);
         this.ghost.moveGhostToSlot(closestSlot);
@@ -44,7 +44,7 @@ class Dragger { // eslint-disable-line no-unused-vars
 
   drop(x, y) {
     var screenPosition = this.view3D.convertMouseEventPositionToScreenPosition(x, y);
-    var closestSlot = this.view3D.getClosestSlot(screenPosition);
+    var closestSlot = this.view3D.getClosestSlot(screenPosition, this.slotType);
 
     if (closestSlot)
       this.robotController.addPart(closestSlot.parent.parent.mediator.model, this.draggedPart, closestSlot.userdata.slotName);
