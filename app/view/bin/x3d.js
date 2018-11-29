@@ -42,19 +42,70 @@ THREE.X3DLoader.prototype = {
   parseNode: function(object, node) {
     console.log('Parse Node');
 
+    var currentObject = object;
+    if (node.tagName === 'Transform') {
+      console.log('Parse Transform');
+
+      currentObject = new THREE.Object3D();
+
+      // Parse the orientation matrix.
+      // First, position
+      if (node.attributes.getNamedItem("translation")) {
+        var pos = node.attributes.getNamedItem("translation").value;
+        pos = pos.split(/\s/);
+        var v = new THREE.Vector3(
+          parseFloat(pos[0]),
+          parseFloat(pos[1]),
+          parseFloat(pos[2])
+        );
+        currentObject.position.copy(v);
+      }
+
+      // Then scale
+      if (node.attributes.getNamedItem("scale")) {
+        pos = node.attributes.getNamedItem("scale").value;
+        pos = pos.split(/\s/);
+        v = new THREE.Vector3(
+          parseFloat(pos[0]),
+          parseFloat(pos[1]),
+          parseFloat(pos[2])
+        );
+        currentObject.scale.copy(v);
+      }
+
+      // Finally, rotation
+      if (node.attributes.getNamedItem("rotation")) {
+        pos = node.attributes.getNamedItem("rotation").value;
+        pos = pos.split(/\s/);
+        var m = new THREE.Matrix4();
+        m.identity();
+        m.makeRotationAxis(
+        new THREE.Vector3(parseFloat(pos[0]),
+          parseFloat(pos[1]),
+          parseFloat(pos[2])),
+          parseFloat(pos[3])
+        );
+        var v = new THREE.Euler();
+        v.setFromRotationMatrix(m);
+        currentObject.rotation.copy(v);
+      }
+
+      object.add(currentObject);
+    }
+
     for (var i = 0; i < node.childNodes.length; i++) {
       var child = node.childNodes[i];
       if (typeof child.tagName === 'undefined')
         continue;
       if (child.tagName === 'Shape') {
         var shape = this.parseShape(child);
-        object.add(shape);
+        currentObject.add(shape);
       } else if (child.tagName === 'Slot') {
         var slot = this.parseSlot(child);
         if (slot)
-          object.add(slot);
+          currentObject.add(slot);
       } else
-        console.log('Unknown node: ' + child.tagName);
+        this.parseNode(currentObject, child);
     }
   },
 
@@ -93,6 +144,8 @@ THREE.X3DLoader.prototype = {
         material = this.parseAppearance(child);
       else if (child.tagName === 'IndexedFaceSet')
         geometry = this.parseIndexedFaceSet(child);
+      else if (child.tagName === 'Sphere')
+        geometry = this.parseSphere(child);
       else
         console.log('Unknown node: ' + child.tagName);
     }
@@ -252,6 +305,18 @@ THREE.X3DLoader.prototype = {
     geometry.computeFaceNormals();
 
     return geometry;
+  },
+
+  parseSphere: function(sphere) {
+    console.log('Parse Sphere');
+
+    var radius = sphere.attributes.getNamedItem('radius').value;
+    var subdivision = sphere.attributes.getNamedItem('subdivision').value.split(',');
+    return new THREE.SphereGeometry(
+      radius,
+      subdivision[0],
+      subdivision[1]
+    );
   }
 };
 
