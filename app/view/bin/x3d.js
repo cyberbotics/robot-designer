@@ -48,51 +48,17 @@ THREE.X3DLoader.prototype = {
 
       currentObject = new THREE.Object3D();
 
-      // Parse the orientation matrix.
-      // First, position
-      if (node.attributes.getNamedItem("translation")) {
-        var pos = node.attributes.getNamedItem("translation").value;
-        pos = pos.split(/\s/);
-        var v = new THREE.Vector3(
-          parseFloat(pos[0]),
-          parseFloat(pos[1]),
-          parseFloat(pos[2])
-        );
-        currentObject.position.copy(v);
-      }
-
-      // Then scale
-      if (node.attributes.getNamedItem("scale")) {
-        pos = node.attributes.getNamedItem("scale").value;
-        pos = pos.split(/\s/);
-        v = new THREE.Vector3(
-          parseFloat(pos[0]),
-          parseFloat(pos[1]),
-          parseFloat(pos[2])
-        );
-        currentObject.scale.copy(v);
-      }
-
-      // Finally, rotation
-      if (node.attributes.getNamedItem("rotation")) {
-        pos = node.attributes.getNamedItem("rotation").value;
-        pos = pos.split(/\s/);
-        var m = new THREE.Matrix4();
-        m.identity();
-        m.makeRotationAxis(
-        new THREE.Vector3(parseFloat(pos[0]),
-          parseFloat(pos[1]),
-          parseFloat(pos[2])),
-          parseFloat(pos[3])
-        );
-        var v = new THREE.Euler();
-        v.setFromRotationMatrix(m);
-        currentObject.rotation.copy(v);
-      }
+      var position = convertStringToVec3(getNodeAttribute(node, 'translation', '0 0 0'));
+      currentObject.position.copy(position);
+      var scale = convertStringToVec3(getNodeAttribute(node, 'scale', '1 1 1'));
+      currentObject.scale.copy(scale);
+      var quaternion = convertStringToQuaternion(getNodeAttribute(node, 'rotation', '0 1 0 0'));
+      currentObject.quaternion.copy(quaternion);
 
       object.add(currentObject);
     }
 
+    // Parse children.
     for (var i = 0; i < node.childNodes.length; i++) {
       var child = node.childNodes[i];
       if (typeof child.tagName === 'undefined')
@@ -112,7 +78,7 @@ THREE.X3DLoader.prototype = {
   parseSlot: function(slot) {
     console.log('Parse Slot');
 
-    var type = slot.attributes.getNamedItem('slotType').value;
+    var type = getNodeAttribute(slot, 'slotType', '');
     if (type !== 'tinkerbots')
       return; // TODO: deal with this in a generic way.
 
@@ -120,12 +86,12 @@ THREE.X3DLoader.prototype = {
     object.name = 'slot';
     object.userdata = {
       slotType: type,
-      slotName: slot.attributes.getNamedItem('slotName').value
+      slotName: getNodeAttribute(slot, 'slotName', '')
     };
-    if (slot.attributes.getNamedItem('translation'))
-      object.position.copy(cvtStr2Vec3(slot.attributes.getNamedItem('translation').value));
-    if (slot.attributes.getNamedItem('rotation'))
-      object.quaternion.copy(cvtStr2Rotation(slot.attributes.getNamedItem('rotation').value));
+    var position = convertStringToVec3(getNodeAttribute(slot, 'translation', '0 0 0'));
+    object.position.copy(position);
+    var quaternion = convertStringToQuaternion(getNodeAttribute(slot, 'rotation', '0 1 0 0'));
+    object.quaternion.copy(quaternion);
 
     return object;
   },
@@ -161,15 +127,15 @@ THREE.X3DLoader.prototype = {
     var mat = new THREE.MeshBasicMaterial({color: 0xffffff});
 
     // Get the Material tag
-    var matTag = appearance.getElementsByTagName('Material')[0];
-    if (matTag === undefined)
+    var material = appearance.getElementsByTagName('Material')[0];
+    if (material === undefined)
       return mat;
 
     // Pull out the standard colors
-    var diffuse = cvtStr2rgb(matTag.attributes.getNamedItem('diffuseColor') ? matTag.attributes.getNamedItem('diffuseColor').value : '0.8 0.8 0.8');
-    var specular = cvtStr2rgb(matTag.attributes.getNamedItem('specularColor') ? matTag.attributes.getNamedItem('specularColor').value : '0 0 0');
-    var emissive = cvtStr2rgb(matTag.attributes.getNamedItem('emissiveColor') ? matTag.attributes.getNamedItem('specularColor').value : '0 0 0');
-    var shininess = parseFloat(matTag.attributes.getNamedItem('shininess') ? matTag.attributes.getNamedItem('shininess').value : '0.2');
+    var diffuse = convertStringTorgb(getNodeAttribute(material, 'diffuseColor', '0.8 0.8 0.8'));
+    var specular = convertStringTorgb(getNodeAttribute(material, 'specularColor', '0 0 0'));
+    var emissive = convertStringTorgb(getNodeAttribute(material, 'emissiveColor', '0 0 0'));
+    var shininess = parseFloat(getNodeAttribute(material, 'shininess', '0.2'));
 
     // Check to see if there is a texture
     var imageTexture = appearance.getElementsByTagName('ImageTexture');
@@ -177,7 +143,7 @@ THREE.X3DLoader.prototype = {
     if (imageTexture.length > 0)
       colorMap = this.parseImageTexture(imageTexture[0]);
 
-    var materialSpecifications = {color: new THREE.Color(diffuse), specular: new THREE.Color(specular), emissive: new THREE.Color(emissive), shininess: shininess};
+    var materialSpecifications = {color: diffuse, specular: specular, emissive: emissive, shininess: shininess};
     if (colorMap)
       materialSpecifications.map = colorMap;
 
@@ -190,7 +156,7 @@ THREE.X3DLoader.prototype = {
     console.log('Parse ImageTexture');
     // Possible improvement: load the texture in an asynchronous way.
 
-    var filename = imageTexture.attributes.getNamedItem('url').value;
+    var filename = getNodeAttribute(imageTexture, 'url', '');
     filename = filename.split(/['"\s]/).filter(n => n);
     var that = this;
     var loader = new THREE.TextureLoader();
@@ -211,18 +177,17 @@ THREE.X3DLoader.prototype = {
   parseIndexedFaceSet: function(ifs) {
     console.log('Parse IndexedFaceSet');
 
+    var coordinate = ifs.getElementsByTagName('Coordinate')[0];
+    var textureCoordinate = ifs.getElementsByTagName('TextureCoordinate')[0];
+
     var geometry = new THREE.Geometry();
-    // var creaseAngle = ifs.attributes.getNamedItem('creaseAngle') ? parseFloat(ifs.attributes.getNamedItem('creaseAngle').value) : 0.0;  // TODO: support me.
-    var vertexIndicesStr = ifs.attributes.getNamedItem('coordIndex').value;
-    var verticesStr = ifs.getElementsByTagName('Coordinate')[0].attributes.getNamedItem('point').value;
-    var texcoordIndexStr = ifs.attributes.getNamedItem('texCoordIndex');
-    var texcoordsStr = '';
-    var hasTexCoord = false;
-    if (texcoordIndexStr) {
-      hasTexCoord = true;
-      texcoordIndexStr = texcoordIndexStr.value;
-      texcoordsStr = ifs.getElementsByTagName('TextureCoordinate')[0].attributes.getNamedItem('point').value;
-    }
+
+    var indices = getNodeAttribute(ifs, 'coordIndex', '').split(/\s/);
+    var verticesStr = getNodeAttribute(coordinate, 'point', '');
+    var hasTexCoord = 'texCoordIndex' in ifs.attributes;
+    var texcoordIndexStr = getNodeAttribute(ifs, 'texCoordIndex', '');
+    var texcoordsStr = getNodeAttribute(textureCoordinate, 'point', '');
+    // var creaseAngle = parseFloat(getNodeAttribute(ifs, 'creaseAngle', '0'));
 
     var verts = verticesStr.split(/\s/);
     for (var i = 0; i < verts.length; i += 3) {
@@ -245,7 +210,6 @@ THREE.X3DLoader.prototype = {
     }
 
     // Now pull out the face indices
-    var indices = vertexIndicesStr.split(/\s/);
     if (hasTexCoord)
       var texIndices = texcoordIndexStr.split(/\s/);
     for (i = 0; i < indices.length; i++) {
@@ -310,41 +274,35 @@ THREE.X3DLoader.prototype = {
   parseSphere: function(sphere) {
     console.log('Parse Sphere');
 
-    var radius = sphere.attributes.getNamedItem('radius').value;
-    var subdivision = sphere.attributes.getNamedItem('subdivision').value.split(',');
-    return new THREE.SphereGeometry(
-      radius,
-      subdivision[0],
-      subdivision[1]
-    );
+    var radius = getNodeAttribute(sphere, 'radius', '1');
+    var subdivision = getNodeAttribute(sphere, 'subdivision', '8,8').split(',');
+    return new THREE.SphereGeometry(radius, subdivision[0], subdivision[1]);
   }
 };
 
-function cvtStr2Vec3(s) {
+function getNodeAttribute(node, attributeName, defaultValue) {
+  if (attributeName in node.attributes)
+    return node.attributes.getNamedItem(attributeName).value;
+  return defaultValue;
+}
+
+function convertStringToVec3(s) {
   s = s.split(/\s/);
-  var v = new THREE.Vector3(
-    parseFloat(s[0]),
-    parseFloat(s[1]),
-    parseFloat(s[2])
-  );
+  var v = new THREE.Vector3(parseFloat(s[0]), parseFloat(s[1]), parseFloat(s[2]));
   return v;
 }
 
-function cvtStr2Rotation(s) {
+function convertStringToQuaternion(s) {
   var pos = s.split(/\s/);
   var q = new THREE.Quaternion();
   q.setFromAxisAngle(
-    new THREE.Vector3(
-      parseFloat(pos[0]),
-      parseFloat(pos[1]),
-      parseFloat(pos[2])
-    ),
+    new THREE.Vector3(parseFloat(pos[0]), parseFloat(pos[1]), parseFloat(pos[2])),
     parseFloat(pos[3])
   );
   return q;
 }
 
-function cvtStr2rgb(s) {
-  var v = cvtStr2Vec3(s);
-  return v.x * 0xff0000 + v.y * 0x00ff00 + v.z * 0x0000ff;
+function convertStringTorgb(s) {
+  var v = convertStringToVec3(s);
+  return new THREE.Color(v.x, v.y, v.z);
 }
