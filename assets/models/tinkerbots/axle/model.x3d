@@ -4,7 +4,7 @@
   <head>
     <meta name="generator" content="Webots"/>
   </head>
-  <Scene>
+  <Scene slotType='lego cross female'>
 
     <Slot slotName="endSlot" slotType="lego cross male" id='n10' translation='0 0 0.022'></Slot>
 

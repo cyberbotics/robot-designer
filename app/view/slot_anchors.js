@@ -13,10 +13,11 @@ class SlotAnchors { // eslint-disable-line no-unused-vars
     highlightedMaterial = new THREE.MeshBasicMaterial({color: 0x0088ff, transparent: true, opacity: 0.8});
   }
 
-  static showSlots(scene) {
+  static showSlots(scene, slotType) {
+    console.log(slotType);
     SlotAnchors.hideSlots();
     scene.traverse(function(obj) {
-      if (obj.name === 'slot') {
+      if (obj.name === 'slot' && obj.userdata.slotType === slotType) {
         var mesh = new THREE.Mesh(slotRepresentation, regularMaterial);
         mesh.name = 'slot representation';
         obj.add(mesh);

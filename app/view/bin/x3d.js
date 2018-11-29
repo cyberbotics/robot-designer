@@ -35,6 +35,9 @@ THREE.X3DLoader.prototype = {
 
     var scene = xml.getElementsByTagName('Scene')[0];
     this.parseNode(object, scene);
+    object.userdata = {
+      slotType: getNodeAttribute(scene, 'slotType', '')
+    };
 
     return object;
   },
@@ -78,14 +81,10 @@ THREE.X3DLoader.prototype = {
   parseSlot: function(slot) {
     console.log('Parse Slot');
 
-    var type = getNodeAttribute(slot, 'slotType', '');
-    if (type !== 'tinkerbots')
-      return; // TODO: deal with this in a generic way.
-
     var object = new THREE.Object3D();
     object.name = 'slot';
     object.userdata = {
-      slotType: type,
+      slotType: getNodeAttribute(slot, 'slotType', ''),
       slotName: getNodeAttribute(slot, 'slotName', '')
     };
     var position = convertStringToVec3(getNodeAttribute(slot, 'translation', '0 0 0'));

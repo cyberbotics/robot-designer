@@ -70,6 +70,7 @@ function drop(ev) { // eslint-disable-line no-unused-vars
 
 function dragStart(ev) { // eslint-disable-line no-unused-vars
   var part = ev.target.getAttribute('part');
+  var slotType = ev.target.getAttribute('slotType');
   ev.dataTransfer.setData('text', part); // Cannot be used on Chrome. Cannot be dropped on Firefox.
 
   // https://stackoverflow.com/a/40923520/2210777
@@ -77,7 +78,7 @@ function dragStart(ev) { // eslint-disable-line no-unused-vars
   img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
   ev.dataTransfer.setDragImage(img, 0, 0);
 
-  designer.dragger.dragStart(part);
+  designer.dragger.dragStart(part, slotType);
 }
 
 function dragOver(ev) { // eslint-disable-line no-unused-vars

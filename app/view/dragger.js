@@ -5,16 +5,18 @@ class Dragger { // eslint-disable-line no-unused-vars
     this.view3D = view3D;
     this.robotController = robotController;
     this.draggedPartName = null;
-    this.draggedPart = null;
+    this.draggedPart = undefined;
+    this.slotType = null;
     this.ghost = new Ghost(view3D.scene);
   }
 
-  dragStart(part) {
+  dragStart(part, slotType) {
     this.draggedPart = part;
+    this.slotType = slotType;
   }
 
   dragEnter() {
-    SlotAnchors.showSlots(this.view3D.scene);
+    SlotAnchors.showSlots(this.view3D.scene, this.slotType);
     this.ghost.addGhost(this.draggedPart);
   }
 
