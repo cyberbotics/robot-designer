@@ -1,0 +1,16 @@
+#VRML_SIM R2018b utf8
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.30373849793261226 -0.9341170263320561 -0.1875321465514581 1.168081610889684
+  position -0.10042947697723761 0.04669216472545893 0.06178528859730953
+}
+Robot {
+  children [
+    Slot {
+      type "lego cross male"
+      endPoint TinkerbotsWheel {
+      }
+    }
+  ]
+}

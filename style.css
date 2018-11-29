@@ -7,7 +7,7 @@
   display: grid;
   grid-template-areas:
     'header header header'
-    'menu main sidebar'
+    'menu main main'
     'menu footer sidebar';
   grid-template-columns: 45px auto 275px;
   grid-template-rows: 65px auto 110px;
