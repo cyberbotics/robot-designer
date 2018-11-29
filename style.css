@@ -59,6 +59,7 @@
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+  overflow-x: scroll !important;
 }
 
 .part-icon:hover {
