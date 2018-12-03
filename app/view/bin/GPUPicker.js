@@ -347,7 +347,6 @@ var THREE = THREE || {};
 		if (object) {
 			if (object.raycastWithID) {
 				var intersect = object.raycastWithID(elementId, raycaster);
-				
 				intersect.object = object.originalObject;
 				return intersect;
 			}
