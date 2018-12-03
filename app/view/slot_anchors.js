@@ -17,7 +17,7 @@ class SlotAnchors { // eslint-disable-line no-unused-vars
     console.log(slotType);
     SlotAnchors.hideSlots();
     scene.traverse(function(obj) {
-      if (obj.name === 'slot' && obj.userdata.slotType === slotType) {
+      if (obj.userData.x3dType === 'Slot' && obj.userData.slotType === slotType) {
         var mesh = new THREE.Mesh(slotRepresentation, regularMaterial);
         mesh.name = 'slot representation';
         obj.add(mesh);

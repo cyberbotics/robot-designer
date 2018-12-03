@@ -16,8 +16,10 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
 
   removePart(part) {
     for (var slot in this.slots) {
-      delete this.slots[slot];
-      this.notify('PartRemoved', { 'part': part, 'slotName': slot });
+      if (this.slots[slot] === part) {
+        delete this.slots[slot];
+        this.notify('PartRemoved', { 'part': part, 'slotName': slot });
+      }
     }
   }
 

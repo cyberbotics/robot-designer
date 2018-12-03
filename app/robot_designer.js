@@ -46,8 +46,16 @@ function mousedown(ev) { // eslint-disable-line no-unused-vars
 function deleteSelectedPart() { // eslint-disable-line no-unused-vars
   for (var s = 0; s < designer.view3D.selector.selectedParts.length; s++) {
     var mesh = designer.view3D.selector.selectedParts[s];
-    var part = mesh.parent.parent.mediator.model; // hum
-    part.parent.removePart(part);
+
+    var parent = mesh;
+    do {
+      if (parent.userData.isPartContainer) {
+        var model = parent.mediator.model;
+        model.parent.removePart(model);
+        break;
+      }
+      parent = parent.parent;
+    } while (parent);
   }
   designer.view3D.selector.clearSelection();
 }

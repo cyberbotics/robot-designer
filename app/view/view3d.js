@@ -52,7 +52,7 @@ class View3D { // eslint-disable-line no-unused-vars
     this.selector = new Selector(this.selectionOutlinePass);
 
     this.gpuPicker = new THREE.GPUPicker({renderer:this.renderer, debug: false});
-    this.gpuPicker.setFilter(function (object) {return object.name === 'mesh';});
+    this.gpuPicker.setFilter(function (object) { return object instanceof THREE.Mesh; });
 
     SlotAnchors.initialize();
 
@@ -101,7 +101,7 @@ class View3D { // eslint-disable-line no-unused-vars
     if (!robotObject)
       return;
     robotObject.traverse(function(obj) {
-      if (obj.name === 'slot' && obj.userdata.slotType === slotType) {
+      if (obj.userData.x3dType === 'Slot' && obj.userData.slotType === slotType) {
         var slot = obj;
         var slotGlobalPosition = slot.localToWorld(new THREE.Vector3());
         var sqDistance = ray.distanceSqToPoint(slotGlobalPosition);
@@ -142,7 +142,13 @@ class View3D { // eslint-disable-line no-unused-vars
     var raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(screenPosition, this.camera);
     var intersection = this.gpuPicker.pick(relativePosition, raycaster);
-    if (intersection && intersection.faceIndex > 0 && intersection.object && intersection.object.parent && intersection.object.parent.name === 'part')
-      return intersection.object;
+    if (intersection && intersection.faceIndex > 0) {
+      var parent = intersection.object;
+      do {
+        if (parent.userData.isPartContainer)
+          return parent;
+        parent = parent.parent;
+      } while (parent);
+    }
   }
 }

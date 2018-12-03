@@ -35,9 +35,8 @@ THREE.X3DLoader.prototype = {
 
     var scene = xml.getElementsByTagName('Scene')[0];
     this.parseNode(object, scene);
-    object.userdata = {
-      slotType: getNodeAttribute(scene, 'slotType', '')
-    };
+    object.userData.x3dType = 'Group';
+    object.userData.slotType = getNodeAttribute(scene, 'slotType', '');
 
     return object;
   },
@@ -50,6 +49,7 @@ THREE.X3DLoader.prototype = {
       console.log('Parse Transform');
 
       currentObject = new THREE.Object3D();
+      currentObject.userData.x3dType = 'Transform';
 
       var position = convertStringToVec3(getNodeAttribute(node, 'translation', '0 0 0'));
       currentObject.position.copy(position);
@@ -82,11 +82,10 @@ THREE.X3DLoader.prototype = {
     console.log('Parse Slot');
 
     var object = new THREE.Object3D();
-    object.name = 'slot';
-    object.userdata = {
-      slotType: getNodeAttribute(slot, 'slotType', ''),
-      slotName: getNodeAttribute(slot, 'slotName', '')
-    };
+    object.userData.x3dType = 'Slot';
+    object.userData.slotType = getNodeAttribute(slot, 'slotType', '');
+    object.userData.slotName = getNodeAttribute(slot, 'slotName', '');
+
     var position = convertStringToVec3(getNodeAttribute(slot, 'translation', '0 0 0'));
     object.position.copy(position);
     var quaternion = convertStringToQuaternion(getNodeAttribute(slot, 'rotation', '0 1 0 0'));
@@ -116,7 +115,7 @@ THREE.X3DLoader.prototype = {
     }
 
     var mesh = new THREE.Mesh(geometry, material);
-    mesh.name = 'mesh'; // TODO: Couldn't we find a better way to reference a mesh?
+    mesh.userData.x3dType = 'Shape';
     return mesh;
   },
 
@@ -124,6 +123,7 @@ THREE.X3DLoader.prototype = {
     console.log('Parse Appearance');
 
     var mat = new THREE.MeshBasicMaterial({color: 0xffffff});
+    mat.userData.x3dType = 'Appearance';
 
     // Get the Material tag
     var material = appearance.getElementsByTagName('Material')[0];
@@ -180,6 +180,7 @@ THREE.X3DLoader.prototype = {
     var textureCoordinate = ifs.getElementsByTagName('TextureCoordinate')[0];
 
     var geometry = new THREE.Geometry();
+    geometry.userData = { 'x3dType': 'IndexedFaceSet' };
 
     var indices = getNodeAttribute(ifs, 'coordIndex', '').split(/\s/);
     var verticesStr = getNodeAttribute(coordinate, 'point', '');
@@ -275,7 +276,9 @@ THREE.X3DLoader.prototype = {
 
     var radius = getNodeAttribute(sphere, 'radius', '1');
     var subdivision = getNodeAttribute(sphere, 'subdivision', '8,8').split(',');
-    return new THREE.SphereGeometry(radius, subdivision[0], subdivision[1]);
+    var sphere = new THREE.SphereGeometry(radius, subdivision[0], subdivision[1]);
+    sphere.userData = { 'x3dType': 'Sphere' };
+    return sphere;
   }
 };
 
