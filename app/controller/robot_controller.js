@@ -6,13 +6,14 @@ class RobotController { // eslint-disable-line no-unused-vars
   }
 
   addPart(parent, modelName, closestSlotName) {
-    var part;
-    if (!parent || parent === this.robot) {
-      part = new Part(modelName);
-      this.robot.addRootPart(part);
-    } else {
-      part = new Part(modelName);
-      parent.addPart(closestSlotName, part);
-    }
+    var part = new Part(modelName);
+    if (!parent || parent === this.robot)
+      new Commands().addRootPart(this.robot, part)
+    else
+      new Commands().addPart(parent, closestSlotName, part)
+  }
+
+  removePart(part) {
+    new Commands().removePart(part);
   }
 }

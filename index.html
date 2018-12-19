@@ -17,6 +17,8 @@
   <script src="https://threejs.org/examples/js/postprocessing/OutlinePass.js"></script>
   <script type="text/javascript" src="/robot-designer/app/controller/robot_controller.js"></script>
   <script type="text/javascript" src="/robot-designer/app/controller/part_controller.js"></script>
+  <script type="text/javascript" src="/robot-designer/app/commands/bin/UndoStack.js"></script>
+  <script type="text/javascript" src="/robot-designer/app/commands/commands.js"></script>
   <script type="text/javascript" src="/robot-designer/app/model/observable.js"></script>
   <script type="text/javascript" src="/robot-designer/app/model/robot.js"></script>
   <script type="text/javascript" src="/robot-designer/app/model/part.js"></script>
@@ -47,8 +49,8 @@
       <div class="header-bottom">
         <i class="fas fa-save" onclick="save()"></i>
         <span>|</span>
-        <i class="fas fa-undo"></i>
-        <i class="fas fa-redo"></i>
+        <i class="fas fa-undo" onclick="new Commands().undo()"></i>
+        <i class="fas fa-redo" onclick="new Commands().redo()"></i>
         <span>|</span>
         <i class="fas fa-arrows-alt" onclick="toggleFullScreen()"></i>
       </div>

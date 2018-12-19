@@ -14,7 +14,6 @@ class SlotAnchors { // eslint-disable-line no-unused-vars
   }
 
   static showSlots(scene, slotType) {
-    console.log(slotType);
     SlotAnchors.hideSlots();
     scene.traverse(function(obj) {
       if (obj.userData.x3dType === 'Slot' && obj.userData.slotType === slotType) {

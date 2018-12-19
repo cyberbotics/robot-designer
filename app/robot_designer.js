@@ -51,7 +51,7 @@ function deleteSelectedPart() { // eslint-disable-line no-unused-vars
     do {
       if (parent.userData.isPartContainer) {
         var model = parent.mediator.model;
-        model.parent.removePart(model);
+        designer.robotController.removePart(parent.mediator.model);
         break;
       }
       parent = parent.parent;

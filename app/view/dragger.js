@@ -56,7 +56,7 @@ class Dragger { // eslint-disable-line no-unused-vars
         parent = parent.parent;
       } while (parent);
     } else
-      this.robotController.addPart(this.robot, this.draggedPart, '');
+      this.robotController.addPart(null, this.draggedPart, '');
 
     SlotAnchors.hideSlots(this.view3D.scene);
     this.ghost.removeGhost();
