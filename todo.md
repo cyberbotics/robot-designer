@@ -5,7 +5,7 @@
 - Part browser
 - Part viewer
 - Translation / Rotation
-- PBR appearance
+- PBR appearance (ref: https://threejs.org/examples/webgl_materials_envmaps_exr.html)
 - Build process (using Babel, JSCompress or so)
 - Part rejection mechanism (based on THREE.js AABB?)
 
