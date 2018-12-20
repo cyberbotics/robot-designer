@@ -16,6 +16,16 @@ class View3D { // eslint-disable-line no-unused-vars
 
     this.scene = new THREE.Scene();
 
+    /* // how to set a textured background.
+    var loader = new THREE.CubeTextureLoader();
+    loader.setPath( '/robot-designer/assets/common/textures/cubic/' );
+    this.scene.background = loader.load( [
+    	'noon_sunny_empty_right.jpg', 'noon_sunny_empty_left.jpg',
+    	'noon_sunny_empty_top.jpg', 'noon_sunny_empty_bottom.jpg',
+    	'noon_sunny_empty_front.jpg', 'noon_sunny_empty_back.jpg'
+    ] );
+    */
+
     this.camera = new THREE.PerspectiveCamera(45, 0.3, 0.001, 100);
     this.camera.position.x = 0.1;
     this.camera.position.y = 0.1;

@@ -106,6 +106,8 @@ THREE.X3DLoader.prototype = {
         continue;
       if (child.tagName === 'Appearance')
         material = this.parseAppearance(child);
+      else if (child.tagName === 'PBRAppearance')
+        material = this.parsePBRAppearance(child);
       else if (child.tagName === 'IndexedFaceSet')
         geometry = this.parseIndexedFaceSet(child);
       else if (child.tagName === 'Sphere')
@@ -147,6 +149,57 @@ THREE.X3DLoader.prototype = {
       materialSpecifications.map = colorMap;
 
     mat = new THREE.MeshPhongMaterial(materialSpecifications);
+    mat.userData.x3dType = 'Appearance';
+
+    return mat;
+  },
+
+  parsePBRAppearance: function(pbrAppearance) {
+    console.log('Parse PBRAppearance');
+
+    var baseColor = convertStringTorgb(getNodeAttribute(pbrAppearance, 'baseColor', '1 1 1'));
+    var roughness = parseFloat(getNodeAttribute(pbrAppearance, 'roughness', '0'));
+    var metalness = parseFloat(getNodeAttribute(pbrAppearance, 'metalness', '1'));
+    var emissiveColor = convertStringTorgb(getNodeAttribute(pbrAppearance, 'emissiveColor', '0 0 0'));
+
+    var materialSpecifications = {
+      color: baseColor,
+      roughness: roughness,
+      metalness: metalness,
+      emissive: emissiveColor
+    };
+
+    var imageTextures = pbrAppearance.getElementsByTagName('ImageTexture');
+    for (var t = 0; t < imageTextures.length; t++) {
+      var imageTexture = imageTextures[t];
+      var type = getNodeAttribute(imageTexture, 'type', '');
+      if (type === 'baseColor')
+        materialSpecifications.map = this.parseImageTexture(imageTexture);
+      else if (type === 'occlusion')
+        materialSpecifications.aoMap = this.parseImageTexture(imageTexture);
+      else if (type === 'roughness')
+        materialSpecifications.roughnessMap = this.parseImageTexture(imageTexture);
+      else if (type === 'metalness')
+        materialSpecifications.metalnessMap = this.parseImageTexture(imageTexture);
+      else if (type === 'normal')
+        materialSpecifications.normalMap = this.parseImageTexture(imageTexture);
+      else if (type === 'emissive')
+        materialSpecifications.emissiveMap = this.parseImageTexture(imageTexture);
+    }
+
+    var loader = new THREE.CubeTextureLoader();
+    loader.setPath( '/robot-designer/assets/common/textures/cubic/' );
+    materialSpecifications.envMap = loader.load( [
+      'noon_sunny_empty_right.jpg', 'noon_sunny_empty_left.jpg',
+    	'noon_sunny_empty_top.jpg', 'noon_sunny_empty_bottom.jpg',
+    	'noon_sunny_empty_front.jpg', 'noon_sunny_empty_back.jpg'
+    ] );
+    materialSpecifications.envMap.mapping = THREE.SphericalReflectionMapping;
+
+    console.log(materialSpecifications);
+
+    var mat = new THREE.MeshStandardMaterial(materialSpecifications);
+    mat.userData.x3dType = 'PBRAppearance';
 
     return mat;
   },
