@@ -1,12 +1,14 @@
 /* global View3D, Robot, Dragger, RobotMediator, RobotController */
 
 class RobotDesigner {
-  constructor(part) {
+  constructor(part, undoButton, redoButton) {
     this.part = part;
     if (typeof this.part === 'undefined') {
       console.error('The Robot Designer is initialized on an undefined part.');
       return;
     }
+    this.undoButton = undoButton;
+    this.redoButton = redoButton;
 
     this.view3DElement = document.getElementsByName('view3D')[0];
     if (typeof this.view3DElement === 'undefined') {
@@ -23,10 +25,28 @@ class RobotDesigner {
     this.robotController = new RobotController(this.robot);
 
     this.dragger = new Dragger(this.view3D, this.robotController);
+
+    this.commands = new Commands();
+    this.commands.addObserver('updated', () => this.updateUndoRedoButtons());
+  }
+
+  updateUndoRedoButtons() {
+    if (this.commands.canRedo())
+      this.redoButton.classList.remove('fa-disabled');
+    else
+      this.redoButton.classList.add('fa-disabled');
+    if (this.commands.canUndo())
+      this.undoButton.classList.remove('fa-disabled');
+    else
+      this.undoButton.classList.add('fa-disabled');
   }
 }
 
-var designer = new RobotDesigner(document.getElementById('nrp-robot-designer')); // eslint-disable-line no-new
+var designer = new RobotDesigner( // eslint-disable-line no-new
+  document.getElementById('nrp-robot-designer'),
+  document.getElementById('nrp-robot-designer-undo-button'),
+  document.getElementById('nrp-robot-designer-redo-button')
+);
 
 function save() { // eslint-disable-line no-unused-vars
   // TODO: for now, only shows the internal robot structure in the alert dialog box.

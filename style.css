@@ -77,3 +77,8 @@
 .fas:hover, .menu-item:hover {
   color: #68E
 }
+
+.fa-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

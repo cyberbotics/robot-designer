@@ -15,13 +15,13 @@
   <script src="https://threejs.org/examples/js/postprocessing/ShaderPass.js"></script>
   <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
   <script src="https://threejs.org/examples/js/postprocessing/OutlinePass.js"></script>
+  <script type="text/javascript" src="/robot-designer/app/model/observable.js"></script>
+  <script type="text/javascript" src="/robot-designer/app/model/robot.js"></script>
+  <script type="text/javascript" src="/robot-designer/app/model/part.js"></script>
   <script type="text/javascript" src="/robot-designer/app/controller/robot_controller.js"></script>
   <script type="text/javascript" src="/robot-designer/app/controller/part_controller.js"></script>
   <script type="text/javascript" src="/robot-designer/app/commands/bin/UndoStack.js"></script>
   <script type="text/javascript" src="/robot-designer/app/commands/commands.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/model/observable.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/model/robot.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/model/part.js"></script>
   <script type="text/javascript" src="/robot-designer/app/view/bin/x3d.js"></script>
   <script type="text/javascript" src="/robot-designer/app/view/bin/GPUPicker.js"></script>
   <script type="text/javascript" src="/robot-designer/app/view/dragger.js"></script>
@@ -49,8 +49,8 @@
       <div class="header-bottom">
         <i class="fas fa-save" onclick="save()"></i>
         <span>|</span>
-        <i class="fas fa-undo" onclick="new Commands().undo()"></i>
-        <i class="fas fa-redo" onclick="new Commands().redo()"></i>
+        <i id='nrp-robot-designer-undo-button' class="fas fa-undo fa-disabled" onclick="new Commands().undo()"></i>
+        <i id='nrp-robot-designer-redo-button' class="fas fa-redo fa-disabled" onclick="new Commands().redo()"></i>
         <span>|</span>
         <i class="fas fa-arrows-alt" onclick="toggleFullScreen()"></i>
       </div>

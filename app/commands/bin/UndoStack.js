@@ -55,6 +55,14 @@ UndoStack.prototype.redo = function () {
 	}
 };
 
+UndoStack.prototype.canUndo = function () {
+	return this.current >= 0;
+}
+
+UndoStack.prototype.canRedo = function () {
+	return this.stack[this.current + 1] !== undefined;
+}
+
 UndoStack.prototype.invalidateAll = function () {
 	this.stack = [];
 	this.current = -1;

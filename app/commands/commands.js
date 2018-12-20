@@ -1,7 +1,10 @@
-class Commands {
+/* global Observable */
 
-  constructor() {
+class Commands  extends Observable { // eslint-disable-line no-unused-vars
+
+  constructor() {  // Singleton pattern.
     if (!Commands.instance) {
+      super();
       Commands.instance = this;
       this.undoStack = new UndoStack(null);
     }
@@ -9,16 +12,29 @@ class Commands {
   }
 
   undo() {
-    this.undoStack.undo();
+    if (this.canUndo())
+      this.undoStack.undo();
+    this.notify('updated', null);
   }
 
   redo() {
-    this.undoStack.redo();
+    if (this.canRedo())
+      this.undoStack.redo();
+    this.notify('updated', null);
+  }
+
+  canUndo() {
+    return this.undoStack.canUndo();
+  }
+
+  canRedo() {
+    return this.undoStack.canRedo();
   }
 
   _pushAction(perform, data) {
     var returnedValue = perform.call(this, true, data);
     this.undoStack.push(perform, data);
+    this.notify('updated', null);
     return returnedValue;
   }
 
