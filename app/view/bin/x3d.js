@@ -187,7 +187,7 @@ THREE.X3DLoader.prototype = {
     var hasTexCoord = 'texCoordIndex' in ifs.attributes;
     var texcoordIndexStr = hasTexCoord ? getNodeAttribute(ifs, 'texCoordIndex', '') : '';
     var texcoordsStr = hasTexCoord ? getNodeAttribute(textureCoordinate, 'point', '') : '';
-    // var creaseAngle = parseFloat(getNodeAttribute(ifs, 'creaseAngle', '0'));
+    var creaseAngle = parseFloat(getNodeAttribute(ifs, 'creaseAngle', '0'));
 
     var verts = verticesStr.split(/\s/);
     for (var i = 0; i < verts.length; i += 3) {
@@ -266,7 +266,12 @@ THREE.X3DLoader.prototype = {
     }
 
     geometry.computeBoundingSphere();
-    geometry.computeFaceNormals();
+
+    console.log(creaseAngle);
+    if (creaseAngle > 0)
+      geometry.computeAngleVertexNormals(creaseAngle);
+    else
+      geometry.computeFaceNormals();
 
     return geometry;
   },
@@ -307,4 +312,39 @@ function convertStringToQuaternion(s) {
 function convertStringTorgb(s) {
   var v = convertStringToVec3(s);
   return new THREE.Color(v.x, v.y, v.z);
+}
+
+// Source: https://gist.github.com/Ni55aN/90c017fafbefd3e31ef8d98ab6566cfa
+// Demo: https://codepen.io/Ni55aN/pen/zROmoe?editors=0010
+THREE.Geometry.prototype.computeAngleVertexNormals = function(angle){
+  function weightedNormal(normals, vector) {
+    var normal = new THREE.Vector3();
+    for (var i = 0, l = normals.length; i < l; i++) {
+      if (normals[i].angleTo(vector) < angle)
+        normal.add( normals[ i ] );
+    }
+    return normal.normalize();
+  }
+
+  this.computeFaceNormals();
+
+  var vertexNormals = [];
+  for (var i = 0, l = this.vertices.length; i < l; i++)
+    vertexNormals[ i ] = [];
+  for (var i = 0, fl = this.faces.length; i < fl; i++) {
+    var face = this.faces[i];
+    vertexNormals[face.a].push(face.normal);
+    vertexNormals[face.b].push(face.normal);
+    vertexNormals[face.c].push(face.normal);
+  }
+
+  for (var i = 0, fl = this.faces.length; i < fl; i++) {
+    var face = this.faces[i];
+    face.vertexNormals[0] = weightedNormal(vertexNormals[face.a], face.normal);
+    face.vertexNormals[1] = weightedNormal(vertexNormals[face.b], face.normal);
+    face.vertexNormals[2] = weightedNormal(vertexNormals[face.c], face.normal);
+  }
+
+  if (this.faces.length > 0)
+    this.normalsNeedUpdate = true;
 }
