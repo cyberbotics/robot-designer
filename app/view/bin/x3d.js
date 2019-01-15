@@ -175,8 +175,8 @@ THREE.X3DLoader.prototype = {
       var type = getNodeAttribute(imageTexture, 'type', '');
       if (type === 'baseColor')
         materialSpecifications.map = this.parseImageTexture(imageTexture);
-      else if (type === 'occlusion')
-        materialSpecifications.aoMap = this.parseImageTexture(imageTexture);
+      // else if (type === 'occlusion')  // Not working as expected.
+      //   materialSpecifications.aoMap = this.parseImageTexture(imageTexture);
       else if (type === 'roughness')
         materialSpecifications.roughnessMap = this.parseImageTexture(imageTexture);
       else if (type === 'metalness')
@@ -189,14 +189,11 @@ THREE.X3DLoader.prototype = {
 
     var loader = new THREE.CubeTextureLoader();
     loader.setPath( '/robot-designer/assets/common/textures/cubic/' );
-    materialSpecifications.envMap = loader.load( [
+    materialSpecifications.envMap = loader.load([
       'noon_sunny_empty_right.jpg', 'noon_sunny_empty_left.jpg',
     	'noon_sunny_empty_top.jpg', 'noon_sunny_empty_bottom.jpg',
     	'noon_sunny_empty_front.jpg', 'noon_sunny_empty_back.jpg'
-    ] );
-    materialSpecifications.envMap.mapping = THREE.SphericalReflectionMapping;
-
-    console.log(materialSpecifications);
+    ]);
 
     var mat = new THREE.MeshStandardMaterial(materialSpecifications);
     mat.userData.x3dType = 'PBRAppearance';
