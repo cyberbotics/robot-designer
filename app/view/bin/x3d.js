@@ -177,8 +177,10 @@ THREE.X3DLoader.prototype = {
         materialSpecifications.map = this.parseImageTexture(imageTexture);
       // else if (type === 'occlusion')  // Not working as expected.
       //   materialSpecifications.aoMap = this.parseImageTexture(imageTexture);
-      else if (type === 'roughness')
+      else if (type === 'roughness') {
         materialSpecifications.roughnessMap = this.parseImageTexture(imageTexture);
+        materialSpecifications.roughness = 1.0;
+      }
       else if (type === 'metalness')
         materialSpecifications.metalnessMap = this.parseImageTexture(imageTexture);
       else if (type === 'normal')
