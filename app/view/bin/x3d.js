@@ -239,7 +239,7 @@ THREE.X3DLoader.prototype = {
     var hasTexCoord = 'texCoordIndex' in ifs.attributes;
     var texcoordIndexStr = hasTexCoord ? getNodeAttribute(ifs, 'texCoordIndex', '') : '';
     var texcoordsStr = hasTexCoord ? getNodeAttribute(textureCoordinate, 'point', '') : '';
-    var creaseAngle = parseFloat(getNodeAttribute(ifs, 'creaseAngle', '0'));
+    var creaseAngle = 0.8 * parseFloat(getNodeAttribute(ifs, 'creaseAngle', '0'));  // 0.8 factor empirically found.
 
     var verts = verticesStr.split(/\s/);
     for (var i = 0; i < verts.length; i += 3) {
