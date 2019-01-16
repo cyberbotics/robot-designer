@@ -319,7 +319,6 @@ THREE.X3DLoader.prototype = {
 
     geometry.computeBoundingSphere();
 
-    console.log(creaseAngle);
     if (creaseAngle > 0)
       geometry.computeAngleVertexNormals(creaseAngle);
     else
