@@ -8,7 +8,7 @@ var highlightedMesh = null;
 
 class SlotAnchors { // eslint-disable-line no-unused-vars
   static initialize() {
-    slotRepresentation = new THREE.BoxGeometry(0.01, 0.01, 0.01);
+    slotRepresentation = new THREE.BoxGeometry(0.011, 0.011, 0.011);
     regularMaterial = new THREE.MeshBasicMaterial({color: 0x00ff88, transparent: true, opacity: 0.8});
     highlightedMaterial = new THREE.MeshBasicMaterial({color: 0x0088ff, transparent: true, opacity: 0.8});
   }
