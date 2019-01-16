@@ -14,14 +14,24 @@
 
     <Transform id='n8' translation='0 0.016 0.0045' name='twister led' solid='true'>
       <Shape id='n9'>
-        <Appearance id='n10'><Material diffuseColor="0.4 0.4 0.4" specularColor="0.3 0.3 0.3" shininess="0.3"/></Appearance>
+        <!-- <Appearance id='n10'><Material diffuseColor="0.4 0.4 0.4" specularColor="0.3 0.3 0.3" shininess="0.3"/></Appearance> -->
+        <PBRAppearance baseColor="0.4 0.4 0.4" metalness="0" roughness="0.7" />
         <Sphere id='n11' radius='0.004' subdivision='16,16'></Sphere>
       </Shape>
     </Transform>
     <Shape id='n12'>
-      <Appearance id='n13'><Material diffuseColor="1 1 1" specularColor="1 1 1" shininess="1"/>
-        <ImageTexture id='n14' url='"/robot-designer/assets/models/tinkerbots/twister/textures/twister_base_base_color.png"' containerField='' origChannelCount='3'><TextureProperties anisotropicDegree="8" generateMipMaps="true" minificationFilter="AVG_PIXEL" magnificationFilter="AVG_PIXEL"/></ImageTexture>
-      </Appearance>
+      <!--
+        <Appearance id='n13'><Material diffuseColor="1 1 1" specularColor="1 1 1" shininess="1"/>
+          <ImageTexture id='n14' url='"/robot-designer/assets/models/tinkerbots/twister/textures/twister_base_base_color.png"' containerField='' origChannelCount='3'><TextureProperties anisotropicDegree="8" generateMipMaps="true" minificationFilter="AVG_PIXEL" magnificationFilter="AVG_PIXEL"/></ImageTexture>
+        </Appearance>
+      -->
+      <PBRAppearance>
+        <ImageTexture type="baseColor" url='"/robot-designer/assets/models/tinkerbots/twister/textures/twister_base_base_color.png"' />
+        <ImageTexture type="roughness" url='"/robot-designer/assets/models/tinkerbots/twister/textures/twister_base_roughness.png"' />
+        <ImageTexture type="metalness" url='"/robot-designer/assets/models/tinkerbots/twister/textures/twister_base_metalness.png"' />
+        <ImageTexture type="normal" url='"/robot-designer/assets/models/tinkerbots/twister/textures/twister_base_normal.png"' />
+        <ImageTexture type="occlusion" url='"/robot-designer/assets/models/tinkerbots/twister/textures/twister_base_occlusion.png"' />
+      </PBRAppearance>
       <IndexedFaceSet
         id='n19'
         creaseAngle='0.5585'
@@ -38,9 +48,18 @@
     </Shape>
 
     <Shape id='n37'>
-      <Appearance id='n38'><Material diffuseColor="1 1 1" specularColor="1 1 1" shininess="1"/>
-        <ImageTexture id='n39' url='"/robot-designer/assets/models/tinkerbots/twister/textures/twister_joint_base_color.png"' containerField='' origChannelCount='3'><TextureProperties anisotropicDegree="8" generateMipMaps="true" minificationFilter="AVG_PIXEL" magnificationFilter="AVG_PIXEL"/></ImageTexture>
-      </Appearance>
+      <!--
+        <Appearance id='n38'><Material diffuseColor="1 1 1" specularColor="1 1 1" shininess="1"/>
+          <ImageTexture id='n39' url='"/robot-designer/assets/models/tinkerbots/twister/textures/twister_joint_base_color.png"' containerField='' origChannelCount='3'><TextureProperties anisotropicDegree="8" generateMipMaps="true" minificationFilter="AVG_PIXEL" magnificationFilter="AVG_PIXEL"/></ImageTexture>
+        </Appearance>
+      -->
+      <PBRAppearance>
+        <ImageTexture type="baseColor" url='"/robot-designer/assets/models/tinkerbots/twister/textures/twister_joint_base_color.png"' />
+        <ImageTexture type="roughness" url='"/robot-designer/assets/models/tinkerbots/twister/textures/twister_joint_roughness.png"' />
+        <ImageTexture type="metalness" url='"/robot-designer/assets/models/tinkerbots/twister/textures/twister_joint_metalness.png"' />
+        <ImageTexture type="normal" url='"/robot-designer/assets/models/tinkerbots/twister/textures/twister_joint_normal.png"' />
+        <ImageTexture type="occlusion" url='"/robot-designer/assets/models/tinkerbots/twister/textures/twister_joint_occlusion.png"' />
+      </PBRAppearance>
       <IndexedFaceSet
         id='n44'
         creaseAngle='0.4294'

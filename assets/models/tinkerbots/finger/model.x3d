@@ -6,7 +6,8 @@
   </head>
   <Scene>
     <Shape id='n8'>
-      <Appearance id='n9'><Material diffuseColor="1 0 0" specularColor="0.1 0.1 0.1" shininess="0.1"/></Appearance>
+      <!-- <Appearance id='n9'><Material diffuseColor="1 0 0" specularColor="0.1 0.1 0.1" shininess="0.1"/></Appearance> -->
+      <PBRAppearance metalness='0' roughness='0.9' baseColor="1 0 0"/>
       <IndexedFaceSet
         id='n11'
         creaseAngle='0.5585'

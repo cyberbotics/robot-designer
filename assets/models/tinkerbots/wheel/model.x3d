@@ -8,9 +8,14 @@
 
     <Transform id='n7' translation='0 0 -0.0085'>
       <Shape id='n8'>
-        <Appearance id='n9'><Material diffuseColor="1 1 1" specularColor="0 0 0" shininess="0"/>
-          <ImageTexture id='n10' url='"/robot-designer/assets/models/tinkerbots/wheel/textures/wheel_base_color.png"' containerField='' origChannelCount='3'><TextureProperties anisotropicDegree="8" generateMipMaps="true" minificationFilter="AVG_PIXEL" magnificationFilter="AVG_PIXEL"/></ImageTexture>
-        </Appearance>
+        <!--
+          <Appearance id='n9'><Material diffuseColor="1 1 1" specularColor="0 0 0" shininess="0"/>
+            <ImageTexture id='n10' url='"/robot-designer/assets/models/tinkerbots/wheel/textures/wheel_base_color.png"' containerField='' origChannelCount='3'><TextureProperties anisotropicDegree="8" generateMipMaps="true" minificationFilter="AVG_PIXEL" magnificationFilter="AVG_PIXEL"/></ImageTexture>
+          </Appearance>
+        -->
+        <PBRAppearance metalness='0' roughness='0.9'>
+          <ImageTexture type="baseColor" url='"/robot-designer/assets/models/tinkerbots/wheel/textures/wheel_base_color.png"' />
+        </PBRAppearance>
         <IndexedFaceSet
           id='n14'
           creaseAngle='0.5585'

@@ -26,14 +26,24 @@
 
     <Transform id='n39' translation='0 0.016 0.0065' name='motor led' solid='true'>
       <Shape id='n40'>
-        <Appearance id='n41'><Material diffuseColor="0.4 0.4 0.4" specularColor="0.3 0.3 0.3" shininess="0.3"/></Appearance>
+        <!-- <Appearance id='n41'><Material diffuseColor="0.4 0.4 0.4" specularColor="0.3 0.3 0.3" shininess="0.3"/></Appearance> -->
+        <PBRAppearance baseColor="0.4 0.4 0.4" metalness="0" roughness="0.7" />
         <Sphere id='n42' radius='0.004' subdivision='16,16'></Sphere>
       </Shape>
     </Transform>
     <Shape id='n43'>
-      <Appearance id='n44'><Material diffuseColor="1 1 1" specularColor="1 1 1" shininess="1"/>
-        <ImageTexture id='n45' url='"/robot-designer/assets/models/tinkerbots/motor/textures/motor_base_color.png"' containerField='' origChannelCount='3'><TextureProperties anisotropicDegree="8" generateMipMaps="true" minificationFilter="AVG_PIXEL" magnificationFilter="AVG_PIXEL"/></ImageTexture>
-      </Appearance>
+      <!--
+        <Appearance id='n44'><Material diffuseColor="1 1 1" specularColor="1 1 1" shininess="1"/>
+          <ImageTexture id='n45' url='"/robot-designer/assets/models/tinkerbots/motor/textures/motor_base_color.png"' containerField='' origChannelCount='3'><TextureProperties anisotropicDegree="8" generateMipMaps="true" minificationFilter="AVG_PIXEL" magnificationFilter="AVG_PIXEL"/></ImageTexture>
+        </Appearance>
+      -->
+      <PBRAppearance>
+        <ImageTexture type="baseColor" url='"/robot-designer/assets/models/tinkerbots/motor/textures/motor_base_color.png"' />
+        <ImageTexture type="roughness" url='"/robot-designer/assets/models/tinkerbots/motor/textures/motor_roughness.png"' />
+        <ImageTexture type="metalness" url='"/robot-designer/assets/models/tinkerbots/motor/textures/motor_metalness.png"' />
+        <ImageTexture type="normal" url='"/robot-designer/assets/models/tinkerbots/motor/textures/motor_normal.png"' />
+        <ImageTexture type="occlusion" url='"/robot-designer/assets/models/tinkerbots/motor/textures/motor_occlusion.png"' />
+      </PBRAppearance>
       <IndexedFaceSet
         id='n50'
         creaseAngle='0.5585'

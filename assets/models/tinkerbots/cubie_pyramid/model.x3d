@@ -10,7 +10,8 @@
     <Slot slotName='backSlot' slotType='lego cross female' id='n10' translation='-0.0005 0 0.011' rotation='0 1 0 -1.05'></Slot>
 
     <Shape id='n12'>
-      <Appearance id='n13'><Material diffuseColor="1 0.4 0" specularColor="0.1 0.1 0.1" shininess="0.1"/></Appearance>
+      <!-- <Appearance id='n13'><Material diffuseColor="1 0.4 0" specularColor="0.1 0.1 0.1" shininess="0.1"/></Appearance> -->
+      <PBRAppearance metalness='0' roughness='0.9' baseColor="1 0.6 0"/>
       <IndexedFaceSet
         id='n15'
         creaseAngle='0.3'

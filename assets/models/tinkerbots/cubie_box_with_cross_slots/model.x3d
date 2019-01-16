@@ -13,7 +13,8 @@
     <Slot slotName='rightSlot' slotType='lego cross female' id='n16' translation='-0.01 -0.005 0.015' rotation='1 0 0 1.57'></Slot>
 
     <Shape id='n18'>
-      <Appearance id='n19'><Material diffuseColor="1 0.4 0" specularColor="0.1 0.1 0.1" shininess="0.1"/></Appearance>
+      <!-- <Appearance id='n19'><Material diffuseColor="1 0.4 0" specularColor="0.1 0.1 0.1" shininess="0.1"/></Appearance> -->      <PBRAppearance metalness='0' roughness='0.9' baseColor="0.8 0.8 0.8"/>
+      <PBRAppearance metalness='0' roughness='0.9' baseColor="1 0.6 0"/>
       <IndexedFaceSet
         id='n21'
         creaseAngle='0.5585'

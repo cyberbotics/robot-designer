@@ -29,15 +29,25 @@
 
     <Transform id='n9' translation='0 0.016 0.0065' name='distance sensor led' solid='true'>
       <Shape id='n10'>
-        <Appearance id='n11'><Material diffuseColor="0.4 0.4 0.4" specularColor="0.3 0.3 0.3" shininess="0.3"/></Appearance>
+        <!-- <Appearance id='n11'><Material diffuseColor="0.4 0.4 0.4" specularColor="0.3 0.3 0.3" shininess="0.3"/></Appearance> -->
+        <PBRAppearance baseColor="0.4 0.4 0.4" metalness="0" roughness="0.7" />
         <Sphere id='n12' radius='0.004' subdivision='16,16'></Sphere>
       </Shape>
     </Transform>
 
     <Shape id='n53'>
-      <Appearance id='n54'><Material diffuseColor="1 1 1" specularColor="1 1 1" shininess="1"/>
-        <ImageTexture id='n55' url='"/robot-designer/assets/models/tinkerbots/distance_sensor/textures/distance_sensor_base_color.png"' containerField='' origChannelCount='3'><TextureProperties anisotropicDegree="8" generateMipMaps="true" minificationFilter="AVG_PIXEL" magnificationFilter="AVG_PIXEL"/></ImageTexture>
-      </Appearance>
+      <!--
+        <Appearance id='n54'><Material diffuseColor="1 1 1" specularColor="1 1 1" shininess="1"/>
+          <ImageTexture id='n55' url='"/robot-designer/assets/models/tinkerbots/distance_sensor/textures/distance_sensor_base_color.png"' containerField='' origChannelCount='3'><TextureProperties anisotropicDegree="8" generateMipMaps="true" minificationFilter="AVG_PIXEL" magnificationFilter="AVG_PIXEL"/></ImageTexture>
+        </Appearance>
+      -->
+      <PBRAppearance>
+        <ImageTexture type="baseColor" url='"/robot-designer/assets/models/tinkerbots/distance_sensor/textures/distance_sensor_base_color.png"' />
+        <ImageTexture type="roughness" url='"/robot-designer/assets/models/tinkerbots/distance_sensor/textures/distance_sensor_roughness.png"' />
+        <ImageTexture type="metalness" url='"/robot-designer/assets/models/tinkerbots/distance_sensor/textures/distance_sensor_metalness.png"' />
+        <ImageTexture type="normal" url='"/robot-designer/assets/models/tinkerbots/distance_sensor/textures/distance_sensor_normal.png"' />
+        <ImageTexture type="occlusion" url='"/robot-designer/assets/models/tinkerbots/distance_sensor/textures/distance_sensor_occlusion.png"' />
+      </PBRAppearance>
       <IndexedFaceSet
         id='n60'
         creaseAngle='0.5585'
