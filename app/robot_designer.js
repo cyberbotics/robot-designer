@@ -12,12 +12,18 @@ class RobotDesigner {
 
     this.view3DElement = document.getElementsByName('view3D')[0];
     if (typeof this.view3DElement === 'undefined') {
-      console.error('The Robot Designer cannot find its 3D view.');
+      console.error('The Robot Designer cannot find its 3D component.');
       return;
     }
-
     this.view3D = new View3D(this.view3DElement);
     this.highlightOutlinePass = this.view3D.highlightOutlinePass;
+
+    this.assetLibraryElement = document.getElementsByName('assets-library-component')[0];
+    if (typeof this.assetLibraryElement === 'undefined') {
+      console.error('The Robot Designer cannot find its asset library component.');
+      return;
+    }
+    this.assetLibraryComponent = new AssetLibraryComponent(this.assetLibraryElement);
 
     this.robot = new Robot();
     this.robotMediator = new RobotMediator(this.robot);
@@ -28,6 +34,7 @@ class RobotDesigner {
 
     this.commands = new Commands();
     this.commands.addObserver('updated', () => this.updateUndoRedoButtons());
+    this.commands.addObserver('updated', () => this.assetLibraryComponent.update(this.view3D.scene));
   }
 
   updateUndoRedoButtons() {
