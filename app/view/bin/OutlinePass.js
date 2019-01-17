@@ -270,7 +270,7 @@ THREE.OutlinePass.prototype = Object.assign( Object.create( THREE.Pass.prototype
 			renderer.setClearColor( 0xffffff, 1 );
 
 			// Make selected objects invisible
-			this.changeVisibilityOfSelectedObjects( false );
+			// this.changeVisibilityOfSelectedObjects( false );  // Fabien note: this cause issues with the selector mechanism.
 
 			var currentBackground = this.renderScene.background;
 			this.renderScene.background = null;
@@ -280,7 +280,7 @@ THREE.OutlinePass.prototype = Object.assign( Object.create( THREE.Pass.prototype
 			renderer.render( this.renderScene, this.renderCamera, this.renderTargetDepthBuffer, true );
 
 			// Make selected objects visible
-			this.changeVisibilityOfSelectedObjects( true );
+			// this.changeVisibilityOfSelectedObjects( true );  // Fabien note: this cause issues with the selector mechanism.
 
 			// Update Texture Matrix for Depth compare
 			this.updateTextureMatrix();
