@@ -1,8 +1,12 @@
-/* global View3D, Robot, Dragger, RobotMediator, RobotController, AssetComponent, Commands */
+/* global View3D, Robot, Dragger, RobotMediator, RobotController, AssetComponent, AssetLibrary, Commands */
 'use strict';
 
 class RobotDesigner {
   constructor(part, undoButton, redoButton) {
+    this.part = part;
+    this.undoButton = undoButton;
+    this.redoButton = redoButton;
+
     if (typeof part === 'undefined') {
       console.error('The Robot Designer is initialized on an undefined part.');
       return;
@@ -12,20 +16,18 @@ class RobotDesigner {
       console.error('The Robot Designer cannot find its 3D component.');
       return;
     }
-
-    this.part = part;
-    this.undoButton = undoButton;
-    this.redoButton = redoButton;
-
-    this.view3D = new View3D(this.view3DElement);
-    this.highlightOutlinePass = this.view3D.highlightOutlinePass;
-
     this.assetLibraryElement = document.getElementsByName('assets-library-component')[0];
     if (typeof this.assetLibraryElement === 'undefined') {
       console.error('The Robot Designer cannot find its asset library component.');
       return;
     }
-    this.assetComponent = new AssetComponent(this.assetLibraryElement);
+
+    this.assetLibrary = new AssetLibrary();
+    this.assetComponent = new AssetComponent(this.assetLibraryElement, this.assetLibrary);
+    this.assetLibrary.addObserver('loaded', () => { this.assetComponent.loadAssets(); });
+
+    this.view3D = new View3D(this.view3DElement);
+    this.highlightOutlinePass = this.view3D.highlightOutlinePass;
 
     this.robot = new Robot();
     this.robotMediator = new RobotMediator(this.robot);

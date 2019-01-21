@@ -1,28 +1,23 @@
 'use strict';
 
 class AssetComponent { // eslint-disable-line no-unused-vars
-  constructor(assetLibraryElement) {
+  constructor(assetLibraryElement, assetLibrary) {
     this.assetLibraryElement = assetLibraryElement;
+    this.assetLibrary = assetLibrary;
     this.partIconDivs = [];
-
-    fetch('/robot-designer/assets/assets.json')
-      .then(response => response.text())
-      .then((txt) => this.loadAssets(JSON.parse(txt)));
   }
 
-  loadAssets(assets) {
-    Object.keys(assets).forEach((assetName) => {
-      var asset = assets[assetName];
-
+  loadAssets() {
+    this.assetLibrary.assets.forEach((asset) => {
       var div = document.createElement('div');
       if (asset.root) {
         div.innerHTML = '' +
-          '<div class="part-icon" draggable="true" ondragstart="dragStart(event)" part="' + assetName + '" >' +
+          '<div class="part-icon" draggable="true" ondragstart="dragStart(event)" part="' + asset.name + '" >' +
             '<img draggable="false" src="' + asset.icon + '" />' +
           '</div>';
       } else {
         div.innerHTML = '' +
-          '<div class="part-icon hidden" draggable="true" ondragstart="dragStart(event)" part="' + assetName + '" slotType="' + asset.slotType + '">' +
+          '<div class="part-icon hidden" draggable="true" ondragstart="dragStart(event)" part="' + asset.name + '" slotType="' + asset.slotType + '">' +
             '<img draggable="false" src="' + asset.icon + '" />' +
           '</div>';
       }
