@@ -23,7 +23,7 @@ class RobotDesigner {
       console.error('The Robot Designer cannot find its asset library component.');
       return;
     }
-    this.assetLibraryComponent = new AssetLibraryComponent(this.assetLibraryElement);
+    this.assetLibraryComponent = new AssetComponent(this.assetLibraryElement);
 
     this.robot = new Robot();
     this.robotMediator = new RobotMediator(this.robot);

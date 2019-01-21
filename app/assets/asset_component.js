@@ -1,4 +1,4 @@
-class AssetLibraryComponent { // eslint-disable-line no-unused-vars
+class AssetComponent { // eslint-disable-line no-unused-vars
   constructor(assetLibraryElement) {
     this.assetLibraryElement = assetLibraryElement;
     this.partIconDivs = [];
