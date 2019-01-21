@@ -65,7 +65,7 @@ class View3D { // eslint-disable-line no-unused-vars
     this.gpuPicker = new THREE.GPUPicker({renderer: this.renderer, debug: false});
     this.gpuPicker.setFilter(function(object) { return object instanceof THREE.Mesh; });
 
-    SlotAnchors.initialize();
+    this.slotAnchors = new SlotAnchors(this.scene);
 
     this.render();
   }
@@ -140,7 +140,7 @@ class View3D { // eslint-disable-line no-unused-vars
   projectScreenPositionOnSlotsAnchors(screenPosition) {
     var raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(screenPosition, this.camera);
-    var intersects = raycaster.intersectObjects(SlotAnchors.slots());
+    var intersects = raycaster.intersectObjects(this.slotAnchors.slots());
     if (intersects.length > 0)
       return intersects[0].point;
   }

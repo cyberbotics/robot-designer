@@ -1,4 +1,4 @@
-/* global Ghost, SlotAnchors */
+/* global Ghost */
 'use strict';
 
 class Dragger { // eslint-disable-line no-unused-vars
@@ -17,7 +17,7 @@ class Dragger { // eslint-disable-line no-unused-vars
   }
 
   dragEnter() {
-    SlotAnchors.showSlots(this.view3D.scene, this.slotType);
+    this.view3D.slotAnchors.showSlots(this.slotType);
     this.ghost.addGhost(this.draggedPart);
   }
 
@@ -28,7 +28,7 @@ class Dragger { // eslint-disable-line no-unused-vars
     if (projection) {
       var closestSlot = this.view3D.getClosestSlot(screenPosition, this.slotType);
       if (closestSlot) {
-        SlotAnchors.highlight(closestSlot);
+        this.view3D.slotAnchors.highlight(closestSlot);
         this.ghost.moveGhostToSlot(closestSlot);
         return;
       }
@@ -39,7 +39,7 @@ class Dragger { // eslint-disable-line no-unused-vars
   }
 
   dragLeave() {
-    SlotAnchors.hideSlots(this.view3D.scene);
+    this.view3D.hideSlots(this.view3D.scene);
     this.ghost.removeGhost();
   }
 
@@ -59,7 +59,7 @@ class Dragger { // eslint-disable-line no-unused-vars
     } else
       this.robotController.addPart(null, this.draggedPart, '');
 
-    SlotAnchors.hideSlots(this.view3D.scene);
+    this.view3D.slotAnchors.hideSlots(this.view3D.scene);
     this.ghost.removeGhost();
   }
 }
