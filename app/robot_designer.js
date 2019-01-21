@@ -64,6 +64,14 @@ function save() { // eslint-disable-line no-unused-vars
   alert(JSON.stringify(designer.robot.serialize(), null, 2));
 }
 
+function undo() { // eslint-disable-line no-unused-vars
+  designer.commands.undo();
+}
+
+function redo() { // eslint-disable-line no-unused-vars
+  designer.commands.redo();
+}
+
 function mousedown(ev) { // eslint-disable-line no-unused-vars
   var relativePosition = designer.view3D.convertMouseEventPositionToRelativePosition(ev.clientX, ev.clientY);
   var screenPosition = designer.view3D.convertMouseEventPositionToScreenPosition(ev.clientX, ev.clientY);
