@@ -2,9 +2,9 @@
 'use strict';
 
 class Part extends Observable { // eslint-disable-line no-unused-vars
-  constructor(modelName) {
+  constructor(asset) {
     super();
-    this.modelName = modelName;
+    this.modelName = asset.name;
     this.slots = {};
   }
 

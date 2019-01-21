@@ -36,7 +36,7 @@ class RobotDesigner {
     this.robot = new Robot();
     this.robotMediator = new RobotMediator(this.robot);
     this.view3D.scene.add(this.robotMediator.object3D);
-    this.robotController = new RobotController(this.commands, this.robot);
+    this.robotController = new RobotController(this.assetLibrary, this.commands, this.robot);
 
     this.dragger = new Dragger(this.view3D, this.robotController);
   }

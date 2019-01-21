@@ -2,13 +2,15 @@
 'use strict';
 
 class RobotController { // eslint-disable-line no-unused-vars
-  constructor(commands, robot) {
+  constructor(assetLibrary, commands, robot) {
+    this.assetLibrary = assetLibrary;
     this.commands = commands;
     this.robot = robot;
   }
 
   addPart(parent, modelName, closestSlotName) {
-    var part = new Part(modelName);
+    var asset = this.assetLibrary.getAssetByName(modelName);
+    var part = new Part(asset);
     if (!parent || parent === this.robot)
       this.commands.addRootPart(this.robot, part);
     else
