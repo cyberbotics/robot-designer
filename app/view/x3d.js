@@ -209,13 +209,12 @@ THREE.X3DLoader.prototype = {
 
     var filename = getNodeAttribute(imageTexture, 'url', '');
     filename = filename.split(/['"\s]/).filter(n => n);
-    var that = this;
     var loader = new THREE.TextureLoader();
     var texture = loader.load(
       filename[0],
-      function(texture) { // onLoad callback
-        if (that.ontextureload !== undefined)
-          that.ontextureload();
+      (texture) => { // onLoad callback
+        if (this.ontextureload !== undefined)
+          this.ontextureload();
       },
       undefined, // onProgress callback
       function(err) { // onError callback

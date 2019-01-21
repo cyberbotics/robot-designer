@@ -16,13 +16,12 @@ class PartMediator { // eslint-disable-line no-unused-vars
 
   onPartAdded(data) {
     // 1. Look for every slots recursively.
-    var that = this;
     var slotCandidates = [];
-    this.object3D.children[0].traverse(function(child) {
+    this.object3D.children[0].traverse((child) => {
       if (child.userData.x3dType === 'Slot' && child.userData.slotName === data.slotName) {
         var level = 0;
         var parent = child;
-        while (parent && parent !== that.object3D.children[0]) {
+        while (parent && parent !== this.object3D.children[0]) {
           level++;
           parent = parent.parent;
         }

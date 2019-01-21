@@ -13,13 +13,12 @@ class SlotAnchors { // eslint-disable-line no-unused-vars
 
   showSlots(slotType) {
     this.hideSlots();
-    var that = this;
-    this.scene.traverse(function(obj) {
+    this.scene.traverse((obj) => {
       if (obj.userData.x3dType === 'Slot' && obj.userData.slotType === slotType) {
-        var mesh = new THREE.Mesh(that.slotRepresentation, that.regularMaterial);
+        var mesh = new THREE.Mesh(this.slotRepresentation, this.regularMaterial);
         mesh.name = 'slot representation';
         obj.add(mesh);
-        that.slotRepresentationList.push(mesh);
+        this.slotRepresentationList.push(mesh);
       }
     });
   }

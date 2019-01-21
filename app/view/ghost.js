@@ -14,11 +14,10 @@ class Ghost { // eslint-disable-line no-unused-vars
 
     var model = '/robot-designer/assets/models/' + modelName + '/model.x3d';
     var loader = new THREE.X3DLoader();
-    var that = this;
-    loader.load(model, function(object3d) {
-      if (that.ghost) {
-        that.ghost.add(object3d);
-        that.ghost.traverse(function(child) {
+    loader.load(model, (object3d) => {
+      if (this.ghost) {
+        this.ghost.add(object3d);
+        this.ghost.traverse(function(child) {
           if (child instanceof THREE.Mesh) {
             child.material.transparent = true;
             child.material.opacity = 0.5;

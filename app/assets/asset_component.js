@@ -11,8 +11,7 @@ class AssetComponent { // eslint-disable-line no-unused-vars
   }
 
   loadAssets(assets) {
-    var that = this;
-    Object.keys(assets).forEach(function(assetName) {
+    Object.keys(assets).forEach((assetName) => {
       var asset = assets[assetName];
 
       var div = document.createElement('div');
@@ -27,8 +26,8 @@ class AssetComponent { // eslint-disable-line no-unused-vars
             '<img draggable="false" src="' + asset.icon + '" />' +
           '</div>';
       }
-      that.partIconDivs.push(div.firstChild);
-      that.assetLibraryElement.appendChild(div.firstChild);
+      this.partIconDivs.push(div.firstChild);
+      this.assetLibraryElement.appendChild(div.firstChild);
     });
   }
 
