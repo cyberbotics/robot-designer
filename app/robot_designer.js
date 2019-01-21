@@ -23,7 +23,7 @@ class RobotDesigner {
       console.error('The Robot Designer cannot find its asset library component.');
       return;
     }
-    this.assetLibraryComponent = new AssetComponent(this.assetLibraryElement);
+    this.assetComponent = new AssetComponent(this.assetLibraryElement);
 
     this.robot = new Robot();
     this.robotMediator = new RobotMediator(this.robot);
@@ -34,7 +34,7 @@ class RobotDesigner {
 
     this.commands = new Commands();
     this.commands.addObserver('updated', () => this.updateUndoRedoButtons());
-    this.commands.addObserver('updated', () => this.assetLibraryComponent.update(this.view3D.scene));
+    this.commands.addObserver('updated', () => this.assetComponent.update(this.view3D.scene));
   }
 
   updateUndoRedoButtons() {
