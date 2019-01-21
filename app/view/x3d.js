@@ -4,7 +4,7 @@
 // Inspiration: https://github.com/lkolbly/threejs-x3dloader/blob/master/X3DLoader.js
 
 THREE.X3DLoader = function(manager) {
-  this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
+  this.manager = (typeof manager !== 'undefined') ? manager : THREE.DefaultLoadingManager;
 };
 
 THREE.X3DLoader.prototype = {
@@ -130,7 +130,7 @@ THREE.X3DLoader.prototype = {
 
     // Get the Material tag
     var material = appearance.getElementsByTagName('Material')[0];
-    if (material === undefined)
+    if (typeof material === 'undefined')
       return mat;
 
     // Pull out the standard colors
@@ -213,7 +213,7 @@ THREE.X3DLoader.prototype = {
     var texture = loader.load(
       filename[0],
       (texture) => { // onLoad callback
-        if (this.ontextureload !== undefined)
+        if (typeof this.ontextureload !== 'undefined')
           this.ontextureload();
       },
       undefined, // onProgress callback
