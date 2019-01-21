@@ -54,7 +54,7 @@ class View3D { // eslint-disable-line no-unused-vars
     this.selectionOutlinePass.renderToScreen = true;
     this.composer.addPass(this.selectionOutlinePass);
 
-    window.onresize = this.resize.bind(this); // when the window has been resized.
+    window.onresize = () => this.resize(); // when the window has been resized.
 
     this.view3DElement.appendChild(this.renderer.domElement);
     this.resize();
@@ -71,8 +71,7 @@ class View3D { // eslint-disable-line no-unused-vars
   }
 
   render() {
-    var that = this;
-    requestAnimationFrame(that.render.bind(that));
+    requestAnimationFrame(() => this.render());
     this.composer.render();
   }
 
