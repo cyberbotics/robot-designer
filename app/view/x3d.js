@@ -63,7 +63,7 @@ THREE.X3DLoader.prototype = {
     }
 
     // Parse children.
-    for (var i = 0; i < node.childNodes.length; i++) {
+    for (let i = 0; i < node.childNodes.length; i++) {
       var child = node.childNodes[i];
       if (typeof child.tagName === 'undefined')
         continue;
@@ -101,7 +101,7 @@ THREE.X3DLoader.prototype = {
     var geometry = new THREE.Geometry();
     var material = new THREE.MeshBasicMaterial({color: 0xffffff});
 
-    for (var i = 0; i < shape.childNodes.length; i++) {
+    for (let i = 0; i < shape.childNodes.length; i++) {
       var child = shape.childNodes[i];
       if (typeof child.tagName === 'undefined')
         continue;
@@ -171,7 +171,7 @@ THREE.X3DLoader.prototype = {
     };
 
     var imageTextures = pbrAppearance.getElementsByTagName('ImageTexture');
-    for (var t = 0; t < imageTextures.length; t++) {
+    for (let t = 0; t < imageTextures.length; t++) {
       var imageTexture = imageTextures[t];
       var type = getNodeAttribute(imageTexture, 'type', '');
       if (type === 'baseColor')
@@ -242,7 +242,7 @@ THREE.X3DLoader.prototype = {
     var creaseAngle = 0.8 * parseFloat(getNodeAttribute(ifs, 'creaseAngle', '0')); // 0.8 factor empirically found.
 
     var verts = verticesStr.split(/\s/);
-    for (var i = 0; i < verts.length; i += 3) {
+    for (let i = 0; i < verts.length; i += 3) {
       var v = new THREE.Vector3();
       v.x = parseFloat(verts[i + 0]);
       v.y = parseFloat(verts[i + 1]);
@@ -253,7 +253,7 @@ THREE.X3DLoader.prototype = {
     if (hasTexCoord) {
       var texcoords = texcoordsStr.split(/\s/);
       var uvs = [];
-      for (i = 0; i < texcoords.length; i += 2) {
+      for (let i = 0; i < texcoords.length; i += 2) {
         v = new THREE.Vector2();
         v.x = parseFloat(texcoords[i + 0]);
         v.y = parseFloat(texcoords[i + 1]);
@@ -264,7 +264,7 @@ THREE.X3DLoader.prototype = {
     // Now pull out the face indices
     if (hasTexCoord)
       var texIndices = texcoordIndexStr.split(/\s/);
-    for (i = 0; i < indices.length; i++) {
+    for (let i = 0; i < indices.length; i++) {
       var faceIndices = [];
       var uvIndices = [];
       while (parseFloat(indices[i]) >= 0) {
@@ -370,7 +370,7 @@ function convertStringTorgb(s) {
 THREE.Geometry.prototype.computeAngleVertexNormals = function(angle) {
   function weightedNormal(normals, vector) {
     var normal = new THREE.Vector3();
-    for (var i = 0, l = normals.length; i < l; i++) {
+    for (let i = 0, l = normals.length; i < l; i++) {
       if (normals[i].angleTo(vector) < angle)
         normal.add(normals[ i ]);
     }
@@ -380,18 +380,17 @@ THREE.Geometry.prototype.computeAngleVertexNormals = function(angle) {
   this.computeFaceNormals();
 
   var vertexNormals = [];
-  var i, l, fl, face;
-  for (i = 0, l = this.vertices.length; i < l; i++)
+  for (let i = 0, l = this.vertices.length; i < l; i++)
     vertexNormals[ i ] = [];
-  for (i = 0, fl = this.faces.length; i < fl; i++) {
-    face = this.faces[i];
+  for (let i = 0, fl = this.faces.length; i < fl; i++) {
+    let face = this.faces[i];
     vertexNormals[face.a].push(face.normal);
     vertexNormals[face.b].push(face.normal);
     vertexNormals[face.c].push(face.normal);
   }
 
-  for (i = 0, fl = this.faces.length; i < fl; i++) {
-    face = this.faces[i];
+  for (let i = 0, fl = this.faces.length; i < fl; i++) {
+    let face = this.faces[i];
     face.vertexNormals[0] = weightedNormal(vertexNormals[face.a], face.normal);
     face.vertexNormals[1] = weightedNormal(vertexNormals[face.b], face.normal);
     face.vertexNormals[2] = weightedNormal(vertexNormals[face.c], face.normal);
