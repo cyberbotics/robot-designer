@@ -3,19 +3,20 @@
 
 class RobotDesigner {
   constructor(part, undoButton, redoButton) {
-    this.part = part;
-    if (typeof this.part === 'undefined') {
+    if (typeof part === 'undefined') {
       console.error('The Robot Designer is initialized on an undefined part.');
       return;
     }
-    this.undoButton = undoButton;
-    this.redoButton = redoButton;
-
     this.view3DElement = document.getElementsByName('view3D')[0];
     if (typeof this.view3DElement === 'undefined') {
       console.error('The Robot Designer cannot find its 3D component.');
       return;
     }
+
+    this.part = part;
+    this.undoButton = undoButton;
+    this.redoButton = redoButton;
+
     this.view3D = new View3D(this.view3DElement);
     this.highlightOutlinePass = this.view3D.highlightOutlinePass;
 
