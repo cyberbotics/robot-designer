@@ -41,7 +41,6 @@ class AssetComponent { // eslint-disable-line no-unused-vars
         availableSlotTypes.push(obj.userData.slotType);
     });
     availableSlotTypes = availableSlotTypes.filter((v, i, a) => a.indexOf(v) === i); // unique
-    console.log(availableSlotTypes);
     for (let d = 0; d < this.partIconDivs.length; d++) {
       var div = this.partIconDivs[d];
       if (availableSlotTypes.length === 0) {
