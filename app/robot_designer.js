@@ -29,16 +29,16 @@ class RobotDesigner {
     this.view3D = new View3D(this.view3DElement);
     this.highlightOutlinePass = this.view3D.highlightOutlinePass;
 
-    this.robot = new Robot();
-    this.robotMediator = new RobotMediator(this.robot);
-    this.view3D.scene.add(this.robotMediator.object3D);
-    this.robotController = new RobotController(this.robot);
-
-    this.dragger = new Dragger(this.view3D, this.robotController);
-
     this.commands = new Commands();
     this.commands.addObserver('updated', () => this.updateUndoRedoButtons());
     this.commands.addObserver('updated', () => this.assetComponent.update(this.view3D.scene));
+
+    this.robot = new Robot();
+    this.robotMediator = new RobotMediator(this.robot);
+    this.view3D.scene.add(this.robotMediator.object3D);
+    this.robotController = new RobotController(this.commands, this.robot);
+
+    this.dragger = new Dragger(this.view3D, this.robotController);
   }
 
   updateUndoRedoButtons() {

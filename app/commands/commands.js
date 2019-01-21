@@ -2,13 +2,9 @@
 'use strict';
 
 class Commands extends Observable { // eslint-disable-line no-unused-vars
-  constructor() { // Singleton pattern.
-    if (!Commands.instance) {
-      super();
-      Commands.instance = this;
-      this.undoStack = new UndoStack(null);
-    }
-    return Commands.instance;
+  constructor() {
+    super();
+    this.undoStack = new UndoStack(null);
   }
 
   undo() {
