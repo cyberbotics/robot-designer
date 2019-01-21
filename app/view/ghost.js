@@ -17,7 +17,7 @@ class Ghost { // eslint-disable-line no-unused-vars
     loader.load(model, function(object3d) {
       if (that.ghost) {
         that.ghost.add(object3d);
-        that.ghost.traverse( function(child) {
+        that.ghost.traverse(function(child) {
           if (child instanceof THREE.Mesh) {
             child.material.transparent = true;
             child.material.opacity = 0.5;

@@ -180,8 +180,7 @@ THREE.X3DLoader.prototype = {
       else if (type === 'roughness') {
         materialSpecifications.roughnessMap = this.parseImageTexture(imageTexture);
         materialSpecifications.roughness = 1.0;
-      }
-      else if (type === 'metalness')
+      } else if (type === 'metalness')
         materialSpecifications.metalnessMap = this.parseImageTexture(imageTexture);
       else if (type === 'normal')
         materialSpecifications.normalMap = this.parseImageTexture(imageTexture);
@@ -190,11 +189,11 @@ THREE.X3DLoader.prototype = {
     }
 
     var loader = new THREE.CubeTextureLoader();
-    loader.setPath( '/robot-designer/assets/common/textures/cubic/' );
+    loader.setPath('/robot-designer/assets/common/textures/cubic/');
     materialSpecifications.envMap = loader.load([
       'noon_sunny_empty_right.jpg', 'noon_sunny_empty_left.jpg',
-    	'noon_sunny_empty_top.jpg', 'noon_sunny_empty_bottom.jpg',
-    	'noon_sunny_empty_front.jpg', 'noon_sunny_empty_back.jpg'
+      'noon_sunny_empty_top.jpg', 'noon_sunny_empty_bottom.jpg',
+      'noon_sunny_empty_front.jpg', 'noon_sunny_empty_back.jpg'
     ]);
 
     var mat = new THREE.MeshStandardMaterial(materialSpecifications);
@@ -239,7 +238,7 @@ THREE.X3DLoader.prototype = {
     var hasTexCoord = 'texCoordIndex' in ifs.attributes;
     var texcoordIndexStr = hasTexCoord ? getNodeAttribute(ifs, 'texCoordIndex', '') : '';
     var texcoordsStr = hasTexCoord ? getNodeAttribute(textureCoordinate, 'point', '') : '';
-    var creaseAngle = 0.8 * parseFloat(getNodeAttribute(ifs, 'creaseAngle', '0'));  // 0.8 factor empirically found.
+    var creaseAngle = 0.8 * parseFloat(getNodeAttribute(ifs, 'creaseAngle', '0')); // 0.8 factor empirically found.
 
     var verts = verticesStr.split(/\s/);
     for (var i = 0; i < verts.length; i += 3) {
@@ -332,9 +331,9 @@ THREE.X3DLoader.prototype = {
 
     var radius = getNodeAttribute(sphere, 'radius', '1');
     var subdivision = getNodeAttribute(sphere, 'subdivision', '8,8').split(',');
-    var sphere = new THREE.SphereGeometry(radius, subdivision[0], subdivision[1]);
-    sphere.userData = { 'x3dType': 'Sphere' };
-    return sphere;
+    var sphereGeometry = new THREE.SphereGeometry(radius, subdivision[0], subdivision[1]);
+    sphereGeometry.userData = { 'x3dType': 'Sphere' };
+    return sphereGeometry;
   }
 };
 
@@ -367,12 +366,12 @@ function convertStringTorgb(s) {
 
 // Source: https://gist.github.com/Ni55aN/90c017fafbefd3e31ef8d98ab6566cfa
 // Demo: https://codepen.io/Ni55aN/pen/zROmoe?editors=0010
-THREE.Geometry.prototype.computeAngleVertexNormals = function(angle){
+THREE.Geometry.prototype.computeAngleVertexNormals = function(angle) {
   function weightedNormal(normals, vector) {
     var normal = new THREE.Vector3();
     for (var i = 0, l = normals.length; i < l; i++) {
       if (normals[i].angleTo(vector) < angle)
-        normal.add( normals[ i ] );
+        normal.add(normals[ i ]);
     }
     return normal.normalize();
   }
@@ -380,17 +379,18 @@ THREE.Geometry.prototype.computeAngleVertexNormals = function(angle){
   this.computeFaceNormals();
 
   var vertexNormals = [];
-  for (var i = 0, l = this.vertices.length; i < l; i++)
+  var i, l, fl, face;
+  for (i = 0, l = this.vertices.length; i < l; i++)
     vertexNormals[ i ] = [];
-  for (var i = 0, fl = this.faces.length; i < fl; i++) {
-    var face = this.faces[i];
+  for (i = 0, fl = this.faces.length; i < fl; i++) {
+    face = this.faces[i];
     vertexNormals[face.a].push(face.normal);
     vertexNormals[face.b].push(face.normal);
     vertexNormals[face.c].push(face.normal);
   }
 
-  for (var i = 0, fl = this.faces.length; i < fl; i++) {
-    var face = this.faces[i];
+  for (i = 0, fl = this.faces.length; i < fl; i++) {
+    face = this.faces[i];
     face.vertexNormals[0] = weightedNormal(vertexNormals[face.a], face.normal);
     face.vertexNormals[1] = weightedNormal(vertexNormals[face.b], face.normal);
     face.vertexNormals[2] = weightedNormal(vertexNormals[face.c], face.normal);
@@ -398,4 +398,4 @@ THREE.Geometry.prototype.computeAngleVertexNormals = function(angle){
 
   if (this.faces.length > 0)
     this.normalsNeedUpdate = true;
-}
+};

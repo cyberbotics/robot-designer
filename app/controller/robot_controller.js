@@ -1,4 +1,4 @@
-/* global Part */
+/* global Part, Commands */
 
 class RobotController { // eslint-disable-line no-unused-vars
   constructor(robot) {
@@ -8,9 +8,9 @@ class RobotController { // eslint-disable-line no-unused-vars
   addPart(parent, modelName, closestSlotName) {
     var part = new Part(modelName);
     if (!parent || parent === this.robot)
-      new Commands().addRootPart(this.robot, part)
+      new Commands().addRootPart(this.robot, part);
     else
-      new Commands().addPart(parent, closestSlotName, part)
+      new Commands().addPart(parent, closestSlotName, part);
   }
 
   removePart(part) {

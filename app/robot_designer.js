@@ -1,4 +1,4 @@
-/* global View3D, Robot, Dragger, RobotMediator, RobotController */
+/* global View3D, Robot, Dragger, RobotMediator, RobotController, AssetComponent, Commands */
 
 class RobotDesigner {
   constructor(part, undoButton, redoButton) {
@@ -77,7 +77,6 @@ function deleteSelectedPart() { // eslint-disable-line no-unused-vars
     var parent = mesh;
     do {
       if (parent.userData.isPartContainer) {
-        var model = parent.mediator.model;
         designer.robotController.removePart(parent.mediator.model);
         break;
       }

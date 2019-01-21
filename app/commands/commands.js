@@ -1,8 +1,7 @@
-/* global Observable */
+/* global Observable, UndoStack */
 
-class Commands  extends Observable { // eslint-disable-line no-unused-vars
-
-  constructor() {  // Singleton pattern.
+class Commands extends Observable { // eslint-disable-line no-unused-vars
+  constructor() { // Singleton pattern.
     if (!Commands.instance) {
       super();
       Commands.instance = this;
@@ -40,7 +39,7 @@ class Commands  extends Observable { // eslint-disable-line no-unused-vars
 
   addPart(parent, slot, part) {
     this._pushAction(
-      function (redo, data) {
+      function(redo, data) {
         if (redo)
           parent.addPart(slot, part);
         else
@@ -52,7 +51,7 @@ class Commands  extends Observable { // eslint-disable-line no-unused-vars
 
   addRootPart(robot, part) {
     this._pushAction(
-      function (redo, data) {
+      function(redo, data) {
         if (redo)
           robot.addRootPart(part);
         else
@@ -66,7 +65,7 @@ class Commands  extends Observable { // eslint-disable-line no-unused-vars
     var parent = part.parent;
     var slotName = parent.slotName(part);
     this._pushAction(
-      function (redo, data) {
+      function(redo, data) {
         if (redo)
           parent.removePart(part);
         else

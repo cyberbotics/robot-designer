@@ -17,7 +17,7 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
     for (var subSlotName in part.slots) {
       var slot = part.slots[subSlotName];
       if (slot) {
-        slot._applyFooRecursively(function (child) {
+        slot._applyFooRecursively(function(child) {
           child.parent.notify('PartAdded', { 'part': child, 'slotName': child.parent.slotName(child) });
         });
       }

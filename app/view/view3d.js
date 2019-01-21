@@ -20,9 +20,9 @@ class View3D { // eslint-disable-line no-unused-vars
     var loader = new THREE.CubeTextureLoader();
     loader.setPath( '/robot-designer/assets/common/textures/cubic/' );
     this.scene.background = loader.load( [
-    	'noon_sunny_empty_right.jpg', 'noon_sunny_empty_left.jpg',
-    	'noon_sunny_empty_top.jpg', 'noon_sunny_empty_bottom.jpg',
-    	'noon_sunny_empty_front.jpg', 'noon_sunny_empty_back.jpg'
+      'noon_sunny_empty_right.jpg', 'noon_sunny_empty_left.jpg',
+      'noon_sunny_empty_top.jpg', 'noon_sunny_empty_bottom.jpg',
+      'noon_sunny_empty_front.jpg', 'noon_sunny_empty_back.jpg'
     ] );
     */
 
@@ -61,8 +61,8 @@ class View3D { // eslint-disable-line no-unused-vars
     this.highlightor = new Highlightor(this.highlightOutlinePass);
     this.selector = new Selector(this.selectionOutlinePass);
 
-    this.gpuPicker = new THREE.GPUPicker({renderer:this.renderer, debug: false});
-    this.gpuPicker.setFilter(function (object) { return object instanceof THREE.Mesh; });
+    this.gpuPicker = new THREE.GPUPicker({renderer: this.renderer, debug: false});
+    this.gpuPicker.setFilter(function(object) { return object instanceof THREE.Mesh; });
 
     SlotAnchors.initialize();
 

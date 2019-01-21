@@ -14,16 +14,17 @@ class AssetComponent { // eslint-disable-line no-unused-vars
       var asset = assets[assetName];
 
       var div = document.createElement('div');
-      if (asset.root)
+      if (asset.root) {
         div.innerHTML = '' +
           '<div class="part-icon" draggable="true" ondragstart="dragStart(event)" part="' + assetName + '" >' +
             '<img draggable="false" src="' + asset.icon + '" />' +
           '</div>';
-      else
+      } else {
         div.innerHTML = '' +
           '<div class="part-icon hidden" draggable="true" ondragstart="dragStart(event)" part="' + assetName + '" slotType="' + asset.slotType + '">' +
             '<img draggable="false" src="' + asset.icon + '" />' +
           '</div>';
+      }
       that.partIconDivs.push(div.firstChild);
       that.assetLibraryElement.appendChild(div.firstChild);
     });
@@ -34,7 +35,7 @@ class AssetComponent { // eslint-disable-line no-unused-vars
     // At some point, Asset and Slot classes would be useful.
     var availableSlotTypes = [];
     scene.traverse(function(obj) {
-      if (obj.userData.x3dType === 'Slot' && obj.children.length == 0)
+      if (obj.userData.x3dType === 'Slot' && obj.children.length === 0)
         availableSlotTypes.push(obj.userData.slotType);
     });
     availableSlotTypes = availableSlotTypes.filter((v, i, a) => a.indexOf(v) === i); // unique

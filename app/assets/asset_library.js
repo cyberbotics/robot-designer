@@ -1,4 +1,2 @@
-class AssetLibrary {
-  constructor() {
-  }
+class AssetLibrary { // eslint-disable-line no-unused-vars
 }
