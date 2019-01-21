@@ -1,4 +1,5 @@
 /* global Observable */
+'use strict';
 
 class Part extends Observable { // eslint-disable-line no-unused-vars
   constructor(modelName) {

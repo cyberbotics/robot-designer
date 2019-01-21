@@ -1,4 +1,5 @@
 /* global View3D, Robot, Dragger, RobotMediator, RobotController, AssetComponent, Commands */
+'use strict';
 
 class RobotDesigner {
   constructor(part, undoButton, redoButton) {

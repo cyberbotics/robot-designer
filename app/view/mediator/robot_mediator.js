@@ -1,4 +1,5 @@
 /* global THREE, PartMediator */
+'use strict';
 
 class RobotMediator { // eslint-disable-line no-unused-vars
   constructor(robot) {

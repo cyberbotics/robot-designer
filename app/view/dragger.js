@@ -1,4 +1,5 @@
 /* global Ghost, SlotAnchors */
+'use strict';
 
 class Dragger { // eslint-disable-line no-unused-vars
   constructor(view3D, robotController) {

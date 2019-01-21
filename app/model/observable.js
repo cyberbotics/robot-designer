@@ -1,4 +1,5 @@
 /* global Map */
+'use strict';
 
 class Observable { // eslint-disable-line no-unused-vars
   constructor() {

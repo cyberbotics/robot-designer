@@ -1,4 +1,5 @@
 /* global THREE, ActiveXObject */
+'use strict';
 
 // Inspiration: https://github.com/lkolbly/threejs-x3dloader/blob/master/X3DLoader.js
 

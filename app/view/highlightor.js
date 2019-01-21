@@ -1,3 +1,5 @@
+'use strict';
+
 class Highlightor { // eslint-disable-line no-unused-vars
   constructor(outlinePass) {
     this.outlinePass = outlinePass;

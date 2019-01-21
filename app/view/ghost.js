@@ -1,4 +1,5 @@
 /* global THREE */
+'use strict';
 
 class Ghost { // eslint-disable-line no-unused-vars
   constructor(scene) {

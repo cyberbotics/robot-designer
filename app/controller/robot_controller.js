@@ -1,4 +1,5 @@
 /* global Part, Commands */
+'use strict';
 
 class RobotController { // eslint-disable-line no-unused-vars
   constructor(robot) {

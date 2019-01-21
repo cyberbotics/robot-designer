@@ -1,4 +1,5 @@
 /* global THREE */
+'use strict';
 
 var slotRepresentation = null;
 var regularMaterial = null;

@@ -1,4 +1,5 @@
 /* global Observable */
+'use strict';
 
 class Robot extends Observable { // eslint-disable-line no-unused-vars
   constructor() {

@@ -1,4 +1,5 @@
 /* global Observable, UndoStack */
+'use strict';
 
 class Commands extends Observable { // eslint-disable-line no-unused-vars
   constructor() { // Singleton pattern.

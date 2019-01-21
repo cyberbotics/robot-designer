@@ -1,4 +1,5 @@
 /* global THREE, SlotAnchors, Selector, Highlightor */
+'use strict';
 
 // 1. dom
 // 2. renderer

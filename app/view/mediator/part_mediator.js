@@ -1,4 +1,5 @@
 /* global THREE */
+'use strict';
 
 class PartMediator { // eslint-disable-line no-unused-vars
   constructor(part) {

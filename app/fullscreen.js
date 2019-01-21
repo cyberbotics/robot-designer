@@ -1,3 +1,5 @@
+'use strict';
+
 function toggleFullScreen() { // eslint-disable-line no-unused-vars
   // reference: https://stackoverflow.com/questions/3900701/onclick-go-full-screen
   if ((document.fullScreenElement && document.fullScreenElement !== null) ||
