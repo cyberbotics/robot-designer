@@ -8,4 +8,8 @@ class Asset { // eslint-disable-line no-unused-vars
     this.slotType = assetData.slotType;
     this.slots = assetData.slots;
   }
+
+  getSlotNames() {
+    return Object.keys(this.slots);
+  }
 }

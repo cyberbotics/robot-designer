@@ -4,8 +4,13 @@
 class Part extends Observable { // eslint-disable-line no-unused-vars
   constructor(asset) {
     super();
-    this.modelName = asset.name;
+    this.name = asset.name;
+
+    // init empty slots from the asset.
     this.slots = {};
+    asset.getSlotNames().forEach((name) => {
+      this.slots[name] = null;
+    });
   }
 
   addPart(slotName, part) {
@@ -28,7 +33,7 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
   removePart(part) {
     for (let slotName in this.slots) {
       if (this.slots[slotName] === part) {
-        delete this.slots[slotName];
+        this.slots[slotName] = null;
         this.notify('PartRemoved', { 'part': part, 'slotName': slotName });
       }
     }
@@ -43,10 +48,12 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
 
   serialize() {
     var o = {};
-    o.modelName = this.modelName;
+    o.modelName = this.name;
     o.slots = {};
-    for (let slot in this.slots)
-      o.slots[slot] = this.slots[slot].serialize();
+    for (let slot in this.slots) {
+      if (this.slots[slot])
+        o.slots[slot] = this.slots[slot].serialize();
+    }
     return o;
   }
 
