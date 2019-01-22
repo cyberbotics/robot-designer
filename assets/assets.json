@@ -259,66 +259,525 @@
   },
   "tinkerbots/light_sensor": {
     "icon": "/robot-designer/assets/models/tinkerbots/light_sensor/icon.png",
-    "slotType": "tinkerbots"
+    "slotType": "tinkerbots",
+    "slots": {
+      "backASlot": {
+        "rotation": "0.5773496 -0.5773496 0.5773516 2.0944",
+        "translation": "0.01 -0.015 0.03",
+        "type": "lego cross female"
+      },
+      "backBSlot": {
+        "rotation": "1 0 0 1.57",
+        "translation": "0.01 -0.015 0.01",
+        "type": "lego cross female"
+      },
+      "backCSlot": {
+        "rotation": "0.5773496 0.5773496 -0.5773516 2.0944",
+        "translation": "-0.01 -0.015 0.01",
+        "type": "lego cross female"
+      },
+      "backDSlot": {
+        "rotation": "0 0.70710677 -0.70710677 3.14153",
+        "translation": "-0.01 -0.015 0.03",
+        "type": "lego cross female"
+      },
+      "backSlot": {
+        "rotation": "1 0 0 1.57",
+        "translation": "0 -0.02 0.02",
+        "type": "tinkerbots"
+      },
+      "leftASlot": {
+        "rotation": "0.7071053 3.2758115e-05 0.70710826 3.14153",
+        "translation": "0.015 0.01 0.03",
+        "type": "lego cross female"
+      },
+      "leftBSlot": {
+        "rotation": "0.5773496 0.5773496 0.5773516 2.0944",
+        "translation": "0.015 0.01 0.01",
+        "type": "lego cross female"
+      },
+      "leftCSlot": {
+        "rotation": "0 1 0 1.57",
+        "translation": "0.015 -0.01 0.01",
+        "type": "lego cross female"
+      },
+      "leftDSlot": {
+        "rotation": "-0.5773496 0.5773496 -0.5773516 2.0944",
+        "translation": "0.015 -0.01 0.03",
+        "type": "lego cross female"
+      },
+      "leftSlot": {
+        "rotation": "0 1 0 1.57",
+        "translation": "0.02 0 0.02",
+        "type": "tinkerbots"
+      },
+      "rightASlo": {
+        "rotation": "0 1 0 -1.57",
+        "translation": "-0.015 -0.01 0.03",
+        "type": "lego cross female"
+      },
+      "rightBSlo": {
+        "rotation": "0.5773496 -0.5773496 -0.5773516 2.0944",
+        "translation": "-0.015 -0.01 0.01",
+        "type": "lego cross female"
+      },
+      "rightCSlo": {
+        "rotation": "0.7071053 0 -0.70710826 3.14153",
+        "translation": "-0.015 0.01 0.01",
+        "type": "lego cross female"
+      },
+      "rightDSlo": {
+        "rotation": "-0.5773496 -0.5773496 0.5773516 2.0944",
+        "translation": "-0.015 0.01 0.03",
+        "type": "lego cross female"
+      },
+      "rightSlot": {
+        "rotation": "0 1 0 -1.57",
+        "translation": "-0.02 0 0.02",
+        "type": "tinkerbots"
+      },
+      "upASlot": {
+        "rotation": "0 0 1 -1.5708",
+        "translation": "-0.01 -0.01 0.035",
+        "type": "lego cross female"
+      },
+      "upBSlot": {
+        "rotation": "0 0 1 3.1415",
+        "translation": "-0.01 0.01 0.035",
+        "type": "lego cross female"
+      },
+      "upCSlot": {
+        "rotation": "0 0 1 1.5708",
+        "translation": "0.01 0.01 0.035",
+        "type": "lego cross female"
+      },
+      "upDSlot": {
+        "translation": "0.01 -0.01 0.035",
+        "type": "lego cross female"
+      },
+      "upSlot": {
+        "translation": "0 0 0.04",
+        "type": "tinkerbots"
+      }
+    }
   },
   "tinkerbots/twister": {
     "icon": "/robot-designer/assets/models/tinkerbots/twister/icon.png",
-    "slotType": "tinkerbots"
+    "slotType": "tinkerbots",
+    "slots": {
+      "ASlot": {
+        "rotation": "0 0 1 -1.5708",
+        "translation": "-0.01 -0.01 0.035",
+        "type": "lego cross female"
+      },
+      "BSlot": {
+        "rotation": "0 0 1 3.1415",
+        "translation": "-0.01 0.01 0.035",
+        "type": "lego cross female"
+      },
+      "CSlot": {
+        "rotation": "0 0 1 1.5708",
+        "translation": "0.01 0.01 0.035",
+        "type": "lego cross female"
+      },
+      "DSlot": {
+        "translation": "0.01 -0.01 0.035",
+        "type": "lego cross female"
+      },
+      "slot": {
+        "translation": "0 0 0.04",
+        "type": "tinkerbots"
+      }
+    }
   },
   "tinkerbots/pivot": {
     "icon": "/robot-designer/assets/models/tinkerbots/pivot/icon.png",
-    "slotType": "tinkerbots"
+    "slotType": "tinkerbots",
+    "slots": {
+      "ASlot": {
+        "rotation": "0 0 1 -1.5708",
+        "translation": "-0.01 -0.01 0.035",
+        "type": "lego cross female"
+      },
+      "BSlot": {
+        "rotation": "0 0 1 3.1415",
+        "translation": "-0.01 0.01 0.035",
+        "type": "lego cross female"
+      },
+      "CSlot": {
+        "rotation": "0 0 1 1.5708",
+        "translation": "0.01 0.01 0.035",
+        "type": "lego cross female"
+      },
+      "DSlot": {
+        "translation": "0.01 -0.01 0.035",
+        "type": "lego cross female"
+      },
+      "slot": {
+        "translation": "0 0 0.04",
+        "type": "tinkerbots"
+      }
+    }
   },
   "tinkerbots/motor": {
     "icon": "/robot-designer/assets/models/tinkerbots/motor/icon.png",
-    "slotType": "tinkerbots"
+    "slotType": "tinkerbots",
+    "slots": {
+      "backSlot": {
+        "rotation": "1 0 0 -1.57",
+        "translation": "0 0.015 0.02",
+        "type": "lego cross female"
+      },
+      "frontSlot": {
+        "rotation": "1 0 0 1.57",
+        "translation": "0 -0.015 0.02",
+        "type": "lego cross female"
+      },
+      "leftASlot": {
+        "rotation": "0.7071053 3.2758115e-05 0.70710826 3.14153",
+        "translation": "0.015 0.01 0.03",
+        "type": "lego cross female"
+      },
+      "leftBSlot": {
+        "rotation": "0.5773496 0.5773496 0.5773516 2.0944",
+        "translation": "0.015 0.01 0.01",
+        "type": "lego cross female"
+      },
+      "leftCSlot": {
+        "rotation": "0 1 0 1.57",
+        "translation": "0.015 -0.01 0.01",
+        "type": "lego cross female"
+      },
+      "leftDSlot": {
+        "rotation": "-0.5773496 0.5773496 -0.5773516 2.0944",
+        "translation": "0.015 -0.01 0.03",
+        "type": "lego cross female"
+      },
+      "leftSlot": {
+        "rotation": "0 1 0 1.57",
+        "translation": "0.02 0 0.02",
+        "type": "tinkerbots"
+      },
+      "rightASlot": {
+        "rotation": "0 1 0 -1.57",
+        "translation": "-0.015 -0.01 0.03",
+        "type": "lego cross female"
+      },
+      "rightBSlot": {
+        "rotation": "0.5773496 -0.5773496 -0.5773516 2.0944",
+        "translation": "-0.015 -0.01 0.01",
+        "type": "lego cross female"
+      },
+      "rightCSlot": {
+        "rotation": "0.7071053 0 -0.70710826 3.14153",
+        "translation": "-0.015 0.01 0.01",
+        "type": "lego cross female"
+      },
+      "rightDSlot": {
+        "rotation": "-0.5773496 -0.5773496 0.5773516 2.0944",
+        "translation": "-0.015 0.01 0.03",
+        "type": "lego cross female"
+      },
+      "rightSlot": {
+        "rotation": "0 1 0 -1.57",
+        "translation": "-0.02 0 0.02",
+        "type": "tinkerbots"
+      },
+      "upASlot": {
+        "rotation": "0 0 1 -1.5708",
+        "translation": "-0.01 -0.01 0.035",
+        "type": "lego cross female"
+      },
+      "upBSlot": {
+        "rotation": "0 0 1 3.1415",
+        "translation": "-0.01 0.01 0.035",
+        "type": "lego cross female"
+      },
+      "upCSlot": {
+        "rotation": "0 0 1 1.5708",
+        "translation": "0.01 0.01 0.035",
+        "type": "lego cross female"
+      },
+      "upDSlot": {
+        "translation": "0.01 -0.01 0.035",
+        "type": "lego cross female"
+      },
+      "upSlot": {
+        "translation": "0 0 0.04",
+        "type": "tinkerbots"
+      }
+    }
   },
   "tinkerbots/grabber": {
     "icon": "/robot-designer/assets/models/tinkerbots/grabber/icon.png",
-    "slotType": "tinkerbots"
+    "slotType": "tinkerbots",
+    "slots": {
+      "fingerASlot": {
+        "rotation": "1 0 0 -0.0655",
+        "translation": "0 0.0156 0.0354",
+        "type": "lego cross female"
+      },
+      "fingerBSlot": {
+        "rotation": "-0.025175689 -0.04360558 0.99873155 2.09549",
+        "translation": "-0.01351 -0.0078 0.0354",
+        "type": "lego cross female"
+      },
+      "fingerCSlot": {
+        "rotation": "0.025175689 -0.04360558 0.99873155 4.1877",
+        "translation": "0.01351 -0.0078 0.0354",
+        "type": "lego cross female"
+      }
+    }
   },
   "tinkerbots/distance_sensor": {
     "icon": "/robot-designer/assets/models/tinkerbots/distance_sensor/icon.png",
-    "slotType": "tinkerbots"
+    "slotType": "tinkerbots",
+    "slots": {
+      "backASlot": {
+        "rotation": "0.5773496 -0.5773496 0.5773516 2.0944",
+        "translation": "0.01 -0.015 0.03",
+        "type": "lego cross female"
+      },
+      "backBSlot": {
+        "rotation": "1 0 0 1.57",
+        "translation": "0.01 -0.015 0.01",
+        "type": "lego cross female"
+      },
+      "backCSlot": {
+        "rotation": "0.5773496 0.5773496 -0.5773516 2.0944",
+        "translation": "-0.01 -0.015 0.01",
+        "type": "lego cross female"
+      },
+      "backDSlot": {
+        "rotation": "0 0.70710677 -0.70710677 3.14153",
+        "translation": "-0.01 -0.015 0.03",
+        "type": "lego cross female"
+      },
+      "backSlot": {
+        "rotation": "1 0 0 1.57",
+        "translation": "0 -0.02 0.02",
+        "type": "tinkerbots"
+      },
+      "leftASlot": {
+        "rotation": "0.7071053 3.2758115e-05 0.70710826 3.14153",
+        "translation": "0.015 0.01 0.03",
+        "type": "lego cross female"
+      },
+      "leftBSlot": {
+        "rotation": "0.5773496 0.5773496 0.5773516 2.0944",
+        "translation": "0.015 0.01 0.01",
+        "type": "lego cross female"
+      },
+      "leftCSlot": {
+        "rotation": "0 1 0 1.57",
+        "translation": "0.015 -0.01 0.01",
+        "type": "lego cross female"
+      },
+      "leftDSlot": {
+        "rotation": "-0.5773496 0.5773496 -0.5773516 2.0944",
+        "translation": "0.015 -0.01 0.03",
+        "type": "lego cross female"
+      },
+      "leftSlot": {
+        "rotation": "0 1 0 1.57",
+        "translation": "0.02 0 0.02",
+        "type": "tinkerbots"
+      },
+      "rightASlot": {
+        "rotation": "0 1 0 -1.57",
+        "translation": "-0.015 -0.01 0.03",
+        "type": "lego cross female"
+      },
+      "rightBSlot": {
+        "rotation": "0.5773496 -0.5773496 -0.5773516 2.0944",
+        "translation": "-0.015 -0.01 0.01",
+        "type": "lego cross female"
+      },
+      "rightCSlot": {
+        "rotation": "0.7071053 0 -0.70710826 3.14153",
+        "translation": "-0.015 0.01 0.01",
+        "type": "lego cross female"
+      },
+      "rightDSlot": {
+        "rotation": "-0.5773496 -0.5773496 0.5773516 2.0944",
+        "translation": "-0.015 0.01 0.03",
+        "type": "lego cross female"
+      },
+      "rightSlot": {
+        "rotation": "0 1 0 -1.57",
+        "translation": "-0.02 0 0.02",
+        "type": "tinkerbots"
+      },
+      "upASlot": {
+        "rotation": "0 0 1 -1.5708",
+        "translation": "-0.01 -0.01 0.035",
+        "type": "lego cross female"
+      },
+      "upBSlot": {
+        "rotation": "0 0 1 3.1415",
+        "translation": "-0.01 0.01 0.035",
+        "type": "lego cross female"
+      },
+      "upCSlot": {
+        "rotation": "0 0 1 1.5708",
+        "translation": "0.01 0.01 0.035",
+        "type": "lego cross female"
+      },
+      "upDSlot": {
+        "translation": "0.01 -0.01 0.035",
+        "type": "lego cross female"
+      },
+      "upSlot": {
+        "translation": "0 0 0.04",
+        "type": "tinkerbots"
+      }
+    }
   },
   "tinkerbots/axle": {
     "icon": "/robot-designer/assets/models/tinkerbots/axle/icon.png",
-    "slotType": "lego cross female"
+    "slotType": "lego cross female",
+    "slots": {
+      "endSlot": {
+        "translation": "0 0 0.022",
+        "type": "lego cross male"
+      }
+    }
   },
   "tinkerbots/brick_adapter": {
     "icon": "/robot-designer/assets/models/tinkerbots/brick_adapter/icon.png",
-    "slotType": "lego cross female"
+    "slotType": "lego cross female",
+    "slots": {}
   },
   "tinkerbots/cubie_box_with_cross_slots": {
     "icon": "/robot-designer/assets/models/tinkerbots/cubie_box_with_cross_slots/icon.png",
-    "slotType": "lego cross female"
+    "slotType": "lego cross female",
+    "slots": {
+      "backSlot": {
+        "rotation": "0 1 0 -1.57",
+        "translation": "-0.025 0 0.015",
+        "type": "lego cross female"
+      },
+      "frontSlot": {
+        "rotation": "0 1 0 1.57",
+        "translation": "0.005 0 0.015",
+        "type": "lego cross female"
+      },
+      "leftSlot": {
+        "rotation": "1 0 0 -1.57",
+        "translation": "-0.01 0.005 0.015",
+        "type": "lego cross female"
+      },
+      "rightSlot": {
+        "rotation": "1 0 0 1.57",
+        "translation": "-0.01 -0.005 0.015",
+        "type": "lego cross female"
+      },
+      "upSlot": {
+        "translation": "-0.01 0 0.02",
+        "type": "lego cross female"
+      }
+    }
   },
   "tinkerbots/cubie_box_with_round_slots": {
     "icon": "/robot-designer/assets/models/tinkerbots/cubie_box_with_round_slots/icon.png",
-    "slotType": "lego cross female"
+    "slotType": "lego cross female",
+    "slots": {}
   },
   "tinkerbots/cubie_female_cube": {
     "icon": "/robot-designer/assets/models/tinkerbots/cubie_female_cube/icon.png",
-    "slotType": "lego cross female"
+    "slotType": "lego cross female",
+    "slots": {
+      "backSlot": {
+        "rotation": "0 1 0 -1.57",
+        "translation": "-0.005 0 0.015",
+        "type": "lego cross female"
+      },
+      "frontSlot": {
+        "rotation": "0 1 0 1.57",
+        "translation": "0.005 0 0.015",
+        "type": "lego cross female"
+      },
+      "leftSlot": {
+        "rotation": "1 0 0 -1.57",
+        "translation": "0 0.005 0.015",
+        "type": "lego cross female"
+      },
+      "rightSlot": {
+        "rotation": "1 0 0 1.57",
+        "translation": "0 -0.005 0.015",
+        "type": "lego cross female"
+      },
+      "upSlot": {
+        "translation": "0 0 0.02",
+        "type": "lego cross female"
+      }
+    }
   },
   "tinkerbots/cubie_male_cube": {
     "icon": "/robot-designer/assets/models/tinkerbots/cubie_male_cube/icon.png",
-    "slotType": "lego cross female"
+    "slotType": "lego cross female",
+    "slots": {
+      "backSlot": {
+        "rotation": "0 1 0 -1.57",
+        "translation": "-0.005 0 0.015",
+        "type": "lego cross female"
+      },
+      "frontSlot": {
+        "rotation": "0 1 0 1.57",
+        "translation": "0.005 0 0.015",
+        "type": "lego cross female"
+      },
+      "leftSlot": {
+        "rotation": "1 0 0 -1.57",
+        "translation": "0 0.01 0.015",
+        "type": "lego cross female"
+      },
+      "rightSlot": {
+        "rotation": "1 0 0 1.57",
+        "translation": "0 -0.005 0.015",
+        "type": "lego cross male"
+      },
+      "upSlot": {
+        "translation": "0 0 0.02",
+        "type": "lego cross female"
+      }
+    }
   },
   "tinkerbots/cubie_pyramid": {
     "icon": "/robot-designer/assets/models/tinkerbots/cubie_pyramid/icon.png",
-    "slotType": "lego cross female"
+    "slotType": "lego cross female",
+    "slots": {
+      "backSlot": {
+        "rotation": "0 1 0 -1.05",
+        "translation": "-0.0005 0 0.011",
+        "type": "lego cross female"
+      },
+      "frontSlot": {
+        "rotation": "0 1 0 1.05",
+        "translation": "0.0005 0 0.011",
+        "type": "lego cross female"
+      }
+    }
   },
   "tinkerbots/cubie_triangle": {
     "icon": "/robot-designer/assets/models/tinkerbots/cubie_triangle/icon.png",
-    "slotType": "lego cross female"
+    "slotType": "lego cross female",
+    "slots": {
+      "slot": {
+        "rotation": "0 1 0 1.57",
+        "translation": "0.005 0 0.015",
+        "type": "lego cross female"
+      }
+    }
   },
   "tinkerbots/finger": {
     "icon": "/robot-designer/assets/models/tinkerbots/finger/icon.png",
-    "slotType": "lego cross female"
+    "slotType": "lego cross female",
+    "slots": {}
   },
   "tinkerbots/wheel": {
     "icon": "/robot-designer/assets/models/tinkerbots/wheel/icon.png",
-    "slotType": "lego cross male"
+    "slotType": "lego cross male",
+    "slots": {}
   }
 }
