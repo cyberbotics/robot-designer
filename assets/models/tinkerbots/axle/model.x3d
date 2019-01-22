@@ -5,9 +5,6 @@
     <meta name="generator" content="Webots"/>
   </head>
   <Scene slotType='lego cross female'>
-
-    <Slot slotName="endSlot" slotType="lego cross male" id='n10' translation='0 0 0.022'></Slot>
-
     <Shape id='n12'>
       <!-- <Appearance id='n13'><Material diffuseColor="0 0 0" specularColor="0.1 0.1 0.1" shininess="0.1"/></Appearance> -->
       <PBRAppearance metalness='0' roughness='0.9' baseColor="0 0 0"/>

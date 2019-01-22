@@ -26,15 +26,8 @@ class AssetComponent { // eslint-disable-line no-unused-vars
     });
   }
 
-  update(scene) {
-    // TODO Passing the scene as an argument is not clean.
-    // At some point, Asset and Slot classes would be useful.
-    var availableSlotTypes = [];
-    scene.traverse(function(obj) {
-      if (obj.userData.x3dType === 'Slot' && obj.children.length === 0)
-        availableSlotTypes.push(obj.userData.slotType);
-    });
-    availableSlotTypes = availableSlotTypes.filter((v, i, a) => a.indexOf(v) === i); // unique
+  update(robot) {
+    var availableSlotTypes = robot.getAvailableSlotTypes();
     for (let d = 0; d < this.partIconDivs.length; d++) {
       var div = this.partIconDivs[d];
       if (availableSlotTypes.length === 0) {

@@ -4,6 +4,7 @@
 class Part extends Observable { // eslint-disable-line no-unused-vars
   constructor(asset) {
     super();
+    this.asset = asset;
     this.name = asset.name;
 
     // init empty slots from the asset.
@@ -50,11 +51,22 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
     var o = {};
     o.modelName = this.name;
     o.slots = {};
-    for (let slot in this.slots) {
-      if (this.slots[slot])
-        o.slots[slot] = this.slots[slot].serialize();
+    for (let slotName in this.slots) {
+      if (this.slots[slotName])
+        o.slots[slotName] = this.slots[slotName].serialize();
     }
     return o;
+  }
+
+  getAvailableSlotTypes() {
+    var availableSlotTypes = [];
+    for (let slotName in this.slots) {
+      if (this.slots[slotName] === null)
+        availableSlotTypes.push(this.asset.slots[slotName].type);
+      else
+        availableSlotTypes = availableSlotTypes.concat(this.slots[slotName].getAvailableSlotTypes());
+    }
+    return availableSlotTypes;
   }
 
   _applyFooRecursively(foo) {

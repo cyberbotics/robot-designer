@@ -55,13 +55,32 @@ class PartMediator { // eslint-disable-line no-unused-vars
 
     var model = '/robot-designer/assets/models/' + this.model.name + '/model.x3d';
     var loader = new THREE.X3DLoader();
-    loader.load(model, function(object3d) {
+    loader.load(model, (object3d) => {
       if (container) {
         object3d.userData.isPartRoot = true;
         container.add(object3d);
+        this.createSlots();
       }
     });
 
     return container;
+  }
+
+  createSlots() {
+    Object.keys(this.model.asset.slots).forEach((slotName) => {
+      var slot = this.model.asset.slots[slotName];
+
+      var object = new THREE.Object3D();
+      object.userData.x3dType = 'Slot';
+      object.userData.slotType = slot.type;
+      object.userData.slotName = slotName;
+
+      var position = convertStringToVec3(slot.translation ? slot.translation : '0 0 0');
+      object.position.copy(position);
+      var quaternion = convertStringToQuaternion(slot.rotation ? slot.rotation : '0 1 0 0');
+      object.quaternion.copy(quaternion);
+
+      this.object3D.children[0].add(object);
+    });
   }
 }

@@ -5,28 +5,6 @@
     <meta name="generator" content="Webots"/>
   </head>
   <Scene>
-
-    <Slot slotName="upSlot" slotType="tinkerbots" id='n13' translation='0 0 0.04'></Slot>
-    <Slot slotName="upASlot" slotType="lego cross female" id='n15' translation='-0.01 -0.01 0.035' rotation='0 0 1 -1.5708'></Slot>
-    <Slot slotName="upBSlot" slotType="lego cross female" id='n17' translation='-0.01 0.01 0.035' rotation='0 0 1 3.1415'></Slot>
-    <Slot slotName="upCSlot" slotType="lego cross female" id='n19' translation='0.01 0.01 0.035' rotation='0 0 1 1.5708'></Slot>
-    <Slot slotName="upDSlot" slotType="lego cross female" id='n21' translation='0.01 -0.01 0.035'></Slot>
-    <Slot slotName="leftSlot" slotType="tinkerbots" id='n23' translation='0.02 0 0.02' rotation='0 1 0 1.57'></Slot>
-    <Slot slotName="leftASlot" slotType="lego cross female" id='n25' translation='0.015 0.01 0.03' rotation='0.7071053 3.2758115e-05 0.70710826 3.14153'></Slot>
-    <Slot slotName="leftBSlot" slotType="lego cross female" id='n27' translation='0.015 0.01 0.01' rotation='0.5773496 0.5773496 0.5773516 2.0944'></Slot>
-    <Slot slotName="leftCSlot" slotType="lego cross female" id='n29' translation='0.015 -0.01 0.01' rotation='0 1 0 1.57'></Slot>
-    <Slot slotName="leftDSlot" slotType="lego cross female" id='n31' translation='0.015 -0.01 0.03' rotation='-0.5773496 0.5773496 -0.5773516 2.0944'></Slot>
-    <Slot slotName="rightSlot" slotType="tinkerbots" id='n33' translation='-0.02 0 0.02' rotation='0 1 0 -1.57'></Slot>
-    <Slot slotName="rightASlot" slotType="lego cross female" id='n35' translation='-0.015 -0.01 0.03' rotation='0 1 0 -1.57'></Slot>
-    <Slot slotName="rightBSlot" slotType="lego cross female" id='n37' translation='-0.015 -0.01 0.01' rotation='0.5773496 -0.5773496 -0.5773516 2.0944'></Slot>
-    <Slot slotName="rightCSlot" slotType="lego cross female" id='n39' translation='-0.015 0.01 0.01' rotation='0.7071053 0 -0.70710826 3.14153'></Slot>
-    <Slot slotName="rightDSlot" slotType="lego cross female" id='n41' translation='-0.015 0.01 0.03' rotation='-0.5773496 -0.5773496 0.5773516 2.0944'></Slot>
-    <Slot slotName="backSlot" slotType="tinkerbots" id='n43' translation='0 -0.02 0.02' rotation='1 0 0 1.57'></Slot>
-    <Slot slotName="backASlot" slotType="lego cross female" id='n45' translation='0.01 -0.015 0.03' rotation='0.5773496 -0.5773496 0.5773516 2.0944'></Slot>
-    <Slot slotName="backBSlot" slotType="lego cross female" id='n47' translation='0.01 -0.015 0.01' rotation='1 0 0 1.57'></Slot>
-    <Slot slotName="backCSlot" slotType="lego cross female" id='n49' translation='-0.01 -0.015 0.01' rotation='0.5773496 0.5773496 -0.5773516 2.0944'></Slot>
-    <Slot slotName="backDSlot" slotType="lego cross female" id='n51' translation='-0.01 -0.015 0.03' rotation='0 0.70710677 -0.70710677 3.14153'></Slot>
-
     <Transform id='n9' translation='0 0.016 0.0065' name='distance sensor led' solid='true'>
       <Shape id='n10'>
         <!-- <Appearance id='n11'><Material diffuseColor="0.4 0.4 0.4" specularColor="0.3 0.3 0.3" shininess="0.3"/></Appearance> -->

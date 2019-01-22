@@ -31,7 +31,7 @@ class RobotDesigner {
 
     this.commands = new Commands();
     this.commands.addObserver('updated', () => this.updateUndoRedoButtons());
-    this.commands.addObserver('updated', () => this.assetComponent.update(this.view3D.scene));
+    this.commands.addObserver('updated', () => this.assetComponent.update(this.robot));
 
     this.robot = new Robot();
     this.robotMediator = new RobotMediator(this.robot);

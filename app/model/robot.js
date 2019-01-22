@@ -28,4 +28,12 @@ class Robot extends Observable { // eslint-disable-line no-unused-vars
       o.rootPart = this.rootPart.serialize();
     return o;
   }
+
+  getAvailableSlotTypes() {
+    if (this.rootPart === null)
+      return [];
+    var availableSlotTypes = this.rootPart.getAvailableSlotTypes();
+    availableSlotTypes = availableSlotTypes.filter((v, i, a) => a.indexOf(v) === i); // unique
+    return availableSlotTypes;
+  }
 }

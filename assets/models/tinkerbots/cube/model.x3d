@@ -2,33 +2,6 @@
 <!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.0//EN" "http://www.web3d.org/specifications/x3d-3.0.dtd">
 <x3d version="3.0" profile="Immersive" xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance" xsd:noNamespaceSchemaLocation="http://www.web3d.org/specifications/x3d-3.0.xsd">
   <Scene>
-
-    <Slot slotName="upSlot" slotType="tinkerbots" translation="0 0 0.04"/>
-    <Slot slotName="upASlot" slotType="lego cross female" translation="-0.01 -0.01 0.035" rotation="0 0 1 -1.5708"/>
-    <Slot slotName="upBSlot" slotType="lego cross female" translation="-0.01 0.01 0.035" rotation="0 0 1 3.1415"/>
-    <Slot slotName="upCSlot" slotType="lego cross female" translation="0.01 0.01 0.035" rotation="0 0 1 1.5708"/>
-    <Slot slotName="upDSlot" slotType="lego cross female" translation="0.01 -0.01 0.035"/>
-    <Slot slotName="leftSlot" slotType="tinkerbots" translation="0.02 0 0.02" rotation="0 1 0 1.57"/>
-    <Slot slotName="leftASlot" slotType="lego cross female" translation="0.015 0.01 0.03" rotation="0.7071053 3.2758115e-5 0.70710826 3.14153"/>
-    <Slot slotName="leftBSlot" slotType="lego cross female" translation="0.015 0.01 0.01" rotation="0.5773496 0.5773496 0.5773516 2.0944"/>
-    <Slot slotName="leftCSlot" slotType="lego cross female" translation="0.015 -0.01 0.01" rotation="0 1 0 1.57"/>
-    <Slot slotName="leftDSlot" slotType="lego cross female" translation="0.015 -0.01 0.03" rotation="-0.5773496 0.5773496 -0.5773516 2.0944"/>
-    <Slot slotName="rightSlot" slotType="tinkerbots" translation="-0.02 0 0.02" rotation="0 1 0 -1.57"/>
-    <Slot slotName="rightASlot" slotType="lego cross female" translation="-0.015 -0.01 0.03" rotation="0 1 0 -1.57"/>
-    <Slot slotName="rightBSlot" slotType="lego cross female" translation="-0.015 -0.01 0.01" rotation="0.5773496 -0.5773496 -0.5773516 2.0944"/>
-    <Slot slotName="rightCSlot" slotType="lego cross female" translation="-0.015 0.01 0.01" rotation="0.7071053 0 -0.70710826 3.14153"/>
-    <Slot slotName="rightDSlot" slotType="lego cross female" translation="-0.015 0.01 0.03" rotation="-0.5773496 -0.5773496 0.5773516 2.0944"/>
-    <Slot slotName="frontSlot" slotType="tinkerbots" translation="0 -0.02 0.02" rotation="1 0 0 1.57"/>
-    <Slot slotName="frontASlot" slotType="lego cross female" translation="-0.01 0.015 0.03" rotation="-0.5775032 -0.57704425 -0.5775032 2.09348"/>
-    <Slot slotName="frontBSlot" slotType="lego cross female" translation="-0.01 0.015 0.01" rotation="0 0.7068252 0.7073882 3.14153"/>
-    <Slot slotName="frontCSlot" slotType="lego cross female" translation="0.01 0.015 0.01" rotation="-0.5775032 0.57704425 0.5775032 2.09348"/>
-    <Slot slotName="frontDSlot" slotType="lego cross female" translation="0.01 0.015 0.03" rotation="1 0 0 -1.57"/>
-    <Slot slotName="backSlot" slotType="tinkerbots" translation="0 0.02 0.02" rotation="1 0 0 -1.57"/>
-    <Slot slotName="backASlot" slotType="lego cross female" translation="0.01 -0.015 0.03" rotation="0.5773496 -0.5773496 0.5773516 2.0944"/>
-    <Slot slotName="backBSlot" slotType="lego cross female" translation="0.01 -0.015 0.01" rotation="1 0 0 1.57"/>
-    <Slot slotName="backCSlot" slotType="lego cross female" translation="-0.01 -0.015 0.01" rotation="0.5773496 0.5773496 -0.5773516 2.0944"/>
-    <Slot slotName="backDSlot" slotType="lego cross female" translation="-0.01 -0.015 0.03" rotation="0 0.70710677 -0.70710677 3.14153"/>
-
     <Shape>
       <!--
       <Appearance>

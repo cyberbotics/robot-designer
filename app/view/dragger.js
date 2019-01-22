@@ -39,7 +39,7 @@ class Dragger { // eslint-disable-line no-unused-vars
   }
 
   dragLeave() {
-    this.view3D.hideSlots(this.view3D.scene);
+    this.view3D.slotAnchors.hideSlots(this.view3D.scene);
     this.ghost.removeGhost();
   }
 

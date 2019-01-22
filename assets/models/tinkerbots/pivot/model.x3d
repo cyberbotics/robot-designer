@@ -5,13 +5,6 @@
     <meta name="generator" content="Webots"/>
   </head>
   <Scene>
-
-    <Slot slotName='slot' slotType='tinkerbots' id='n27' translation='0 0 0.04'></Slot>
-    <Slot slotName='ASlot' slotType='lego cross female' id='n29' translation='-0.01 -0.01 0.035' rotation='0 0 1 -1.5708'></Slot>
-    <Slot slotName='BSlot' slotType='lego cross female' id='n31' translation='-0.01 0.01 0.035' rotation='0 0 1 3.1415'></Slot>
-    <Slot slotName='CSlot' slotType='lego cross female' id='n33' translation='0.01 0.01 0.035' rotation='0 0 1 1.5708'></Slot>
-    <Slot slotName='DSlot' slotType='lego cross female' id='n35' translation='0.01 -0.01 0.035'></Slot>
-
     <Transform id='n8' translation='-0.016 0 0.005' name='pivot led' solid='true'>
       <Shape id='n9'>
         <!-- <Appearance id='n10'><Material diffuseColor="0.4 0.4 0.4" specularColor="0.3 0.3 0.3" shininess="0.3"/></Appearance> -->

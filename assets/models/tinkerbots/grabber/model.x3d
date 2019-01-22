@@ -41,7 +41,6 @@
       </IndexedFaceSet>
     </Shape>
     <Transform id='n27' name='grabber finger A' solid='true'>
-      <Slot slotName='fingerASlot' slotType='lego cross female' id='n28' translation='0 0.0156 0.0354' rotation='1 0 0 -0.0655'></Slot>
       <Shape id='n30'>
         <Appearance id='n31'><Material diffuseColor="1 0 0" specularColor="0.1 0.1 0.1" shininess="0.1"/></Appearance>
         <IndexedFaceSet
@@ -57,7 +56,6 @@
       </Shape>
     </Transform>
     <Transform id='n42' name='grabber finger B' solid='true'>
-      <Slot slotName='fingerBSlot' slotType='lego cross female' id='n43' translation='-0.01351 -0.0078 0.0354' rotation='-0.025175689 -0.04360558 0.99873155 2.09549'></Slot>
       <Shape id='n45'>
         <Appearance id='n46'><Material diffuseColor="1 0 0" specularColor="0.1 0.1 0.1" shininess="0.1"/></Appearance>
         <IndexedFaceSet
@@ -73,7 +71,6 @@
       </Shape>
     </Transform>
     <Transform id='n57' name='grabber finger C' solid='true'>
-      <Slot slotName='fingerCSlot' slotType='lego cross female' id='n58' translation='0.01351 -0.0078 0.0354' rotation='0.025175689 -0.04360558 0.99873155 4.1877'></Slot>
       <Shape id='n60'>
         <Appearance id='n61'><Material diffuseColor="1 0 0" specularColor="0.1 0.1 0.1" shininess="0.1"/></Appearance>
         <IndexedFaceSet

@@ -37,7 +37,6 @@ THREE.X3DLoader.prototype = {
     var scene = xml.getElementsByTagName('Scene')[0];
     this.parseNode(object, scene);
     object.userData.x3dType = 'Group';
-    object.userData.slotType = getNodeAttribute(scene, 'slotType', '');
 
     return object;
   },
@@ -70,29 +69,9 @@ THREE.X3DLoader.prototype = {
       if (child.tagName === 'Shape') {
         var shape = this.parseShape(child);
         currentObject.add(shape);
-      } else if (child.tagName === 'Slot') {
-        var slot = this.parseSlot(child);
-        if (slot)
-          currentObject.add(slot);
       } else
         this.parseNode(currentObject, child);
     }
-  },
-
-  parseSlot: function(slot) {
-    console.log('Parse Slot');
-
-    var object = new THREE.Object3D();
-    object.userData.x3dType = 'Slot';
-    object.userData.slotType = getNodeAttribute(slot, 'slotType', '');
-    object.userData.slotName = getNodeAttribute(slot, 'slotName', '');
-
-    var position = convertStringToVec3(getNodeAttribute(slot, 'translation', '0 0 0'));
-    object.position.copy(position);
-    var quaternion = convertStringToQuaternion(getNodeAttribute(slot, 'rotation', '0 1 0 0'));
-    object.quaternion.copy(quaternion);
-
-    return object;
   },
 
   parseShape: function(shape) {
