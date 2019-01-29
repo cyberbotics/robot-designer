@@ -76,10 +76,13 @@ function mousedown(ev) { // eslint-disable-line no-unused-vars
   var relativePosition = designer.view3D.convertMouseEventPositionToRelativePosition(ev.clientX, ev.clientY);
   var screenPosition = designer.view3D.convertMouseEventPositionToScreenPosition(ev.clientX, ev.clientY);
   var part = designer.view3D.getPartAt(relativePosition, screenPosition);
-  if (part)
+  if (part) {
     designer.view3D.selector.toggleSelection(part);
-  else
+    designer.view3D.handle.attachToObject(part);
+  } else {
     designer.view3D.selector.clearSelection();
+    designer.view3D.handle.detach();
+  }
 }
 
 function deleteSelectedPart() { // eslint-disable-line no-unused-vars
