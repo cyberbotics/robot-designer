@@ -3,20 +3,22 @@
 class Selector { // eslint-disable-line no-unused-vars
   constructor(outlinePass) {
     this.outlinePass = outlinePass;
-    this.selectedParts = [];
+    this.selectedPart = null;
   }
 
-  toggleSelection(object) {
-    var index = this.selectedParts.indexOf(object);
-    if (index > -1)
-      this.selectedParts.splice(index, 1);
-    else
-      this.selectedParts.push(object);
-    this.outlinePass.selectedObjects = this.selectedParts;
+  selectPart(part) {
+    this.selectedPart = part;
+    var selectedObjects = [];
+    part.children[0].children.forEach((child) => {
+      console.log(child.userData);
+      if (child.userData.x3dType === 'Shape' || child.userData.x3dType === 'Transform')
+        selectedObjects.push(child);
+    });
+    this.outlinePass.selectedObjects = selectedObjects;
   }
 
   clearSelection() {
-    this.selectedParts = [];
+    this.selectedPart = null;
     this.outlinePass.selectedObjects = [];
   }
 }

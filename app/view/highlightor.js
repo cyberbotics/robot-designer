@@ -6,7 +6,13 @@ class Highlightor { // eslint-disable-line no-unused-vars
   }
 
   highlight(part) {
-    this.outlinePass.selectedObjects = [ part ];
+    var selectedObjects = [];
+    part.children[0].children.forEach((child) => {
+      console.log(child.userData);
+      if (child.userData.x3dType === 'Shape' || child.userData.x3dType === 'Transform')
+        selectedObjects.push(child);
+    });
+    this.outlinePass.selectedObjects = selectedObjects;
   }
 
   clearHighlight() {

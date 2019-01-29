@@ -77,7 +77,7 @@ function mousedown(ev) { // eslint-disable-line no-unused-vars
   var screenPosition = designer.view3D.convertMouseEventPositionToScreenPosition(ev.clientX, ev.clientY);
   var part = designer.view3D.getPartAt(relativePosition, screenPosition);
   if (part) {
-    designer.view3D.selector.toggleSelection(part);
+    designer.view3D.selector.selectPart(part);
     designer.view3D.handle.attachToObject(part);
   } else {
     designer.view3D.selector.clearSelection();
