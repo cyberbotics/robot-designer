@@ -61,9 +61,12 @@ class View3D { // eslint-disable-line no-unused-vars
 
     this.highlightor = new Highlightor(this.highlightOutlinePass);
     this.selector = new Selector(this.selectionOutlinePass);
+    this.handle = new Handle(this.view3DElement, this.camera, this.scene, this.controls);
 
     this.gpuPicker = new THREE.GPUPicker({renderer: this.renderer, debug: false});
-    this.gpuPicker.setFilter(function(object) { return object instanceof THREE.Mesh; });
+    this.gpuPicker.setFilter(function(object) {
+      return object instanceof THREE.Mesh && 'x3dType' in object.userData;
+    });
 
     this.slotAnchors = new SlotAnchors(this.scene);
 
@@ -146,6 +149,7 @@ class View3D { // eslint-disable-line no-unused-vars
   }
 
   getPartAt(relativePosition, screenPosition) {
+    this.handle.hideHandle();
     this.gpuPicker.setScene(this.scene);
     this.gpuPicker.setCamera(this.camera);
 
@@ -155,10 +159,13 @@ class View3D { // eslint-disable-line no-unused-vars
     if (intersection && intersection.faceIndex > 0) {
       var parent = intersection.object;
       do {
-        if (parent.userData.isPartContainer)
+        if (parent.userData.isPartContainer) {
+          this.handle.showHandle();
           return parent;
+        }
         parent = parent.parent;
       } while (parent);
     }
+    this.handle.showHandle();
   }
 }

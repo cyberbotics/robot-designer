@@ -209,7 +209,7 @@ THREE.OutlinePass.prototype = Object.assign( Object.create( THREE.Pass.prototype
 
 		function VisibilityChangeCallBack( object ) {
 
-			if ( object.isMesh || object.isLine || object.isSprite ) {
+			if ( object.isMesh || object.isLine || object.isSprite || object.isTransformControls ) {
 
 				var bFound = false;
 
