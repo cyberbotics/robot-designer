@@ -102,9 +102,6 @@ function mousedown(ev) { // eslint-disable-line no-unused-vars
   if (part) {
     designer.view3D.selector.selectPart(part);
     designer.view3D.handle.attachToObject(part);
-  } else {
-    designer.view3D.selector.clearSelection();
-    designer.view3D.handle.detach();
   }
 }
 
