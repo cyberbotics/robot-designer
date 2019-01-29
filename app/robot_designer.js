@@ -2,10 +2,13 @@
 'use strict';
 
 class RobotDesigner {
-  constructor(part, undoButton, redoButton) {
+  constructor(part, undoButton, redoButton, selectButton, translateButton, rotateButton) {
     this.part = part;
     this.undoButton = undoButton;
     this.redoButton = redoButton;
+    this.selectButton = selectButton;
+    this.translateButton = translateButton;
+    this.rotateButton = rotateButton;
 
     if (typeof part === 'undefined') {
       console.error('The Robot Designer is initialized on an undefined part.');
@@ -56,7 +59,10 @@ class RobotDesigner {
 var designer = new RobotDesigner( // eslint-disable-line no-new
   document.getElementById('nrp-robot-designer'),
   document.getElementById('nrp-robot-designer-undo-button'),
-  document.getElementById('nrp-robot-designer-redo-button')
+  document.getElementById('nrp-robot-designer-redo-button'),
+  document.getElementById('nrp-robot-designer-select-button'),
+  document.getElementById('nrp-robot-designer-translate-button'),
+  document.getElementById('nrp-robot-designer-rotate-button')
 );
 
 function save() { // eslint-disable-line no-unused-vars
@@ -70,6 +76,23 @@ function undo() { // eslint-disable-line no-unused-vars
 
 function redo() { // eslint-disable-line no-unused-vars
   designer.commands.redo();
+}
+
+function changeMode(mode) { // eslint-disable-line no-unused-vars
+  designer.selectButton.classList.remove('fa-selected');
+  designer.translateButton.classList.remove('fa-selected');
+  designer.rotateButton.classList.remove('fa-selected');
+
+  if (mode === 'select') {
+    designer.selectButton.classList.add('fa-selected');
+    designer.view3D.handle.selectMode();
+  } else if (mode === 'translate') {
+    designer.translateButton.classList.add('fa-selected');
+    designer.view3D.handle.translateMode();
+  } else if (mode === 'rotate') {
+    designer.rotateButton.classList.add('fa-selected');
+    designer.view3D.handle.rotateMode();
+  }
 }
 
 function mousedown(ev) { // eslint-disable-line no-unused-vars

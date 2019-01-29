@@ -62,7 +62,11 @@
         <i id='nrp-robot-designer-undo-button' class="fas fa-undo fa-disabled" onclick="undo()"></i>
         <i id='nrp-robot-designer-redo-button' class="fas fa-redo fa-disabled" onclick="redo()"></i>
         <span>|</span>
-        <i class="fas fa-arrows-alt" onclick="toggleFullScreen()"></i>
+        <i id='nrp-robot-designer-select-button' class="fas fa-selected fa-mouse-pointer" onclick="changeMode('select')"></i>
+        <i id='nrp-robot-designer-translate-button' class="fas fa-arrows-alt" onclick="changeMode('translate')"></i>
+        <i id='nrp-robot-designer-rotate-button' class="fas fa-sync-alt" onclick="changeMode('rotate')"></i>
+        <span>|</span>
+        <i class="fas fa-window-maximize" onclick="toggleFullScreen()"></i>
       </div>
     </div>
     <div class="menu">
