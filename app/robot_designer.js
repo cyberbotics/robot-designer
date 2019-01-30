@@ -83,16 +83,14 @@ function changeMode(mode) { // eslint-disable-line no-unused-vars
   designer.translateButton.classList.remove('fa-selected');
   designer.rotateButton.classList.remove('fa-selected');
 
-  if (mode === 'select') {
+  if (mode === 'select')
     designer.selectButton.classList.add('fa-selected');
-    designer.view3D.handle.selectMode();
-  } else if (mode === 'translate') {
+  else if (mode === 'translate')
     designer.translateButton.classList.add('fa-selected');
-    designer.view3D.handle.translateMode();
-  } else if (mode === 'rotate') {
+  else if (mode === 'rotate')
     designer.rotateButton.classList.add('fa-selected');
-    designer.view3D.handle.rotateMode();
-  }
+
+  designer.view3D.handle.setMode(mode);
 }
 
 function mousedown(ev) { // eslint-disable-line no-unused-vars
@@ -106,9 +104,9 @@ function mousedown(ev) { // eslint-disable-line no-unused-vars
 }
 
 function deleteSelectedPart() { // eslint-disable-line no-unused-vars
-  for (let s = 0; s < designer.view3D.selector.selectedParts.length; s++) {
-    var mesh = designer.view3D.selector.selectedParts[s];
+  var mesh = designer.view3D.selector.selectedPart;
 
+  if (mesh) {
     var parent = mesh;
     do {
       if (parent.userData.isPartContainer) {
@@ -118,7 +116,9 @@ function deleteSelectedPart() { // eslint-disable-line no-unused-vars
       parent = parent.parent;
     } while (parent);
   }
+
   designer.view3D.selector.clearSelection();
+  designer.view3D.handle.detach();
 }
 
 function mouseMove(ev) { // eslint-disable-line no-unused-vars
