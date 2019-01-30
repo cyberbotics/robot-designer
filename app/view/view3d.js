@@ -1,4 +1,4 @@
-/* global THREE, SlotAnchors, Selector, Highlightor */
+/* global THREE, Handle, SlotAnchors, Selector, Highlightor */
 'use strict';
 
 // 1. dom
