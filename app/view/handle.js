@@ -8,6 +8,7 @@ class Handle { // eslint-disable-line no-unused-vars
     this.control = new THREE.TransformControls(camera, domElement);
     this.control.isTransformControls = true; // To be detected correctly by OutlinePass.
     this.control.visible = false;
+    this.control.enabled = false;
     this.control.setSpace('local');
     this.control.addEventListener('dragging-changed', (event) => {
       orbitControls.enabled = !event.value;
@@ -25,13 +26,16 @@ class Handle { // eslint-disable-line no-unused-vars
 
   setMode(mode) {
     this.mode = mode;
-    if (mode === 'select')
+    if (mode === 'select') {
       this.control.visible = false;
-    else if (mode === 'translate') {
+      this.control.enabled = false;
+    } else if (mode === 'translate') {
       this.control.visible = true;
+      this.control.enabled = true;
       this.control.setMode('translate');
     } else if (mode === 'rotate') {
       this.control.visible = true;
+      this.control.enabled = true;
       this.control.setMode('rotate');
     }
   }
