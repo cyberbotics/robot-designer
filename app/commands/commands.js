@@ -46,6 +46,18 @@ class Commands extends Observable { // eslint-disable-line no-unused-vars
     );
   }
 
+  translatePart(part, translation) {
+    this._pushAction(
+      function(redo, data) {
+        if (redo)
+          part.translate(translation);
+        // else
+        //   part.translate(previousTranslation);
+      },
+      []
+    );
+  }
+
   addRootPart(robot, part) {
     this._pushAction(
       function(redo, data) {

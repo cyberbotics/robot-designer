@@ -1,4 +1,4 @@
-/* global Observable */
+/* global Observable, THREE */
 'use strict';
 
 class Part extends Observable { // eslint-disable-line no-unused-vars
@@ -6,12 +6,18 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
     super();
     this.asset = asset;
     this.name = asset.name;
+    this.translation = new THREE.Vector3();
 
     // init empty slots from the asset.
     this.slots = {};
     asset.getSlotNames().forEach((name) => {
       this.slots[name] = null;
     });
+  }
+
+  translate(translation) {
+    this.translation = translation;
+    this.notify('Translated', {'translation': translation});
   }
 
   addPart(slotName, part) {
@@ -50,6 +56,7 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
   serialize() {
     var o = {};
     o.modelName = this.name;
+    o.translation = this.translation;
     o.slots = {};
     for (let slotName in this.slots) {
       if (this.slots[slotName])

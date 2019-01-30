@@ -1,9 +1,11 @@
 /* global THREE */
 
 class Handle { // eslint-disable-line no-unused-vars
-  constructor(domElement, camera, scene, orbitControls) {
+  constructor(robotController, domElement, camera, scene, orbitControls) {
+    this.robotController = robotController;
     this.scene = scene;
     this.mode = 'select';
+    this.part = null;
 
     this.control = new THREE.TransformControls(camera, domElement);
     this.control.isTransformControls = true; // To be detected correctly by OutlinePass.
@@ -14,13 +16,19 @@ class Handle { // eslint-disable-line no-unused-vars
       orbitControls.enabled = !event.value;
     });
     this.control.addEventListener('change', (event) => {
-      if (this.control.object)
-        this.control.object.updateMatrix();
+      // if (this.control.object)
+      //   this.control.object.updateMatrix();
+      var position = this.control.object.position;
+      if (this.part)
+        this.robotController.translatePart(this.part, position);
     });
   }
 
   attachToObject(object) {
-    this.control.attach(object);
+    this.part = object.mediator.model;
+    var target = new THREE.Object3D();
+    object.add(target);
+    this.control.attach(target);
     this.setMode(this.mode); // update visibility.
   }
 

@@ -12,6 +12,7 @@ class PartMediator { // eslint-disable-line no-unused-vars
     this.childrenSlots = {};
     this.model.addObserver('PartAdded', (d) => this.onPartAdded(d));
     this.model.addObserver('PartRemoved', (d) => this.onPartRemoved(d));
+    this.model.addObserver('Translated', (d) => this.onTranslated(d));
   }
 
   onPartAdded(data) {
@@ -48,6 +49,11 @@ class PartMediator { // eslint-disable-line no-unused-vars
     this.childrenSlots[data.slotName].remove(this.childrenMediators[data.slotName].object3D);
     delete this.childrenSlots[data.slotName];
     delete this.childrenMediators[data.slotName];
+  }
+
+  onTranslated(data) {
+    this.object3D.position.copy(data.translation);
+    this.object3D.updateMatrix();
   }
 
   makeObject3D() {

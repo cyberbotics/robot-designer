@@ -9,8 +9,9 @@
 // 6. mouse interactions
 
 class View3D { // eslint-disable-line no-unused-vars
-  constructor(view3DElement) {
+  constructor(view3DElement, robotController) {
     this.view3DElement = view3DElement;
+    this.robotController = robotController;
 
     this.renderer = new THREE.WebGLRenderer({'antialias': true});
     this.renderer.setClearColor(0x000, 1.0);
@@ -61,7 +62,7 @@ class View3D { // eslint-disable-line no-unused-vars
 
     this.highlightor = new Highlightor(this.highlightOutlinePass);
     this.selector = new Selector(this.selectionOutlinePass);
-    this.handle = new Handle(this.view3DElement, this.camera, this.scene, this.controls);
+    this.handle = new Handle(this.robotController, this.view3DElement, this.camera, this.scene, this.controls);
 
     this.gpuPicker = new THREE.GPUPicker({renderer: this.renderer, debug: false});
     this.gpuPicker.setFilter(function(object) {
