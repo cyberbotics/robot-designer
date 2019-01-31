@@ -16,19 +16,26 @@ class Handle { // eslint-disable-line no-unused-vars
       orbitControls.enabled = !event.value;
     });
     this.control.addEventListener('change', (event) => {
-      // if (this.control.object)
-      //   this.control.object.updateMatrix();
-      var position = this.control.object.position;
+      var position = this.target.position;
       if (this.part)
         this.robotController.translatePart(this.part, position);
     });
   }
 
   attachToObject(object) {
+    this.detach();
+
     this.part = object.mediator.model;
-    var target = new THREE.Object3D();
-    object.add(target);
-    this.control.attach(target);
+    this.target = new THREE.Object3D();
+
+    // Uncomment to visualize the target:
+    // var geometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
+    // var material = new THREE.MeshBasicMaterial({color: 0x00ff00, transparent: true, opacity: 0.5});
+    // var cube = new THREE.Mesh(geometry, material);
+    // this.target.add(cube);
+
+    object.parent.add(this.target);
+    this.control.attach(this.target);
     this.setMode(this.mode); // update visibility.
   }
 
@@ -50,6 +57,8 @@ class Handle { // eslint-disable-line no-unused-vars
 
   detach() {
     this.control.detach();
+    if (this.target)
+      this.target.parent.remove(this.target);
   }
 
   showHandle() {
