@@ -52,7 +52,12 @@ class PartMediator { // eslint-disable-line no-unused-vars
   }
 
   onTranslated(data) {
-    this.object3D.position.copy(data.translation);
+    var translation = new THREE.Vector3(
+      data.translation[0],
+      data.translation[1],
+      data.translation[2]
+    );
+    this.object3D.position.copy(translation);
     this.object3D.updateMatrix();
   }
 

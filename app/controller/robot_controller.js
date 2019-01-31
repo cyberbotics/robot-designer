@@ -22,6 +22,6 @@ class RobotController { // eslint-disable-line no-unused-vars
   }
 
   translatePart(part, translation) {
-    this.commands.translatePart(part, translation);
+    this.commands.translatePart(part, [translation.x, translation.y, translation.z]);
   }
 }
