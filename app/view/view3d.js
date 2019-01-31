@@ -150,6 +150,8 @@ class View3D { // eslint-disable-line no-unused-vars
   }
 
   getPartAt(relativePosition, screenPosition) {
+    if (this.handle.control.pointerHover(screenPosition))
+      return;
     this.handle.hideHandle();
     this.gpuPicker.setScene(this.scene);
     this.gpuPicker.setCamera(this.camera);

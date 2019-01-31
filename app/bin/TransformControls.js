@@ -211,7 +211,7 @@ THREE.TransformControls = function ( camera, domElement ) {
 
 	this.pointerHover = function( pointer ) {
 
-		if ( this.object === undefined || this.dragging === true || ( pointer.button !== undefined && pointer.button !== 0 ) ) return;
+		if ( this.object === undefined || this.dragging === true || ( pointer.button !== undefined && pointer.button !== 0 ) ) return false;
 
 		ray.setFromCamera( pointer, this.camera );
 
@@ -220,10 +220,12 @@ THREE.TransformControls = function ( camera, domElement ) {
 		if ( intersect ) {
 
 			this.axis = intersect.object.name;
+			return true;
 
 		} else {
 
 			this.axis = null;
+			return false;
 
 		}
 

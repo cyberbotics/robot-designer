@@ -100,6 +100,8 @@ class Handle { // eslint-disable-line no-unused-vars
 
   _updateConstraints() {
     // TODO: the following should be defined in assets.json (and so Webots :-/ )
+    if (!this.part)
+      return;
     var asset = this.part.asset;
     if (asset.root) {
       this.control.rotationSnap = null;
