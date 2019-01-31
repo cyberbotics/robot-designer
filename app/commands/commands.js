@@ -47,12 +47,13 @@ class Commands extends Observable { // eslint-disable-line no-unused-vars
   }
 
   translatePart(part, translation) {
+    var previousTranslation = part.translation;
     this._pushAction(
       function(redo, data) {
         if (redo)
           part.translate(translation);
-        // else
-        //   part.translate(previousTranslation);
+        else
+          part.translate(previousTranslation);
       },
       []
     );

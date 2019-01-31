@@ -15,18 +15,24 @@ class Handle { // eslint-disable-line no-unused-vars
     this.control.addEventListener('dragging-changed', (event) => {
       orbitControls.enabled = !event.value;
     });
-    this.control.addEventListener('change', (event) => {
+    this.control.addEventListener('mouseUp', (event) => {
       var position = this.target.position;
       if (this.part)
         this.robotController.translatePart(this.part, position);
     });
+    this.control.translationSnap = 0.02;
   }
 
   attachToObject(object) {
     this.detach();
 
     this.part = object.mediator.model;
+    this.part.addObserver('Translated', (d) => {
+      this._updateTargetPosition();
+    });
+
     this.target = new THREE.Object3D();
+    this._updateTargetPosition();
 
     // Uncomment to visualize the target:
     // var geometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
@@ -67,5 +73,13 @@ class Handle { // eslint-disable-line no-unused-vars
 
   hideHandle() {
     this.scene.remove(this.control);
+  }
+
+  _updateTargetPosition() {
+    this.target.position.copy(new THREE.Vector3(
+      this.part.translation[0],
+      this.part.translation[1],
+      this.part.translation[2]
+    ));
   }
 }
