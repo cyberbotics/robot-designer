@@ -7,8 +7,8 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
     this.asset = asset;
     this.name = asset.name;
     this.translation = [0.0, 0.0, 0.0];
+    this.quaternion = [0.0, 0.0, 0.0, 1.0];
 
-    // init empty slots from the asset.
     this.slots = {};
     asset.getSlotNames().forEach((name) => {
       this.slots[name] = null;
@@ -18,6 +18,11 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
   translate(translation) {
     this.translation = translation;
     this.notify('Translated', {'translation': translation});
+  }
+
+  rotate(quaternion) {
+    this.quaternion = quaternion;
+    this.notify('Rotated', {'quaternion': quaternion});
   }
 
   addPart(slotName, part) {
@@ -58,6 +63,8 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
     o.modelName = this.name;
     if (this.translation[0] !== 0.0 || this.translation[1] !== 0.0 || this.translation[2] !== 0.0)
       o.translation = this.translation;
+    if (this.quaternion[0] !== 0.0 || this.quaternion[1] !== 0.0 || this.quaternion[2] !== 0.0 || this.quaternion[3] !== 1.0)
+      o.quaternion = this.quaternion;
     o.slots = {};
     for (let slotName in this.slots) {
       if (this.slots[slotName])

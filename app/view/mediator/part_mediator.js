@@ -13,6 +13,7 @@ class PartMediator { // eslint-disable-line no-unused-vars
     this.model.addObserver('PartAdded', (d) => this.onPartAdded(d));
     this.model.addObserver('PartRemoved', (d) => this.onPartRemoved(d));
     this.model.addObserver('Translated', (d) => this.onTranslated(d));
+    this.model.addObserver('Rotated', (d) => this.onRotated(d));
   }
 
   onPartAdded(data) {
@@ -58,6 +59,17 @@ class PartMediator { // eslint-disable-line no-unused-vars
       data.translation[2]
     );
     this.object3D.position.copy(translation);
+    this.object3D.updateMatrix();
+  }
+
+  onRotated(data) {
+    var quaternion = new THREE.Quaternion(
+      data.quaternion[0],
+      data.quaternion[1],
+      data.quaternion[2],
+      data.quaternion[3]
+    );
+    this.object3D.quaternion.copy(quaternion);
     this.object3D.updateMatrix();
   }
 

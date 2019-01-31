@@ -59,6 +59,19 @@ class Commands extends Observable { // eslint-disable-line no-unused-vars
     );
   }
 
+  rotatePart(part, quaternion) {
+    var previousQuaternion = part.quaternion;
+    this._pushAction(
+      function(redo, data) {
+        if (redo)
+          part.rotate(quaternion);
+        else
+          part.rotate(previousQuaternion);
+      },
+      []
+    );
+  }
+
   addRootPart(robot, part) {
     this._pushAction(
       function(redo, data) {

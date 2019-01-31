@@ -16,11 +16,15 @@ class Handle { // eslint-disable-line no-unused-vars
       orbitControls.enabled = !event.value;
     });
     this.control.addEventListener('mouseUp', (event) => {
-      var position = this.target.position;
-      if (this.part)
+      if (this.part && this.mode === 'translate') {
+        var position = this.target.position;
         this.robotController.translatePart(this.part, position);
+      }
+      if (this.part && this.mode === 'rotate') {
+        var quaternion = this.target.quaternion;
+        this.robotController.rotatePart(this.part, quaternion);
+      }
     });
-    this.control.translationSnap = 0.02;
   }
 
   attachToObject(object) {
@@ -28,6 +32,9 @@ class Handle { // eslint-disable-line no-unused-vars
 
     this.part = object.mediator.model;
     this.part.addObserver('Translated', (d) => {
+      this._updateTargetPosition();
+    });
+    this.part.addObserver('Rotated', (d) => {
       this._updateTargetPosition();
     });
 
@@ -81,5 +88,13 @@ class Handle { // eslint-disable-line no-unused-vars
       this.part.translation[1],
       this.part.translation[2]
     ));
+    console.log(this.part.quaternion);
+    this.target.quaternion.copy(new THREE.Quaternion(
+      this.part.quaternion[0],
+      this.part.quaternion[1],
+      this.part.quaternion[2],
+      this.part.quaternion[3]
+    ));
+    this.target.updateMatrix();
   }
 }

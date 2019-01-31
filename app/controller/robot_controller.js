@@ -24,4 +24,8 @@ class RobotController { // eslint-disable-line no-unused-vars
   translatePart(part, translation) {
     this.commands.translatePart(part, [translation.x, translation.y, translation.z]);
   }
+
+  rotatePart(part, quaternion) {
+    this.commands.rotatePart(part, [quaternion.x, quaternion.y, quaternion.z, quaternion.w]);
+  }
 }
