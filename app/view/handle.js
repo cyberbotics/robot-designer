@@ -50,7 +50,55 @@ class Handle { // eslint-disable-line no-unused-vars
     // var material = new THREE.MeshBasicMaterial({color: 0x00ff00, transparent: true, opacity: 0.5});
     // var cube = new THREE.Mesh(geometry, material);
     // this.target.add(cube);
+  }
 
+  setMode(mode) {
+    this.mode = mode;
+    if (mode === 'select') {
+      this.control.visible = false;
+      this.control.enabled = false;
+    } else if (mode === 'translate') {
+      this.control.visible = true;
+      this.control.enabled = true;
+      this.control.setMode('translate');
+    } else if (mode === 'rotate') {
+      this.control.visible = true;
+      this.control.enabled = true;
+      this.control.setMode('rotate');
+    }
+    this._updateConstraints();
+  }
+
+  detach() {
+    this.control.detach();
+    if (this.target)
+      this.target.parent.remove(this.target);
+  }
+
+  showHandle() {
+    this.scene.add(this.control);
+  }
+
+  hideHandle() {
+    this.scene.remove(this.control);
+  }
+
+  _updateTargetPosition() {
+    this.target.position.copy(new THREE.Vector3(
+      this.part.translation[0],
+      this.part.translation[1],
+      this.part.translation[2]
+    ));
+    this.target.quaternion.copy(new THREE.Quaternion(
+      this.part.quaternion[0],
+      this.part.quaternion[1],
+      this.part.quaternion[2],
+      this.part.quaternion[3]
+    ));
+    this.target.updateMatrix();
+  }
+
+  _updateConstraints() {
     // TODO: the following should be defined in assets.json (and so Webots :-/ )
     var asset = this.part.asset;
     if (asset.root) {
@@ -91,50 +139,5 @@ class Handle { // eslint-disable-line no-unused-vars
       this.control.showY = false;
       this.control.showZ = false;
     }
-  }
-
-  setMode(mode) {
-    this.mode = mode;
-    if (mode === 'select') {
-      this.control.visible = false;
-      this.control.enabled = false;
-    } else if (mode === 'translate') {
-      this.control.visible = true;
-      this.control.enabled = true;
-      this.control.setMode('translate');
-    } else if (mode === 'rotate') {
-      this.control.visible = true;
-      this.control.enabled = true;
-      this.control.setMode('rotate');
-    }
-  }
-
-  detach() {
-    this.control.detach();
-    if (this.target)
-      this.target.parent.remove(this.target);
-  }
-
-  showHandle() {
-    this.scene.add(this.control);
-  }
-
-  hideHandle() {
-    this.scene.remove(this.control);
-  }
-
-  _updateTargetPosition() {
-    this.target.position.copy(new THREE.Vector3(
-      this.part.translation[0],
-      this.part.translation[1],
-      this.part.translation[2]
-    ));
-    this.target.quaternion.copy(new THREE.Quaternion(
-      this.part.quaternion[0],
-      this.part.quaternion[1],
-      this.part.quaternion[2],
-      this.part.quaternion[3]
-    ));
-    this.target.updateMatrix();
   }
 }
