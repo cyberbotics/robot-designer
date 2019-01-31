@@ -1,4 +1,4 @@
-/* global Part */
+/* global Part, THREE */
 'use strict';
 
 class RobotController { // eslint-disable-line no-unused-vars
@@ -22,10 +22,14 @@ class RobotController { // eslint-disable-line no-unused-vars
   }
 
   translatePart(part, translation) {
-    this.commands.translatePart(part, [translation.x, translation.y, translation.z]);
+    var previousTranslation = new THREE.Vector3(part.translation[0], part.translation[1], part.translation[2]);
+    if (translation.distanceTo(previousTranslation) > 0.001)
+      this.commands.translatePart(part, [translation.x, translation.y, translation.z]);
   }
 
   rotatePart(part, quaternion) {
-    this.commands.rotatePart(part, [quaternion.x, quaternion.y, quaternion.z, quaternion.w]);
+    var previousQuaternion = new THREE.Quaternion(part.quaternion[0], part.quaternion[1], part.quaternion[2], part.quaternion[3]);
+    if (quaternion.angleTo(previousQuaternion) > 0.01)
+      this.commands.rotatePart(part, [quaternion.x, quaternion.y, quaternion.z, quaternion.w]);
   }
 }

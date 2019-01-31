@@ -15,7 +15,7 @@ class Handle { // eslint-disable-line no-unused-vars
     this.control.addEventListener('dragging-changed', (event) => {
       orbitControls.enabled = !event.value;
     });
-    this.control.addEventListener('mouseUp', (event) => {
+    this.control.addEventListener('change', (event) => {
       if (this.part && this.mode === 'translate') {
         var position = this.target.position;
         this.robotController.translatePart(this.part, position);
@@ -41,15 +41,56 @@ class Handle { // eslint-disable-line no-unused-vars
     this.target = new THREE.Object3D();
     this._updateTargetPosition();
 
+    object.parent.add(this.target);
+    this.control.attach(this.target);
+    this.setMode(this.mode); // update visibility.
+
     // Uncomment to visualize the target:
     // var geometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
     // var material = new THREE.MeshBasicMaterial({color: 0x00ff00, transparent: true, opacity: 0.5});
     // var cube = new THREE.Mesh(geometry, material);
     // this.target.add(cube);
 
-    object.parent.add(this.target);
-    this.control.attach(this.target);
-    this.setMode(this.mode); // update visibility.
+    // TODO: the following should be defined in assets.json (and so Webots :-/ )
+    var asset = this.part.asset;
+    if (asset.root) {
+      this.control.rotationSnap = null;
+      this.control.translationSnap = null;
+      this.control.showX = true;
+      this.control.showY = true;
+      this.control.showZ = true;
+    } else if (asset.slotType === 'tinkerbots') {
+      this.control.rotationSnap = Math.PI / 2.0;
+      this.control.translationSnap = null;
+      if (this.mode === 'rotate') {
+        this.control.showX = false;
+        this.control.showY = false;
+        this.control.showZ = true;
+      } else {
+        this.control.showX = false;
+        this.control.showY = false;
+        this.control.showZ = false;
+      }
+    } else if (asset.slotType.startsWith('lego')) {
+      this.control.rotationSnap = Math.PI / 2.0;
+      this.control.translationSnap = 0.02;
+      if (this.mode === 'rotate') {
+        this.control.showX = false;
+        this.control.showY = false;
+        this.control.showZ = true;
+      } else {
+        this.control.showX = true;
+        this.control.showY = true;
+        this.control.showZ = false;
+      }
+    } else {
+      // normally unreachable.
+      this.control.rotationSnap = null;
+      this.control.translationSnap = null;
+      this.control.showX = false;
+      this.control.showY = false;
+      this.control.showZ = false;
+    }
   }
 
   setMode(mode) {
@@ -88,7 +129,6 @@ class Handle { // eslint-disable-line no-unused-vars
       this.part.translation[1],
       this.part.translation[2]
     ));
-    console.log(this.part.quaternion);
     this.target.quaternion.copy(new THREE.Quaternion(
       this.part.quaternion[0],
       this.part.quaternion[1],
