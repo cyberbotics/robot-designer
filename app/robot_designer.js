@@ -1,4 +1,4 @@
-/* global View3D, Robot, Dragger, RobotMediator, RobotController, AssetComponent, AssetLibrary, Commands */
+/* global View3D, Robot, Dragger, RobotMediator, RobotController, PartBrowser, AssetLibrary, Commands */
 'use strict';
 
 class RobotDesigner {
@@ -26,12 +26,12 @@ class RobotDesigner {
     }
 
     this.assetLibrary = new AssetLibrary();
-    this.assetComponent = new AssetComponent(this.assetLibraryElement, this.assetLibrary);
-    this.assetLibrary.addObserver('loaded', () => { this.assetComponent.loadAssets(); });
+    this.PartBrowser = new PartBrowser(this.assetLibraryElement, this.assetLibrary);
+    this.assetLibrary.addObserver('loaded', () => { this.PartBrowser.loadAssets(); });
 
     this.commands = new Commands();
     this.commands.addObserver('updated', () => this.updateUndoRedoButtons());
-    this.commands.addObserver('updated', () => this.assetComponent.update(this.robot));
+    this.commands.addObserver('updated', () => this.PartBrowser.update(this.robot));
 
     this.robot = new Robot();
     this.robotMediator = new RobotMediator(this.robot);

@@ -1,6 +1,6 @@
 'use strict';
 
-class AssetComponent { // eslint-disable-line no-unused-vars
+class PartBrowser { // eslint-disable-line no-unused-vars
   constructor(assetLibraryElement, assetLibrary) {
     this.assetLibraryElement = assetLibraryElement;
     this.assetLibrary = assetLibrary;
