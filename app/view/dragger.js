@@ -2,13 +2,13 @@
 'use strict';
 
 class Dragger { // eslint-disable-line no-unused-vars
-  constructor(view3D, robotController) {
-    this.view3D = view3D;
+  constructor(robotViewer, robotController) {
+    this.robotViewer = robotViewer;
     this.robotController = robotController;
     this.draggedPartName = null;
     this.draggedPart = undefined;
     this.slotType = null;
-    this.ghost = new Ghost(view3D.scene);
+    this.ghost = new Ghost(robotViewer.scene);
   }
 
   dragStart(part, slotType) {
@@ -17,35 +17,35 @@ class Dragger { // eslint-disable-line no-unused-vars
   }
 
   dragEnter() {
-    this.view3D.slotAnchors.showSlots(this.slotType);
+    this.robotViewer.slotAnchors.showSlots(this.slotType);
     this.ghost.addGhost(this.draggedPart);
   }
 
   dragOver(x, y) {
-    var screenPosition = this.view3D.convertMouseEventPositionToScreenPosition(x, y);
+    var screenPosition = this.robotViewer.convertMouseEventPositionToScreenPosition(x, y);
 
-    var projection = this.view3D.projectScreenPositionOnSlotsAnchors(screenPosition);
+    var projection = this.robotViewer.projectScreenPositionOnSlotsAnchors(screenPosition);
     if (projection) {
-      var closestSlot = this.view3D.getClosestSlot(screenPosition, this.slotType);
+      var closestSlot = this.robotViewer.getClosestSlot(screenPosition, this.slotType);
       if (closestSlot) {
-        this.view3D.slotAnchors.highlight(closestSlot);
+        this.robotViewer.slotAnchors.highlight(closestSlot);
         this.ghost.moveGhostToSlot(closestSlot);
         return;
       }
     }
 
-    projection = this.view3D.projectScreenPositionOnFloor(screenPosition);
+    projection = this.robotViewer.projectScreenPositionOnFloor(screenPosition);
     this.ghost.moveGhostToFloor(projection);
   }
 
   dragLeave() {
-    this.view3D.slotAnchors.hideSlots(this.view3D.scene);
+    this.robotViewer.slotAnchors.hideSlots(this.robotViewer.scene);
     this.ghost.removeGhost();
   }
 
   drop(x, y) {
-    var screenPosition = this.view3D.convertMouseEventPositionToScreenPosition(x, y);
-    var closestSlot = this.view3D.getClosestSlot(screenPosition, this.slotType);
+    var screenPosition = this.robotViewer.convertMouseEventPositionToScreenPosition(x, y);
+    var closestSlot = this.robotViewer.getClosestSlot(screenPosition, this.slotType);
 
     if (closestSlot) {
       var parent = closestSlot;
@@ -59,7 +59,7 @@ class Dragger { // eslint-disable-line no-unused-vars
     } else
       this.robotController.addPart(null, this.draggedPart, '');
 
-    this.view3D.slotAnchors.hideSlots(this.view3D.scene);
+    this.robotViewer.slotAnchors.hideSlots(this.robotViewer.scene);
     this.ghost.removeGhost();
   }
 }

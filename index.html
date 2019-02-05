@@ -33,9 +33,9 @@
   <script type="text/javascript" src="/robot-designer/app/view/mediator/robot_mediator.js"></script>
   <script type="text/javascript" src="/robot-designer/app/view/part_browser.js"></script>
   <script type="text/javascript" src="/robot-designer/app/view/part_viewer.js"></script>
+  <script type="text/javascript" src="/robot-designer/app/view/robot_viewer.js"></script>
   <script type="text/javascript" src="/robot-designer/app/view/selector.js"></script>
   <script type="text/javascript" src="/robot-designer/app/view/slot_anchors.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/view/view3d.js"></script>
   <script type="text/javascript" src="/robot-designer/app/view/x3d.js"></script>
   <script type="text/javascript" src="/robot-designer/app/robot_designer.js" defer></script>
   <link rel="stylesheet" href="/robot-designer/style.css">
@@ -73,7 +73,7 @@
     <div class="menu">
       <i class="fas fa-trash-alt" onclick="deleteSelectedPart()"></i>
     </div>
-    <div class="main" name="view3D" ondrop="drop(event)" ondragenter="dragEnter(event)" ondragover="dragOver(event)" ondragleave="dragLeave(event)" onmousemove="mouseMove(event)" onmousedown="mousedown(event)"></div>
+    <div class="main" name="robotViewer" ondrop="drop(event)" ondragenter="dragEnter(event)" ondragover="dragOver(event)" ondragleave="dragLeave(event)" onmousemove="mouseMove(event)" onmousedown="mousedown(event)"></div>
     <div class="sidebar"><t3>Part viewer</t3><div name="part-viewer"></div></div>
     <div class="footer" name="assets-library-component"></div>
   </div>
