@@ -31,7 +31,7 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
     this.slots[slotName] = part;
     this.notify('PartAdded', { 'part': part, 'slotName': slotName });
 
-    // notify the creation of the subparts is any.
+    // notify the creation of the subparts if any.
     for (let subSlotName in part.slots) {
       var slot = part.slots[subSlotName];
       if (slot) {
