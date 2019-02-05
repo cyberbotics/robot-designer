@@ -7,6 +7,7 @@ class Asset { // eslint-disable-line no-unused-vars
     this.icon = assetData.icon;
     this.slotType = assetData.slotType;
     this.slots = assetData.slots;
+    this.parameters = assetData.parameters;
   }
 
   getSlotNames() {

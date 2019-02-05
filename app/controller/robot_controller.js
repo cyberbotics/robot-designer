@@ -32,4 +32,9 @@ class RobotController { // eslint-disable-line no-unused-vars
     if (quaternion.angleTo(previousQuaternion) > 0.01)
       this.commands.rotatePart(part, [quaternion.x, quaternion.y, quaternion.z, quaternion.w]);
   }
+
+  changeColor(part, color) {
+    if (color !== part.color)
+      this.commands.changeColor(part, color);
+  }
 }

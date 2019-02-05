@@ -24,14 +24,19 @@ class RobotDesigner {
       console.error('The Robot Designer cannot find its asset library component.');
       return;
     }
+    this.partViewerElement = document.getElementsByName('part-viewer')[0];
+    if (typeof this.partViewerElement === 'undefined') {
+      console.error('The Robot Designer cannot find its part viewer component.');
+      return;
+    }
 
     this.assetLibrary = new AssetLibrary();
-    this.PartBrowser = new PartBrowser(this.assetLibraryElement, this.assetLibrary);
-    this.assetLibrary.addObserver('loaded', () => { this.PartBrowser.loadAssets(); });
+    this.partBrowser = new PartBrowser(this.assetLibraryElement, this.assetLibrary);
+    this.assetLibrary.addObserver('loaded', () => { this.partBrowser.loadAssets(); });
 
     this.commands = new Commands();
     this.commands.addObserver('updated', () => this.updateUndoRedoButtons());
-    this.commands.addObserver('updated', () => this.PartBrowser.update(this.robot));
+    this.commands.addObserver('updated', () => this.partBrowser.update(this.robot));
 
     this.robot = new Robot();
     this.robotMediator = new RobotMediator(this.robot);
@@ -42,6 +47,8 @@ class RobotDesigner {
     this.highlightOutlinePass = this.view3D.highlightOutlinePass;
 
     this.dragger = new Dragger(this.view3D, this.robotController);
+
+    this.partViewer = new PartViewer(this.robotController, this.partViewerElement, this.view3D.selector);
   }
 
   updateUndoRedoButtons() {

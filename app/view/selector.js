@@ -1,7 +1,9 @@
+/* global Observable */
 'use strict';
 
-class Selector { // eslint-disable-line no-unused-vars
+class Selector extends Observable { // eslint-disable-line no-unused-vars
   constructor(outlinePass) {
+    super();
     this.outlinePass = outlinePass;
     this.selectedPart = null;
   }
@@ -14,10 +16,12 @@ class Selector { // eslint-disable-line no-unused-vars
         selectedObjects.push(child);
     });
     this.outlinePass.selectedObjects = selectedObjects;
+    this.notify('SelectionChanged', {'part': this.selectedPart});
   }
 
   clearSelection() {
     this.selectedPart = null;
     this.outlinePass.selectedObjects = [];
+    this.notify('SelectionChanged', {'part': null});
   }
 }

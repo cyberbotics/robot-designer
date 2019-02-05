@@ -51,6 +51,11 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
     }
   }
 
+  changeColor(color) {
+    this.color = color;
+    this.notify('ColorChanged', {'color': color});
+  }
+
   slotName(part) {
     for (let slotName in this.slots) {
       if (this.slots[slotName] === part)
@@ -65,6 +70,8 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
       o.translation = this.translation;
     if (this.quaternion[0] !== 0.0 || this.quaternion[1] !== 0.0 || this.quaternion[2] !== 0.0 || this.quaternion[3] !== 1.0)
       o.quaternion = this.quaternion;
+    if (typeof this.color !== 'undefined')
+      o.color = this.color;
     o.slots = {};
     for (let slotName in this.slots) {
       if (this.slots[slotName])
