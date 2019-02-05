@@ -18,13 +18,15 @@ class PartMediator { // eslint-disable-line no-unused-vars
   }
 
   onPartAdded(data) {
-    // 1. Look for every slots recursively.
+    // Aim: retrieve the THREEjs slot container matching with the target slot, and create the new mediator there.
+
+    // 1. Look for every THREEjs slot container. Slot containers may appear at any level.
     var slotCandidates = [];
-    this.object3D.children[0].traverse((child) => {
+    this.object3D.traverse((child) => {
       if (child.userData.x3dType === 'Slot' && child.userData.slotName === data.slotName) {
         var level = 0;
         var parent = child;
-        while (parent && parent !== this.object3D.children[0]) {
+        while (parent && parent !== this.object3D) {
           level++;
           parent = parent.parent;
         }
@@ -40,9 +42,11 @@ class PartMediator { // eslint-disable-line no-unused-vars
       return a.level - b.level;
     });
 
-    // 3. Actually add the part.
-    var mediator = new PartMediator(data.part);
+    // 3. Actually add the part to the found slot container.
     this.childrenSlots[data.slotName] = slotCandidates[0].slot;
+
+    // 4. Create the part mediator.
+    var mediator = new PartMediator(data.part);
     this.childrenSlots[data.slotName].add(mediator.object3D);
     this.childrenMediators[data.slotName] = mediator;
   }
