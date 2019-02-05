@@ -16,6 +16,8 @@ class Handle { // eslint-disable-line no-unused-vars
       orbitControls.enabled = !event.value;
     });
     this.control.addEventListener('change', (event) => {
+      if (!this.target)
+        return;
       if (this.part && this.mode === 'translate') {
         var position = this.target.position;
         this.robotController.translatePart(this.part, position);
@@ -71,8 +73,10 @@ class Handle { // eslint-disable-line no-unused-vars
 
   detach() {
     this.control.detach();
-    if (this.target)
+    if (this.target) {
       this.target.parent.remove(this.target);
+      this.target = null;
+    }
   }
 
   showHandle() {
@@ -84,6 +88,9 @@ class Handle { // eslint-disable-line no-unused-vars
   }
 
   _updateTargetPosition() {
+    if (!this.target)
+      return;
+
     this.target.position.copy(new THREE.Vector3(
       this.part.translation[0],
       this.part.translation[1],
