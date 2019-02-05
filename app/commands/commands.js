@@ -109,4 +109,17 @@ class Commands extends Observable { // eslint-disable-line no-unused-vars
       []
     );
   }
+        
+  changeColor(part, color) {
+    var previousColor = part.color;
+    this._pushAction(
+      function(redo, data) {
+        if (redo)
+          part.changeColor(color);
+        else
+          part.changeColor(previousColor);
+      },
+      []
+    );
+  }
 }

@@ -757,6 +757,12 @@
         "translation": "0.0005 0 0.011",
         "type": "lego cross female"
       }
+    },
+    "parameters": {
+      "color" : [
+        "yellow",
+        "blue"
+      ]
     }
   },
   "tinkerbots/cubie_triangle": {
@@ -768,6 +774,12 @@
         "translation": "0.005 0 0.015",
         "type": "lego cross female"
       }
+    },
+    "parameters": {
+      "color" : [
+        "yellow",
+        "blue"
+      ]
     }
   },
   "tinkerbots/finger": {

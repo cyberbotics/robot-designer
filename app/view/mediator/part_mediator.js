@@ -14,6 +14,7 @@ class PartMediator { // eslint-disable-line no-unused-vars
     this.model.addObserver('PartRemoved', (d) => this.onPartRemoved(d));
     this.model.addObserver('Translated', (d) => this.onTranslated(d));
     this.model.addObserver('Rotated', (d) => this.onRotated(d));
+    this.model.addObserver('ColorChanged', (d) => this.onColorChanged(d));
   }
 
   onPartAdded(data) {
@@ -71,6 +72,18 @@ class PartMediator { // eslint-disable-line no-unused-vars
     );
     this.object3D.quaternion.copy(quaternion);
     this.object3D.updateMatrix();
+  }
+
+  onColorChanged(data) {
+    // TODO: color should not be hardcoded here.
+    this.object3D.children[0].traverse((child) => {
+      if (child.isMesh) {
+        if (data.color === 'yellow')
+          child.material.color = new THREE.Color('rgb(100%, 60%, 0%)');
+        else if (data.color === 'blue')
+          child.material.color = new THREE.Color('rgb(0%, 45%, 100%)');
+      }
+    });
   }
 
   makeObject3D() {
