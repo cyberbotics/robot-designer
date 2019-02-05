@@ -18,7 +18,11 @@ class RobotController { // eslint-disable-line no-unused-vars
   }
 
   removePart(part) {
-    this.commands.removePart(part);
+    var parent = part.parent;
+    if (!parent || parent === this.robot)
+      this.commands.removeRootPart(this.robot, part);
+    else
+      this.commands.removePart(part);
   }
 
   translatePart(part, translation) {

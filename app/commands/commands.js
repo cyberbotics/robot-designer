@@ -97,4 +97,16 @@ class Commands extends Observable { // eslint-disable-line no-unused-vars
       []
     );
   }
+
+  removeRootPart(robot, part) {
+    this._pushAction(
+      function(redo, data) {
+        if (redo)
+          robot.removePart();
+        else
+          robot.addRootPart(part);
+      },
+      []
+    );
+  }
 }
