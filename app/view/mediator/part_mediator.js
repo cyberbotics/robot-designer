@@ -22,11 +22,11 @@ class PartMediator { // eslint-disable-line no-unused-vars
 
     // 1. Look for every THREEjs slot container. Slot containers may appear at any level.
     var slotCandidates = [];
-    this.object3D.traverse((child) => {
+    this.object3D.children[0].traverse((child) => {
       if (child.userData.x3dType === 'Slot' && child.userData.slotName === data.slotName) {
         var level = 0;
         var parent = child;
-        while (parent && parent !== this.object3D) {
+        while (parent && parent !== this.object3D.children[0]) {
           level++;
           parent = parent.parent;
         }
