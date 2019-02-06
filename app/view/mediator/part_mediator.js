@@ -45,6 +45,12 @@ class PartMediator { // eslint-disable-line no-unused-vars
     this.model.addObserver('Translated', (d) => this.onTranslated(d));
     this.model.addObserver('Rotated', (d) => this.onRotated(d));
     this.model.addObserver('ColorChanged', (d) => this.onColorChanged(d));
+
+    // Apply initial parameters.
+    this.onTranslated({'translation': this.model.translation});
+    this.onRotated({'quaternion': this.model.quaternion});
+    if (typeof this.model.color !== 'undefined')
+      this.onColorChanged({'color': this.model.color});
   }
 
   onPartAdded(data) {
@@ -109,6 +115,8 @@ class PartMediator { // eslint-disable-line no-unused-vars
 
   onColorChanged(data) {
     // TODO: color should not be hardcoded here.
+    if (!this.representation)
+      return; // TODO: this.representation may not exists a this point :-(
     this.representation.traverse((child) => {
       if (child.isMesh) {
         if (data.color === 'yellow')
