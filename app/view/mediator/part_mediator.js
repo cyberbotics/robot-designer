@@ -1,4 +1,4 @@
-/* global THREE */
+/* global THREE, convertStringToVec3, convertStringToQuaternion */
 'use strict';
 
 class PartMediator { // eslint-disable-line no-unused-vars
@@ -36,7 +36,7 @@ class PartMediator { // eslint-disable-line no-unused-vars
       object.quaternion.copy(quaternion);
 
       this.rootObject.add(object);
-      this.childrenSlots[slotName] = slot;
+      this.childrenSlots[slotName] = object;
     });
 
     // Link signals
@@ -54,34 +54,7 @@ class PartMediator { // eslint-disable-line no-unused-vars
   }
 
   onPartAdded(data) {
-    // Aim: retrieve the THREEjs slot container matching with the target slot, and create the new mediator there.
-
-    // 1. Look for every THREEjs slot container. Slot containers may appear at any level.
-    var slotCandidates = [];
-    this.rootObject.traverse((child) => {
-      if (child.userData.isSlotContainer && child.userData.slotName === data.slotName) {
-        var level = 0;
-        var parent = child;
-        while (parent && parent !== this.rootObject) {
-          level++;
-          parent = parent.parent;
-        }
-        if (parent)
-          slotCandidates.push({ level: level, slot: child });
-      }
-    });
-    if (slotCandidates.length <= 0)
-      return;
-
-    // 2. Sort slots, by level, to be sure the new part will be added to the right slot.
-    slotCandidates.sort(function(a, b) {
-      return a.level - b.level;
-    });
-
-    // 3. Actually add the part to the found slot container.
-    this.childrenSlots[data.slotName] = slotCandidates[0].slot;
-
-    // 4. Create the part mediator.
+    // Create the new part mediator, attach its root parts to this slot.
     var mediator = new PartMediator(data.part);
     this.childrenSlots[data.slotName].add(mediator.rootObject);
   }
