@@ -4,12 +4,43 @@
 class PartMediator { // eslint-disable-line no-unused-vars
   constructor(part) {
     this.model = part;
-    this.object3D = this.makeObject3D();
-    this.object3D.matrixAutoUpdate = false;
-    this.object3D.mediator = this;
-    this.object3D.userData.isPartContainer = true;
-    this.childrenMediators = {};
+
+    // Create the root container.
+    this.rootObject = new THREE.Object3D(); // The THREEjs container (contains the slots container and the part representation.)
+    this.rootObject.matrixAutoUpdate = false;
+    this.rootObject.mediator = this;
+    this.rootObject.userData.isPartContainer = true;
+
+    // Create the representation (async load).
+    var model = '/robot-designer/assets/models/' + this.model.name + '/model.x3d';
+    var loader = new THREE.X3DLoader();
+    loader.load(model, (object3d) => {
+      this.representation = object3d; // The THREEjs representation of the part.
+      this.representation.userData.isRepresentation = true;
+      this.rootObject.add(this.representation);
+    });
+
+    // Create the slot containers.
     this.childrenSlots = {};
+    this.childrenMediators = {};
+    Object.keys(this.model.asset.slots).forEach((slotName) => {
+      var slot = this.model.asset.slots[slotName];
+
+      var object = new THREE.Object3D();
+      object.userData.isSlotContainer = true;
+      object.userData.slotType = slot.type;
+      object.userData.slotName = slotName;
+
+      var position = convertStringToVec3(slot.translation ? slot.translation : '0 0 0');
+      object.position.copy(position);
+      var quaternion = convertStringToQuaternion(slot.rotation ? slot.rotation : '0 1 0 0');
+      object.quaternion.copy(quaternion);
+
+      this.rootObject.add(object);
+      this.childrenSlots[slotName] = slot;
+    });
+
+    // Link signals
     this.model.addObserver('PartAdded', (d) => this.onPartAdded(d));
     this.model.addObserver('PartRemoved', (d) => this.onPartRemoved(d));
     this.model.addObserver('Translated', (d) => this.onTranslated(d));
@@ -22,11 +53,11 @@ class PartMediator { // eslint-disable-line no-unused-vars
 
     // 1. Look for every THREEjs slot container. Slot containers may appear at any level.
     var slotCandidates = [];
-    this.object3D.children[0].traverse((child) => {
-      if (child.userData.x3dType === 'Slot' && child.userData.slotName === data.slotName) {
+    this.rootObject.traverse((child) => {
+      if (child.userData.isSlotContainer && child.userData.slotName === data.slotName) {
         var level = 0;
         var parent = child;
-        while (parent && parent !== this.object3D.children[0]) {
+        while (parent && parent !== this.rootObject) {
           level++;
           parent = parent.parent;
         }
@@ -47,12 +78,12 @@ class PartMediator { // eslint-disable-line no-unused-vars
 
     // 4. Create the part mediator.
     var mediator = new PartMediator(data.part);
-    this.childrenSlots[data.slotName].add(mediator.object3D);
+    this.childrenSlots[data.slotName].add(mediator.rootObject);
     this.childrenMediators[data.slotName] = mediator;
   }
 
   onPartRemoved(data) {
-    this.childrenSlots[data.slotName].remove(this.childrenMediators[data.slotName].object3D);
+    this.childrenSlots[data.slotName].remove(this.childrenMediators[data.slotName].rootObject);
     delete this.childrenSlots[data.slotName];
     delete this.childrenMediators[data.slotName];
   }
@@ -63,8 +94,8 @@ class PartMediator { // eslint-disable-line no-unused-vars
       data.translation[1],
       data.translation[2]
     );
-    this.object3D.position.copy(translation);
-    this.object3D.updateMatrix();
+    this.rootObject.position.copy(translation);
+    this.rootObject.updateMatrix();
   }
 
   onRotated(data) {
@@ -74,53 +105,19 @@ class PartMediator { // eslint-disable-line no-unused-vars
       data.quaternion[2],
       data.quaternion[3]
     );
-    this.object3D.quaternion.copy(quaternion);
-    this.object3D.updateMatrix();
+    this.rootObject.quaternion.copy(quaternion);
+    this.rootObject.updateMatrix();
   }
 
   onColorChanged(data) {
     // TODO: color should not be hardcoded here.
-    this.object3D.children[0].traverse((child) => {
+    this.representation.traverse((child) => {
       if (child.isMesh) {
         if (data.color === 'yellow')
           child.material.color = new THREE.Color('rgb(100%, 60%, 0%)');
         else if (data.color === 'blue')
           child.material.color = new THREE.Color('rgb(0%, 45%, 100%)');
       }
-    });
-  }
-
-  makeObject3D() {
-    var container = new THREE.Object3D();
-
-    var model = '/robot-designer/assets/models/' + this.model.name + '/model.x3d';
-    var loader = new THREE.X3DLoader();
-    loader.load(model, (object3d) => {
-      if (container) {
-        object3d.userData.isPartRoot = true;
-        container.add(object3d);
-        this.createSlots();
-      }
-    });
-
-    return container;
-  }
-
-  createSlots() {
-    Object.keys(this.model.asset.slots).forEach((slotName) => {
-      var slot = this.model.asset.slots[slotName];
-
-      var object = new THREE.Object3D();
-      object.userData.x3dType = 'Slot';
-      object.userData.slotType = slot.type;
-      object.userData.slotName = slotName;
-
-      var position = convertStringToVec3(slot.translation ? slot.translation : '0 0 0');
-      object.position.copy(position);
-      var quaternion = convertStringToQuaternion(slot.rotation ? slot.rotation : '0 1 0 0');
-      object.quaternion.copy(quaternion);
-
-      this.object3D.children[0].add(object);
     });
   }
 }

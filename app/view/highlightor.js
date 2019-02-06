@@ -6,12 +6,13 @@ class Highlightor { // eslint-disable-line no-unused-vars
   }
 
   highlight(part) {
-    var selectedObjects = [];
-    part.children[0].children.forEach((child) => {
-      if (child.userData.x3dType === 'Shape' || child.userData.x3dType === 'Transform')
-        selectedObjects.push(child);
+    var selectedRepresentations = [];
+    part.children.forEach((child) => {
+      if (child.userData.isRepresentation)
+        selectedRepresentations.push(child);
     });
-    this.outlinePass.selectedObjects = selectedObjects;
+    if (selectedRepresentations.length > 0)
+      this.outlinePass.selectedObjects = selectedRepresentations;
   }
 
   clearHighlight() {
