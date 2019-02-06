@@ -22,7 +22,6 @@ class PartMediator { // eslint-disable-line no-unused-vars
 
     // Create the slot containers.
     this.childrenSlots = {};
-    this.childrenMediators = {};
     Object.keys(this.model.asset.slots).forEach((slotName) => {
       var slot = this.model.asset.slots[slotName];
 
@@ -79,13 +78,12 @@ class PartMediator { // eslint-disable-line no-unused-vars
     // 4. Create the part mediator.
     var mediator = new PartMediator(data.part);
     this.childrenSlots[data.slotName].add(mediator.rootObject);
-    this.childrenMediators[data.slotName] = mediator;
   }
 
   onPartRemoved(data) {
-    this.childrenSlots[data.slotName].remove(this.childrenMediators[data.slotName].rootObject);
-    delete this.childrenSlots[data.slotName];
-    delete this.childrenMediators[data.slotName];
+    var partContainerToRemove = this.childrenSlots[data.slotName].children[0];
+    console.assert(partContainerToRemove.userData.isPartContainer);
+    partContainerToRemove.parent.remove(partContainerToRemove);
   }
 
   onTranslated(data) {
