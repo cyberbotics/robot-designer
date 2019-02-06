@@ -5,7 +5,6 @@ class Ghost { // eslint-disable-line no-unused-vars
   constructor(scene) {
     this.scene = scene;
     this.ghost = null;
-    this.slot = null;
   }
 
   addGhost(modelName) {
@@ -39,13 +38,8 @@ class Ghost { // eslint-disable-line no-unused-vars
     slot.add(this.ghost);
   }
 
-  slot() {
-    return this.slot;
-  }
-
   removeGhost() {
     this.ghost.parent.remove(this.ghost);
     this.ghost = null;
-    this.slot = null;
   }
 }

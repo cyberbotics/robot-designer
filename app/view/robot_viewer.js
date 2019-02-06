@@ -8,9 +8,9 @@
 // 5. pass + compose + controls
 // 6. mouse interactions
 
-class View3D { // eslint-disable-line no-unused-vars
-  constructor(view3DElement, robotController) {
-    this.view3DElement = view3DElement;
+class RobotViewer { // eslint-disable-line no-unused-vars
+  constructor(robotViewerElement, robotController) {
+    this.robotViewerElement = robotViewerElement;
     this.robotController = robotController;
 
     this.renderer = new THREE.WebGLRenderer({'antialias': true});
@@ -43,7 +43,7 @@ class View3D { // eslint-disable-line no-unused-vars
     grid.matrixAutoUpdate = false;
     this.scene.add(grid);
 
-    this.controls = new THREE.OrbitControls(this.camera, this.view3DElement);
+    this.controls = new THREE.OrbitControls(this.camera, this.robotViewerElement);
 
     this.composer = new THREE.EffectComposer(this.renderer);
     var renderPass = new THREE.RenderPass(this.scene, this.camera);
@@ -57,12 +57,12 @@ class View3D { // eslint-disable-line no-unused-vars
 
     window.onresize = () => this.resize(); // when the window has been resized.
 
-    this.view3DElement.appendChild(this.renderer.domElement);
+    this.robotViewerElement.appendChild(this.renderer.domElement);
     this.resize();
 
     this.highlightor = new Highlightor(this.highlightOutlinePass);
     this.selector = new Selector(this.selectionOutlinePass);
-    this.handle = new Handle(this.robotController, this.view3DElement, this.camera, this.scene, this.controls);
+    this.handle = new Handle(this.robotController, this.robotViewerElement, this.camera, this.scene, this.controls);
 
     this.gpuPicker = new THREE.GPUPicker({renderer: this.renderer, debug: false});
     this.gpuPicker.setFilter(function(object) {
@@ -80,8 +80,8 @@ class View3D { // eslint-disable-line no-unused-vars
   }
 
   resize() {
-    var width = this.view3DElement.clientWidth;
-    var height = this.view3DElement.clientHeight;
+    var width = this.robotViewerElement.clientWidth;
+    var height = this.robotViewerElement.clientHeight;
     this.renderer.setSize(width, height);
     this.composer.setSize(width, height);
     this.camera.aspect = width / height;

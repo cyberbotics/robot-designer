@@ -1,4 +1,4 @@
-/* global View3D, Robot, Dragger, RobotMediator, RobotController, PartBrowser, AssetLibrary, Commands */
+/* global RobotViewer, Robot, Dragger, RobotMediator, RobotController, PartBrowser, AssetLibrary, Commands */
 'use strict';
 
 class RobotDesigner {
@@ -14,8 +14,8 @@ class RobotDesigner {
       console.error('The Robot Designer is initialized on an undefined part.');
       return;
     }
-    this.view3DElement = document.getElementsByName('view3D')[0];
-    if (typeof this.view3DElement === 'undefined') {
+    this.robotViewerElement = document.getElementsByName('robotViewer')[0];
+    if (typeof this.robotViewerElement === 'undefined') {
       console.error('The Robot Designer cannot find its 3D component.');
       return;
     }
@@ -42,13 +42,13 @@ class RobotDesigner {
     this.robotMediator = new RobotMediator(this.robot);
     this.robotController = new RobotController(this.assetLibrary, this.commands, this.robot);
 
-    this.view3D = new View3D(this.view3DElement, this.robotController);
-    this.view3D.scene.add(this.robotMediator.object3D);
-    this.highlightOutlinePass = this.view3D.highlightOutlinePass;
+    this.robotViewer = new RobotViewer(this.robotViewerElement, this.robotController);
+    this.robotViewer.scene.add(this.robotMediator.object3D);
+    this.highlightOutlinePass = this.robotViewer.highlightOutlinePass;
 
-    this.dragger = new Dragger(this.view3D, this.robotController);
+    this.dragger = new Dragger(this.robotViewer, this.robotController);
 
-    this.partViewer = new PartViewer(this.robotController, this.partViewerElement, this.view3D.selector);
+    this.partViewer = new PartViewer(this.robotController, this.partViewerElement, this.robotViewer.selector);
   }
 
   updateUndoRedoButtons() {
@@ -97,21 +97,21 @@ function changeMode(mode) { // eslint-disable-line no-unused-vars
   else if (mode === 'rotate')
     designer.rotateButton.classList.add('fa-selected');
 
-  designer.view3D.handle.setMode(mode);
+  designer.robotViewer.handle.setMode(mode);
 }
 
 function mousedown(ev) { // eslint-disable-line no-unused-vars
-  var relativePosition = designer.view3D.convertMouseEventPositionToRelativePosition(ev.clientX, ev.clientY);
-  var screenPosition = designer.view3D.convertMouseEventPositionToScreenPosition(ev.clientX, ev.clientY);
-  var part = designer.view3D.getPartAt(relativePosition, screenPosition);
+  var relativePosition = designer.robotViewer.convertMouseEventPositionToRelativePosition(ev.clientX, ev.clientY);
+  var screenPosition = designer.robotViewer.convertMouseEventPositionToScreenPosition(ev.clientX, ev.clientY);
+  var part = designer.robotViewer.getPartAt(relativePosition, screenPosition);
   if (part) {
-    designer.view3D.selector.selectPart(part);
-    designer.view3D.handle.attachToObject(part);
+    designer.robotViewer.selector.selectPart(part);
+    designer.robotViewer.handle.attachToObject(part);
   }
 }
 
 function deleteSelectedPart() { // eslint-disable-line no-unused-vars
-  var mesh = designer.view3D.selector.selectedPart;
+  var mesh = designer.robotViewer.selector.selectedPart;
 
   if (mesh) {
     var parent = mesh;
@@ -124,18 +124,18 @@ function deleteSelectedPart() { // eslint-disable-line no-unused-vars
     } while (parent);
   }
 
-  designer.view3D.selector.clearSelection();
-  designer.view3D.handle.detach();
+  designer.robotViewer.selector.clearSelection();
+  designer.robotViewer.handle.detach();
 }
 
 function mouseMove(ev) { // eslint-disable-line no-unused-vars
-  var relativePosition = designer.view3D.convertMouseEventPositionToRelativePosition(ev.clientX, ev.clientY);
-  var screenPosition = designer.view3D.convertMouseEventPositionToScreenPosition(ev.clientX, ev.clientY);
-  var part = designer.view3D.getPartAt(relativePosition, screenPosition);
+  var relativePosition = designer.robotViewer.convertMouseEventPositionToRelativePosition(ev.clientX, ev.clientY);
+  var screenPosition = designer.robotViewer.convertMouseEventPositionToScreenPosition(ev.clientX, ev.clientY);
+  var part = designer.robotViewer.getPartAt(relativePosition, screenPosition);
   if (part)
-    designer.view3D.highlightor.highlight(part);
+    designer.robotViewer.highlightor.highlight(part);
   else
-    designer.view3D.highlightor.clearHighlight();
+    designer.robotViewer.highlightor.clearHighlight();
 }
 
 function drop(ev) { // eslint-disable-line no-unused-vars

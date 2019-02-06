@@ -33,9 +33,9 @@
   <script type="text/javascript" src="/robot-designer/app/view/mediator/robot_mediator.js"></script>
   <script type="text/javascript" src="/robot-designer/app/view/part_browser.js"></script>
   <script type="text/javascript" src="/robot-designer/app/view/part_viewer.js"></script>
+  <script type="text/javascript" src="/robot-designer/app/view/robot_viewer.js"></script>
   <script type="text/javascript" src="/robot-designer/app/view/selector.js"></script>
   <script type="text/javascript" src="/robot-designer/app/view/slot_anchors.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/view/view3d.js"></script>
   <script type="text/javascript" src="/robot-designer/app/view/x3d.js"></script>
   <script type="text/javascript" src="/robot-designer/app/robot_designer.js" defer></script>
   <link rel="stylesheet" href="/robot-designer/style.css">
@@ -51,29 +51,26 @@
 
   <div class="nrp-robot-designer" id="nrp-robot-designer">
     <div class="header">
-      <div class="header-top">
-        <span>NRP Robot Designer</span>
-        <i class="fas fa-robot"></i>
-        <span class="menu-item">File</span>
-        <span class="menu-item">Help</span>
-      </div>
-      <div class="header-bottom">
-        <i class="fas fa-save" onclick="save()"></i>
-        <span>|</span>
-        <i id='nrp-robot-designer-undo-button' class="fas fa-undo fa-disabled" onclick="undo()"></i>
-        <i id='nrp-robot-designer-redo-button' class="fas fa-redo fa-disabled" onclick="redo()"></i>
-        <span>|</span>
-        <i id='nrp-robot-designer-select-button' class="fas fa-selected fa-mouse-pointer" onclick="changeMode('select')"></i>
-        <i id='nrp-robot-designer-translate-button' class="fas fa-arrows-alt" onclick="changeMode('translate')"></i>
-        <i id='nrp-robot-designer-rotate-button' class="fas fa-sync-alt" onclick="changeMode('rotate')"></i>
-        <span>|</span>
-        <i class="fas fa-window-maximize" onclick="toggleFullScreen()"></i>
-      </div>
+      <span>NRP Robot Designer</span>
+      <i class="fas fa-robot"></i>
+      <span class="menu-item">File</span>
+      <span class="menu-item">Help</span>
     </div>
     <div class="menu">
+      <i class="fas fa-save" onclick="save()"></i>
+      <span>-</span>
+      <i id='nrp-robot-designer-undo-button' class="fas fa-undo fa-disabled" onclick="undo()"></i>
+      <i id='nrp-robot-designer-redo-button' class="fas fa-redo fa-disabled" onclick="redo()"></i>
+      <span>-</span>
+      <i id='nrp-robot-designer-select-button' class="fas fa-selected fa-mouse-pointer" onclick="changeMode('select')"></i>
+      <i id='nrp-robot-designer-translate-button' class="fas fa-arrows-alt" onclick="changeMode('translate')"></i>
+      <i id='nrp-robot-designer-rotate-button' class="fas fa-sync-alt" onclick="changeMode('rotate')"></i>
+      <span>-</span>
       <i class="fas fa-trash-alt" onclick="deleteSelectedPart()"></i>
+      <span>-</span>
+      <i class="fas fa-window-maximize" onclick="toggleFullScreen()"></i>
     </div>
-    <div class="main" name="view3D" ondrop="drop(event)" ondragenter="dragEnter(event)" ondragover="dragOver(event)" ondragleave="dragLeave(event)" onmousemove="mouseMove(event)" onmousedown="mousedown(event)"></div>
+    <div class="main" name="robotViewer" ondrop="drop(event)" ondragenter="dragEnter(event)" ondragover="dragOver(event)" ondragleave="dragLeave(event)" onmousemove="mouseMove(event)" onmousedown="mousedown(event)"></div>
     <div class="sidebar"><t3>Part viewer</t3><div name="part-viewer"></div></div>
     <div class="footer" name="assets-library-component"></div>
   </div>
