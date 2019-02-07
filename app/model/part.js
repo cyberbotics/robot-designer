@@ -26,8 +26,8 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
   }
 
   addPart(slotName, part) {
+    console.assert(!this.slots[slotName]);
     part.parent = this;
-    // TODO: remove previous slot first?
     this.slots[slotName] = part;
     this.notify('PartAdded', { 'part': part, 'slotName': slotName });
 

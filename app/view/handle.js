@@ -41,6 +41,7 @@ class Handle { // eslint-disable-line no-unused-vars
     });
 
     this.target = new THREE.Object3D();
+    this.target.userData.isHandleTarget = true;
     this._updateTargetPosition();
 
     object.parent.add(this.target);

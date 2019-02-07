@@ -60,9 +60,15 @@ class PartMediator { // eslint-disable-line no-unused-vars
   }
 
   onPartRemoved(data) {
-    var partContainerToRemove = this.childrenSlots[data.slotName].children[0];
-    console.assert(partContainerToRemove.userData.isPartContainer);
-    partContainerToRemove.parent.remove(partContainerToRemove);
+    // Remove the child part containers.
+    // The slot container should contain only one part container and eventually the handle target.
+    for (let c = this.childrenSlots[data.slotName].children.length - 1; c >= 0; c--) { // technique to loop through array while removing array items.
+      var child = this.childrenSlots[data.slotName].children[c];
+      if (child.userData.isPartContainer)
+        child.parent.remove(child);
+      else
+        console.assert(child.userData.isHandleTarget);
+    }
   }
 
   onTranslated(data) {
