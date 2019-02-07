@@ -50,8 +50,16 @@
   overflow-x: scroll !important;
 }
 
+.part-icon {
+  height: 100%;
+}
+
 .part-icon:hover {
   background-color: #68E;
+}
+
+.part-icon > img {
+  height:100%;
 }
 
 .hidden {
