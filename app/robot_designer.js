@@ -72,9 +72,47 @@ var designer = new RobotDesigner( // eslint-disable-line no-new
   document.getElementById('nrp-robot-designer-rotate-button')
 );
 
-function save() { // eslint-disable-line no-unused-vars
-  // TODO: for now, only shows the internal robot structure in the alert dialog box.
-  alert(JSON.stringify(designer.robot.serialize(), null, 2));
+function openExportModal() { // eslint-disable-line no-unused-vars
+  var modal = document.getElementById('myModal');
+  modal.style.display = 'block';
+
+  var span = document.getElementsByClassName('close')[0];
+  span.onclick = () => {
+    modal.style.display = 'none';
+  };
+
+  window.onclick = (event) => {
+    if (event.target === modal)
+      modal.style.display = 'none';
+  };
+}
+
+function exportToFile(format) { // eslint-disable-line no-unused-vars
+  var mimeType = '';
+  var data = '';
+  var filename = '';
+
+  if (format === 'json') {
+    mimeType = 'text/json';
+    data = JSON.stringify(designer.robot.serialize(), null, 2);
+    filename = 'robot.json';
+  } else if (format === 'webots') {
+    mimeType = 'text/txt';
+    data = designer.robot.webotsExport();
+    filename = 'robot.wbt';
+  } else {
+    console.assert(false); // Invalid format.
+    return;
+  }
+
+  var blob = new Blob([data], {type: mimeType});
+  var e = document.createEvent('MouseEvents');
+  var a = document.createElement('a');
+  a.download = filename;
+  a.href = window.URL.createObjectURL(blob);
+  a.dataset.downloadurl = [mimeType, a.download, a.href].join(':');
+  e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+  a.dispatchEvent(e);
 }
 
 function undo() { // eslint-disable-line no-unused-vars
