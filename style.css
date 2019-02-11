@@ -58,6 +58,14 @@
   background-color: #68E;
 }
 
+.part-icon-disabled {
+  opacity: 0.3;
+}
+
+.part-icon-disabled:hover {
+  background-color: inherit;
+}
+
 .part-icon > img {
   height:100%;
 }
