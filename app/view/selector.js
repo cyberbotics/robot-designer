@@ -9,14 +9,16 @@ class Selector extends Observable { // eslint-disable-line no-unused-vars
   }
 
   selectPart(part) {
-    this.selectedPart = part;
-    var selectedObjects = [];
-    part.children[0].children.forEach((child) => {
-      if (child.userData.x3dType === 'Shape' || child.userData.x3dType === 'Transform')
-        selectedObjects.push(child);
+    var selectedRepresentations = [];
+    part.children.forEach((child) => {
+      if (child.userData.isRepresentation)
+        selectedRepresentations.push(child);
     });
-    this.outlinePass.selectedObjects = selectedObjects;
-    this.notify('SelectionChanged', {'part': this.selectedPart});
+    if (selectedRepresentations.length > 0) {
+      this.selectedPart = part;
+      this.outlinePass.selectedObjects = selectedRepresentations;
+      this.notify('SelectionChanged', {'part': this.selectedPart});
+    }
   }
 
   clearSelection() {

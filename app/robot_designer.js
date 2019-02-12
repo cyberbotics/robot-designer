@@ -1,4 +1,4 @@
-/* global RobotViewer, Robot, Dragger, RobotMediator, RobotController, PartBrowser, AssetLibrary, Commands */
+/* global RobotViewer, Robot, Dragger, RobotMediator, RobotController, PartBrowser, PartViewer, AssetLibrary, Commands */
 'use strict';
 
 class RobotDesigner {
@@ -43,7 +43,7 @@ class RobotDesigner {
     this.robotController = new RobotController(this.assetLibrary, this.commands, this.robot);
 
     this.robotViewer = new RobotViewer(this.robotViewerElement, this.robotController);
-    this.robotViewer.scene.add(this.robotMediator.object3D);
+    this.robotViewer.scene.add(this.robotMediator.rootObject);
     this.highlightOutlinePass = this.robotViewer.highlightOutlinePass;
 
     this.dragger = new Dragger(this.robotViewer, this.robotController);

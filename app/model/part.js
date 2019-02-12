@@ -26,12 +26,15 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
   }
 
   addPart(slotName, part) {
+    console.assert(!this.slots[slotName]);
     part.parent = this;
-    // TODO: remove previous slot first?
     this.slots[slotName] = part;
     this.notify('PartAdded', { 'part': part, 'slotName': slotName });
 
-    // notify the creation of the subparts is any.
+    // Notify the creation of the subparts if any.
+    // `part` may contain subparts when redo multiple parts at the same time.
+    // This notification is required to create the mediators of the sub parts,
+    // and so actually create the THREEjs meshes and attach them correctly.
     for (let subSlotName in part.slots) {
       var slot = part.slots[subSlotName];
       if (slot) {

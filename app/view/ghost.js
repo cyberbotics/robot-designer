@@ -9,7 +9,7 @@ class Ghost { // eslint-disable-line no-unused-vars
 
   addGhost(modelName) {
     this.ghost = new THREE.Object3D();
-    this.ghost.name = 'ghost';
+    this.ghost.userData.isGhost = true;
 
     var model = '/robot-designer/assets/models/' + modelName + '/model.x3d';
     var loader = new THREE.X3DLoader();
