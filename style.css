@@ -55,6 +55,12 @@
   padding-left: 5px;
 }
 
+.designer-group-title {
+  color: #a5a5a5;
+  font-size: large;
+  margin: 0;
+}
+
 .part-icon {
   height: 100%;
 }
