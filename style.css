@@ -14,9 +14,7 @@
 }
 
 .nrp-robot-designer > div {
-  background-color: #333;
   color: white;
-  padding: 0;
   overflow: hidden;
 }
 
@@ -24,6 +22,7 @@
   grid-area: header;
   display: flex;
   align-items: center;
+  padding-left: 5px;
 }
 
 .menu {
@@ -35,11 +34,11 @@
 
 .main {
   grid-area: main;
-  background: red;
 }
 
 .sidebar {
   grid-area: sidebar;
+  margin-right: 2px;
 }
 
 .footer {
@@ -48,6 +47,12 @@
   flex-flow: row nowrap;
   align-items: center;
   overflow-x: scroll !important;
+}
+
+.designer-group {
+  background-color: #4c4c4c;
+  border-radius: 5px;
+  padding-left: 5px;
 }
 
 .part-icon {
