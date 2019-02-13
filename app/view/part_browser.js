@@ -36,11 +36,15 @@ class PartBrowser { // eslint-disable-line no-unused-vars
         else
           div.classList.remove('hidden');
       } else {
+        div.classList.remove('hidden');
         if (div.getAttribute('slotType')) {
-          if (availableSlotTypes.indexOf(div.getAttribute('slotType')) > -1)
-            div.classList.remove('hidden');
-          else
-            div.classList.add('hidden');
+          if (availableSlotTypes.indexOf(div.getAttribute('slotType')) > -1) {
+            div.classList.remove('part-icon-disabled');
+            div.draggable = true;
+          } else {
+            div.classList.add('part-icon-disabled');
+            div.draggable = false;
+          }
         } else
           div.classList.add('hidden');
       }

@@ -14,22 +14,34 @@ class PartViewer { // eslint-disable-line no-unused-vars
     else {
       var model = part.mediator.model;
       var asset = model.asset;
-      if (asset.parameters)
-        this._populateDiv(model, asset.parameters);
-      else
-        this._cleanupDiv('No parameters');
+      this._populateDiv(model, asset.parameters);
     }
   }
 
   _populateDiv(model, parameters) {
     this.element.innerHTML = '';
+
+    // add name label.
+    var nameLabel = document.createElement('p');
+    nameLabel.innerHTML = 'Name: <span class="part-name-label">' + model.name + '</span>';
+    this.element.appendChild(nameLabel);
+
+    var text = document.createElement('p');
+    if (!parameters) {
+      text.innerHTML = '<i>No parameters<i>';
+      this.element.appendChild(text);
+      return;
+    }
+
+    // create parameter forms.
     var form = document.createElement('form');
     if ('color' in parameters) {
-      var text = document.createElement('p');
+      text.style.display = 'inline';
       var textContent = document.createTextNode('Color: ');
       text.appendChild(textContent);
       form.appendChild(text);
       var select = document.createElement('select');
+      select.style.display = 'inline';
       for (let c in parameters.color) {
         var option = document.createElement('option');
         var optionText = document.createTextNode(parameters.color[c]);
