@@ -4,28 +4,26 @@
 class RobotMediator { // eslint-disable-line no-unused-vars
   constructor(robot) {
     this.model = robot;
-    this.object3D = this.makeObject3D();
-    this.object3D.matrixAutoUpdate = false;
-    this.object3D.mediator = this;
+
+    // Create the root container.
+    this.rootObject = new THREE.Object3D();
+    this.rootObject.name = 'robot';
+    this.rootObject.model = this;
+    this.rootObject.matrixAutoUpdate = false;
+    this.rootObject.mediator = this;
+
+    // Link signals
     this.model.addObserver('RootPartAdded', (e) => this.onRootPartAdded(e));
     this.model.addObserver('RootPartRemoved', (e) => this.onRootPartRemoved(e));
   }
 
   onRootPartAdded(part) {
     this.rootPartMediator = new PartMediator(part);
-    this.object3D.add(this.rootPartMediator.object3D);
+    this.rootObject.add(this.rootPartMediator.rootObject);
   }
 
   onRootPartRemoved() {
-    this.object3D.remove(this.rootPartMediator.object3D);
+    this.rootObject.remove(this.rootPartMediator.rootObject);
     this.rootPartMediator = null;
-  }
-
-  makeObject3D() {
-    const container = new THREE.Object3D();
-    container.name = 'robot';
-    container.model = this;
-
-    return container;
   }
 }

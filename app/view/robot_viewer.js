@@ -115,7 +115,7 @@ class RobotViewer { // eslint-disable-line no-unused-vars
     if (!robotObject)
       return;
     robotObject.traverse(function(obj) {
-      if (obj.userData.x3dType === 'Slot' && obj.userData.slotType === slotType) {
+      if (obj.userData.isSlotContainer && obj.userData.slotType === slotType) {
         var slot = obj;
         var slotGlobalPosition = slot.localToWorld(new THREE.Vector3());
         var sqDistance = ray.distanceSqToPoint(slotGlobalPosition);
