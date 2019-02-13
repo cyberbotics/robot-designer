@@ -57,7 +57,7 @@
       <span class="menu-item">Help</span>
     </div>
     <div class="menu">
-      <i class="fas fa-save" onclick="save()"></i>
+      <i class="fas fa-file-export" onclick="openExportModal()"></i>
       <span>-</span>
       <i id='nrp-robot-designer-undo-button' class="fas fa-undo fa-disabled" onclick="undo()"></i>
       <i id='nrp-robot-designer-redo-button' class="fas fa-redo fa-disabled" onclick="redo()"></i>
@@ -73,6 +73,17 @@
     <div class="main" name="robotViewer" ondrop="drop(event)" ondragenter="dragEnter(event)" ondragover="dragOver(event)" ondragleave="dragLeave(event)" onmousemove="mouseMove(event)" onmousedown="mousedown(event)"></div>
     <div class="sidebar designer-group"><p class="designer-group-title">Part viewer</p><div name="part-viewer"></div></div>
     <div class="footer designer-group" name="assets-library-component"></div>
+  </div>
+
+  <div id="nrp-robot-designer-modal-window" class="modal">
+    <div class="modal-content">
+      <span class="modal-close-button">&times;</span>
+      <div class="modal-grid">
+        <button type="button" class="nrp-button" onclick="exportToFile('json')">Export to JSON</button>
+        <button type="button" class="nrp-button" onclick="exportToFile('webots')">Export to Webots</button>
+        <button type="button" class="nrp-button nrp-button-disabled" onclick="alert('Coming soon...')">Export to NRP</button>
+      </div>
+    </div>
   </div>
 
 </body>
