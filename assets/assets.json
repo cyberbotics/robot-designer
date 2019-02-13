@@ -207,7 +207,7 @@
         "translation": "-0.015 0.01 0.03",
         "rotation": "-0.5773496 -0.5773496 0.5773516 2.0944"
       },
-      "frontSlot": {
+      "backSlot": {
         "type": "tinkerbots",
         "translation": "0 -0.02 0.02",
         "rotation": "1 0 0 1.57"
@@ -232,7 +232,7 @@
         "translation": "0.01 0.015 0.03",
         "rotation": "1 0 0 -1.57"
       },
-      "backSlot": {
+      "frontSlot": {
         "type": "tinkerbots",
         "translation": "0 0.02 0.02",
         "rotation": "1 0 0 -1.57"
