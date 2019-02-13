@@ -681,7 +681,32 @@
   "tinkerbots/cubie_box_with_round_slots": {
     "icon": "/robot-designer/assets/models/tinkerbots/cubie_box_with_round_slots/icon.png",
     "slotType": "lego cross female",
-    "slots": {}
+    "slots": {
+      "backSlot": {
+        "rotation": "0 1 0 -1.57",
+        "translation": "-0.025 0 0.015",
+        "type": "lego cross female"
+      },
+      "frontSlot": {
+        "rotation": "0 1 0 1.57",
+        "translation": "0.005 0 0.015",
+        "type": "lego cross female"
+      },
+      "leftSlot": {
+        "rotation": "1 0 0 -1.57",
+        "translation": "-0.01 0.005 0.015",
+        "type": "lego cross female"
+      },
+      "rightSlot": {
+        "rotation": "1 0 0 1.57",
+        "translation": "-0.01 -0.005 0.015",
+        "type": "lego cross female"
+      },
+      "upSlot": {
+        "translation": "-0.01 0 0.02",
+        "type": "lego cross female"
+      }
+    }
   },
   "tinkerbots/cubie_female_cube": {
     "icon": "/robot-designer/assets/models/tinkerbots/cubie_female_cube/icon.png",
@@ -729,7 +754,7 @@
       },
       "leftSlot": {
         "rotation": "1 0 0 -1.57",
-        "translation": "0 0.01 0.015",
+        "translation": "0 0.005 0.015",
         "type": "lego cross female"
       },
       "rightSlot": {
