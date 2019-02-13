@@ -87,8 +87,8 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
     var i = '  '.repeat(indent); // Indentation string.
     var s = this.asset.proto;
     s += ' {\n';
-    s += i + '  translation ' + this.translation[0] + ' ' + this.translation[1] + ' ' + this.translation[2] + '\n';
-    // TODO: rotation \^^./
+    s += i + '  translation ' + translationToWebotsString(this.translation) + '\n';
+    s += i + '  rotation ' + quaternionToWebotsString(this.quaternion) + '\n';
     if (typeof this.color !== 'undefined')
       s += i + '  color "' + this.color + '"\n';
     for (let slotName in this.slots) {
@@ -118,4 +118,31 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
         slot._applyFooRecursively(foo);
     }
   }
+}
+
+function quaternionToAxisAngle(q) {
+  // refrerence: http://schteppe.github.io/cannon.js/docs/files/src_math_Quaternion.js.html
+  var axis = [0.0, 1.0, 0.0];
+  var angle = 2 * Math.acos(q[3]);
+  var s = Math.sqrt(1.0 - q[3] * q[3]); // assuming quaternion normalised then w is less than 1, so term always positive.
+  if (s < 0.001) { // test to avoid divide by zero, s is always positive due to sqrt
+    // if s close to zero then direction of axis not important
+    axis[0] = q[0]; // if it is important that axis is normalised then replace with x=1; y=z=0;
+    axis[1] = q[1];
+    axis[2] = q[2];
+  } else {
+    axis[0] = q[0] / s; // normalise axis
+    axis[1] = q[1] / s;
+    axis[2] = q[2] / s;
+  }
+  return [axis, angle];
+};
+
+function quaternionToWebotsString(q) {
+  var axisAndAngle = quaternionToAxisAngle(q);
+  return axisAndAngle[0][0] + ' ' + axisAndAngle[0][1] + ' ' + axisAndAngle[0][2] + ' ' + axisAndAngle[1];
+}
+
+function translationToWebotsString(t) {
+  return t[0] + ' ' + t[1] + ' ' + t[2];
 }
