@@ -83,18 +83,19 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
     return o;
   }
 
-  webotsExport() {
+  webotsExport(indent = 0) {
+    var i = '  '.repeat(indent); // Indentation string.
     var s = this.asset.proto;
     s += ' {\n';
-    s += 'translation ' + this.translation[0] + ' ' + this.translation[1] + ' ' + this.translation[2] + '\n';
+    s += i + '  translation ' + this.translation[0] + ' ' + this.translation[1] + ' ' + this.translation[2] + '\n';
     // TODO: rotation \^^./
     if (typeof this.color !== 'undefined')
-      s += 'color "' + this.color + '"\n';
+      s += i + '  color "' + this.color + '"\n';
     for (let slotName in this.slots) {
       if (this.slots[slotName])
-        s += slotName + ' ' + this.slots[slotName].webotsExport();
+        s += i + '  ' + slotName + ' ' + this.slots[slotName].webotsExport(indent + 1);
     }
-    s += '}\n'
+    s += i + '}\n';
     return s;
   }
 
