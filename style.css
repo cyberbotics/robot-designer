@@ -82,6 +82,10 @@
   height:100%;
 }
 
+.part-name-label {
+  font-family: monospace;;
+}
+
 .hidden {
   display: none;
 }
