@@ -73,10 +73,10 @@ var designer = new RobotDesigner( // eslint-disable-line no-new
 );
 
 function openExportModal() { // eslint-disable-line no-unused-vars
-  var modal = document.getElementById('myModal');
+  var modal = document.getElementById('nrp-robot-designer-modal-window');
   modal.style.display = 'block';
 
-  var span = document.getElementsByClassName('close')[0];
+  var span = document.getElementsByClassName('modal-close-button')[0];
   span.onclick = () => {
     modal.style.display = 'none';
   };

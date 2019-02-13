@@ -75,12 +75,13 @@
     <div class="footer designer-group" name="assets-library-component"></div>
   </div>
 
-  <div id="myModal" class="modal">
+  <div id="nrp-robot-designer-modal-window" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
+      <span class="modal-close-button">&times;</span>
       <div class="modal-grid">
-        <button type="button" class="button" onclick="exportToFile('json')">Export to JSON</button>
-        <button type="button" class="button" onclick="exportToFile('webots')">Export to Webots</button>
+        <button type="button" class="nrp-button" onclick="exportToFile('json')">Export to JSON</button>
+        <button type="button" class="nrp-button" onclick="exportToFile('webots')">Export to Webots</button>
+        <button type="button" class="nrp-button nrp-button-disabled" onclick="alert('Coming soon...')">Export to NRP</button>
       </div>
     </div>
   </div>

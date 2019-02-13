@@ -76,22 +76,22 @@
   flex-direction: row;
 }
 
-.close {
+.modal-close-button {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.modal-close-button:hover,
+.modal-close-button:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
 }
 
-.button {
-  background-color: #4CAF50; /* Green */
+.nrp-button {
+  background-color: #4CAF50;
   border: none;
   color: white;
   padding: 15px;
@@ -100,6 +100,11 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+
+.nrp-button-disabled {
+  background-color: #ccc;
+  color: #666;
 }
 
 .designer-group {
