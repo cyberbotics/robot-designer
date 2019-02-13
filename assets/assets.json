@@ -1,5 +1,6 @@
 {
   "tinkerbots/base": {
+    "proto": "TinkerbotsBase",
     "icon": "/robot-designer/assets/models/tinkerbots/base/icon.png",
     "root": true,
     "slots": {
@@ -129,6 +130,7 @@
     }
   },
   "tinkerbots/cube": {
+    "proto": "TinkerbotsCube",
     "icon": "/robot-designer/assets/models/tinkerbots/cube/icon.png",
     "slotType": "tinkerbots",
     "slots": {
@@ -258,6 +260,7 @@
     }
   },
   "tinkerbots/light_sensor": {
+    "proto": "TinkerbotsLightSensor",
     "icon": "/robot-designer/assets/models/tinkerbots/light_sensor/icon.png",
     "slotType": "tinkerbots",
     "slots": {
@@ -362,6 +365,7 @@
     }
   },
   "tinkerbots/twister": {
+    "proto": "TinkerbotsTwister",
     "icon": "/robot-designer/assets/models/tinkerbots/twister/icon.png",
     "slotType": "tinkerbots",
     "slots": {
@@ -391,6 +395,7 @@
     }
   },
   "tinkerbots/pivot": {
+    "proto": "TinkerbotsPivot",
     "icon": "/robot-designer/assets/models/tinkerbots/pivot/icon.png",
     "slotType": "tinkerbots",
     "slots": {
@@ -420,6 +425,7 @@
     }
   },
   "tinkerbots/motor": {
+    "proto": "TinkerbotsMotor",
     "icon": "/robot-designer/assets/models/tinkerbots/motor/icon.png",
     "slotType": "tinkerbots",
     "slots": {
@@ -509,6 +515,7 @@
     }
   },
   "tinkerbots/grabber": {
+    "proto": "TinkerbotsGrabber",
     "icon": "/robot-designer/assets/models/tinkerbots/grabber/icon.png",
     "slotType": "tinkerbots",
     "slots": {
@@ -530,6 +537,7 @@
     }
   },
   "tinkerbots/distance_sensor": {
+    "proto": "TinkerbotsDistanceSensor",
     "icon": "/robot-designer/assets/models/tinkerbots/distance_sensor/icon.png",
     "slotType": "tinkerbots",
     "slots": {
@@ -634,6 +642,7 @@
     }
   },
   "tinkerbots/axle": {
+    "proto": "TinkerbotsAxle",
     "icon": "/robot-designer/assets/models/tinkerbots/axle/icon.png",
     "slotType": "lego cross female",
     "slots": {
@@ -644,11 +653,13 @@
     }
   },
   "tinkerbots/brick_adapter": {
+    "proto": "TinkerbotsBrickAdapter",
     "icon": "/robot-designer/assets/models/tinkerbots/brick_adapter/icon.png",
     "slotType": "lego cross female",
     "slots": {}
   },
   "tinkerbots/cubie_box_with_cross_slots": {
+    "proto": "TinkerbotsCubieBoxWithCrossSlots",
     "icon": "/robot-designer/assets/models/tinkerbots/cubie_box_with_cross_slots/icon.png",
     "slotType": "lego cross female",
     "slots": {
@@ -679,11 +690,13 @@
     }
   },
   "tinkerbots/cubie_box_with_round_slots": {
+    "proto": "TinkerbotsCubieBoxWithRoundSlots",
     "icon": "/robot-designer/assets/models/tinkerbots/cubie_box_with_round_slots/icon.png",
     "slotType": "lego cross female",
     "slots": {}
   },
   "tinkerbots/cubie_female_cube": {
+    "proto": "TinkerbotsCubieFemaleCube",
     "icon": "/robot-designer/assets/models/tinkerbots/cubie_female_cube/icon.png",
     "slotType": "lego cross female",
     "slots": {
@@ -714,6 +727,7 @@
     }
   },
   "tinkerbots/cubie_male_cube": {
+    "proto": "TinkerbotsCubieMaleCube",
     "icon": "/robot-designer/assets/models/tinkerbots/cubie_male_cube/icon.png",
     "slotType": "lego cross female",
     "slots": {
@@ -744,6 +758,7 @@
     }
   },
   "tinkerbots/cubie_pyramid": {
+    "proto": "TinkerbotsCubiePyramid",
     "icon": "/robot-designer/assets/models/tinkerbots/cubie_pyramid/icon.png",
     "slotType": "lego cross female",
     "slots": {
@@ -766,6 +781,7 @@
     }
   },
   "tinkerbots/cubie_triangle": {
+    "proto": "TinkerbotsCubieTriangle",
     "icon": "/robot-designer/assets/models/tinkerbots/cubie_triangle/icon.png",
     "slotType": "lego cross female",
     "slots": {
@@ -783,11 +799,13 @@
     }
   },
   "tinkerbots/finger": {
+    "proto": "TinkerbotsFinger",
     "icon": "/robot-designer/assets/models/tinkerbots/finger/icon.png",
     "slotType": "lego cross female",
     "slots": {}
   },
   "tinkerbots/wheel": {
+    "proto": "TinkerbotsWheel",
     "icon": "/robot-designer/assets/models/tinkerbots/wheel/icon.png",
     "slotType": "lego cross male",
     "slots": {}
