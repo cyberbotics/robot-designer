@@ -23,7 +23,7 @@ class PartViewer { // eslint-disable-line no-unused-vars
 
     // add name label.
     var nameLabel = document.createElement('p');
-    nameLabel.innerHTML = 'Name: <font size="2">' + model.name + '</font>';
+    nameLabel.innerHTML = 'Name: ' + model.name;
     this.element.appendChild(nameLabel);
 
     var text = document.createElement('p');

@@ -39,6 +39,7 @@
 .sidebar {
   grid-area: sidebar;
   margin-right: 2px;
+  font-size: small;
 }
 
 .footer {
@@ -57,7 +58,7 @@
 
 .designer-group-title {
   color: #a5a5a5;
-  font-size: large;
+  font-size: medium;
   margin: 0;
 }
 
