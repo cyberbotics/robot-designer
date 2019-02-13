@@ -51,6 +51,7 @@ class Robot extends Observable { // eslint-disable-line no-unused-vars
     s += 'Viewpoint {\n';
     s += '  orientation -0.02 -0.96 -0.27 3.0\n';
     s += '  position -0.07 0.43 -0.7\n';
+    s += '  follow "Tinkerbots"\n';
     s += '}\n';
     s += 'TexturedBackground {\n';
     s += '  texture "empty_office"\n';
@@ -59,6 +60,7 @@ class Robot extends Observable { // eslint-disable-line no-unused-vars
     s += '  texture "empty_office"\n';
     s += '}\n';
     s += 'Floor {\n';
+    s += '  size 1000 1000\n';
     s += '}\n';
     if (this.rootPart)
       s += this.rootPart.webotsExport();
