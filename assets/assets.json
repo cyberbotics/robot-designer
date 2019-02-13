@@ -314,22 +314,22 @@
         "translation": "0.02 0 0.02",
         "type": "tinkerbots"
       },
-      "rightASlo": {
+      "rightASlot": {
         "rotation": "0 1 0 -1.57",
         "translation": "-0.015 -0.01 0.03",
         "type": "lego cross female"
       },
-      "rightBSlo": {
+      "rightBSlot": {
         "rotation": "0.5773496 -0.5773496 -0.5773516 2.0944",
         "translation": "-0.015 -0.01 0.01",
         "type": "lego cross female"
       },
-      "rightCSlo": {
+      "rightCSlot": {
         "rotation": "0.7071053 0 -0.70710826 3.14153",
         "translation": "-0.015 0.01 0.01",
         "type": "lego cross female"
       },
-      "rightDSlo": {
+      "rightDSlot": {
         "rotation": "-0.5773496 -0.5773496 0.5773516 2.0944",
         "translation": "-0.015 0.01 0.03",
         "type": "lego cross female"
@@ -430,13 +430,13 @@
     "slotType": "tinkerbots",
     "slots": {
       "backSlot": {
-        "rotation": "1 0 0 -1.57",
-        "translation": "0 0.015 0.02",
+        "rotation": "1 0 0 1.57",
+        "translation": "0 -0.015 0.02",
         "type": "lego cross female"
       },
       "frontSlot": {
-        "rotation": "1 0 0 1.57",
-        "translation": "0 -0.015 0.02",
+        "rotation": "1 0 0 -1.57",
+        "translation": "0 0.015 0.02",
         "type": "lego cross female"
       },
       "leftASlot": {
