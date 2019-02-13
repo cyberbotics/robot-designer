@@ -14,9 +14,7 @@
 }
 
 .nrp-robot-designer > div {
-  background-color: #333;
   color: white;
-  padding: 0;
   overflow: hidden;
 }
 
@@ -24,6 +22,7 @@
   grid-area: header;
   display: flex;
   align-items: center;
+  padding-left: 5px;
 }
 
 .menu {
@@ -35,11 +34,12 @@
 
 .main {
   grid-area: main;
-  background: red;
 }
 
 .sidebar {
   grid-area: sidebar;
+  margin-right: 2px;
+  font-size: small;
 }
 
 .footer {
@@ -100,10 +100,41 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+
+.designer-group {
+  background-color: #4c4c4c;
+  border-radius: 5px;
+  padding-left: 5px;
+}
+
+.designer-group-title {
+  color: #a5a5a5;
+  font-size: medium;
+  margin: 0;
+}
+
+.part-icon {
+  height: 100%;
 }
 
 .part-icon:hover {
   background-color: #68E;
+}
+
+.part-icon-disabled {
+  opacity: 0.3;
+}
+
+.part-icon-disabled:hover {
+  background-color: inherit;
+}
+
+.part-icon > img {
+  height:100%;
+}
+
+.part-name-label {
+  font-family: monospace;
 }
 
 .hidden {
