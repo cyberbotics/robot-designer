@@ -113,35 +113,38 @@ class Handle { // eslint-disable-line no-unused-vars
     var parentPart = this.part.parent;
     console.assert(parentPart);
 
-    if (parentPart instanceof Robot) {
-      this.control.rotationSnap = null;
-      this.control.translationSnap = null;
-      this.control.showX = true;
-      this.control.showY = true;
-      this.control.showZ = true;
-      return;
-    }
-
-    if (parentPart instanceof Part) {
-      var slotName = parentPart.slotName(this.part);
-      if (slotName) {
-        var slotData = parentPart.asset.slots[slotName];
-        this.control.rotationSnap = slotData.rotationSnap;
-        this.control.translationSnap = slotData.translationSnap;
-        if (this.mode === 'rotate') {
-          this.control.showX = false;
-          this.control.showY = false;
-          this.control.showZ = true;
-        } else {
-          this.control.showX = this.control.translationSnap !== null;
-          this.control.showY = this.control.showX;
-          this.control.showZ = false;
-        }
+    if (this.mode !== 'select') {
+      if (parentPart instanceof Robot) {
+        this.control.rotationSnap = null;
+        this.control.translationSnap = null;
+        this.control.showX = true;
+        this.control.showY = true;
+        this.control.showZ = true;
         return;
+      }
+
+      if (parentPart instanceof Part) {
+        var slotName = parentPart.slotName(this.part);
+        if (slotName) {
+          var slotData = parentPart.asset.slots[slotName];
+          this.control.rotationSnap = slotData.rotationSnap === -1 ? null : slotData.rotationSnap;
+          this.control.translationSnap = slotData.translationSnap === -1 ? null : slotData.translationSnap;
+          if (this.mode === 'rotate') {
+            this.control.showX = false;
+            this.control.showY = false;
+            this.control.showZ = true;
+            return;
+          } else if (this.mode === 'translate') {
+            this.control.showX = slotData.translationSnap !== null;
+            this.control.showY = this.control.showX;
+            this.control.showZ = slotData.enabledTranslationZSnap === true;
+            return;
+          }
+        }
       }
     }
 
-    // normally unreachable.
+    // select mode or invalid structure.
     this.control.rotationSnap = null;
     this.control.translationSnap = null;
     this.control.showX = false;
