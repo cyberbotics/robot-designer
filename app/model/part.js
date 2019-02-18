@@ -64,6 +64,7 @@ class Part extends Observable { // eslint-disable-line no-unused-vars
       if (this.slots[slotName] === part)
         return slotName;
     }
+    return null;
   }
 
   serialize() {

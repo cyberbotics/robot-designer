@@ -1,4 +1,4 @@
-/* global THREE */
+/* global THREE, Part, Robot */
 
 class Handle { // eslint-disable-line no-unused-vars
   constructor(robotController, domElement, camera, scene, orbitControls) {
@@ -107,47 +107,45 @@ class Handle { // eslint-disable-line no-unused-vars
   }
 
   _updateConstraints() {
-    // TODO: the following should be defined in assets.json (and so Webots :-/ )
     if (!this.part)
       return;
-    var asset = this.part.asset;
-    if (asset.root) {
+
+    var parentPart = this.part.parent;
+    console.assert(parentPart);
+
+    if (parentPart instanceof Robot) {
       this.control.rotationSnap = null;
       this.control.translationSnap = null;
       this.control.showX = true;
       this.control.showY = true;
       this.control.showZ = true;
-    } else if (asset.slotType === 'tinkerbots') {
-      this.control.rotationSnap = Math.PI / 2.0;
-      this.control.translationSnap = null;
-      if (this.mode === 'rotate') {
-        this.control.showX = false;
-        this.control.showY = false;
-        this.control.showZ = true;
-      } else {
-        this.control.showX = false;
-        this.control.showY = false;
-        this.control.showZ = false;
-      }
-    } else if (asset.slotType.startsWith('lego')) {
-      this.control.rotationSnap = Math.PI / 2.0;
-      this.control.translationSnap = 0.02;
-      if (this.mode === 'rotate') {
-        this.control.showX = false;
-        this.control.showY = false;
-        this.control.showZ = true;
-      } else {
-        this.control.showX = true;
-        this.control.showY = true;
-        this.control.showZ = false;
-      }
-    } else {
-      // normally unreachable.
-      this.control.rotationSnap = null;
-      this.control.translationSnap = null;
-      this.control.showX = false;
-      this.control.showY = false;
-      this.control.showZ = false;
+      return;
     }
+
+    if (parentPart instanceof Part) {
+      var slotName = parentPart.slotName(this.part);
+      if (slotName) {
+        var slotData = parentPart.asset.slots[slotName];
+        this.control.rotationSnap = slotData.rotationSnap;
+        this.control.translationSnap = slotData.translationSnap;
+        if (this.mode === 'rotate') {
+          this.control.showX = false;
+          this.control.showY = false;
+          this.control.showZ = true;
+        } else {
+          this.control.showX = this.control.translationSnap !== null;
+          this.control.showY = this.control.showX;
+          this.control.showZ = false;
+        }
+        return;
+      }
+    }
+
+    // normally unreachable.
+    this.control.rotationSnap = null;
+    this.control.translationSnap = null;
+    this.control.showX = false;
+    this.control.showY = false;
+    this.control.showZ = false;
   }
 }
