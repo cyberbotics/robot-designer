@@ -733,9 +733,7 @@
       "leftSlot": {
         "rotation": "1 0 0 1.57",
         "translation": "0 -0.005 0.015",
-        "type": "lego cross female",
-        "rotationSnap": 1.5708,
-        "translationSnap": 0.02
+        "type": "lego cross female"
       },
       "rightSlot": {
         "rotation": "1 0 0 -1.57",
