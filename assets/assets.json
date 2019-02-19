@@ -674,13 +674,13 @@
         "type": "lego cross female"
       },
       "leftSlot": {
-        "rotation": "1 0 0 -1.57",
-        "translation": "-0.01 0.005 0.015",
+        "rotation": "1 0 0 1.57",
+        "translation": "-0.01 -0.005 0.015",
         "type": "lego cross female"
       },
       "rightSlot": {
-        "rotation": "1 0 0 1.57",
-        "translation": "-0.01 -0.005 0.015",
+        "rotation": "1 0 0 -1.57",
+        "translation": "-0.01 0.005 0.015",
         "type": "lego cross female"
       },
       "upSlot": {
@@ -696,11 +696,21 @@
     "slots": {
       "axisSlot": {
         "rotation": "1 0 0 -1.57",
-        "translation": "-0.01 -0.005 0.015",
+        "translation": "-0.01 -0.01 0.015",
         "type": "lego cross female"
       },
       "upSlot": {
         "translation": "-0.01 0 0.02",
+        "type": "lego cross female"
+      },
+      "backSlot": {
+        "rotation": "0 1 0 -1.57",
+        "translation": "-0.025 0 0.015",
+        "type": "lego cross female"
+      },
+      "frontSlot": {
+        "rotation": "0 1 0 1.57",
+        "translation": "0.005 0 0.015",
         "type": "lego cross female"
       }
     }
@@ -721,13 +731,15 @@
         "type": "lego cross female"
       },
       "leftSlot": {
-        "rotation": "1 0 0 -1.57",
-        "translation": "0 0.005 0.015",
-        "type": "lego cross female"
-      },
-      "rightSlot": {
         "rotation": "1 0 0 1.57",
         "translation": "0 -0.005 0.015",
+        "type": "lego cross female",
+        "rotationSnap": 1.5708,
+        "translationSnap": 0.02
+      },
+      "rightSlot": {
+        "rotation": "1 0 0 -1.57",
+        "translation": "0 0.005 0.015",
         "type": "lego cross female"
       },
       "upSlot": {
