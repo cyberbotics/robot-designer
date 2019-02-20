@@ -130,14 +130,34 @@ class Handle { // eslint-disable-line no-unused-vars
           this.control.rotationSnap = slotData.rotationSnap === -1 ? null : slotData.rotationSnap;
           this.control.translationSnap = slotData.translationSnap === -1 ? null : slotData.translationSnap;
           if (this.mode === 'rotate') {
-            this.control.showX = false;
-            this.control.showY = false;
-            this.control.showZ = true;
+            if (this.control.rotationSnap === 0) {
+              this.control.showX = false;
+              this.control.showY = false;
+              this.control.showZ = false;
+            } else if (slotData.rotationGizmoVisibility === undefined) {
+              this.control.showX = true;
+              this.control.showY = true;
+              this.control.showZ = true;
+            } else {
+              this.control.showX = slotData.rotationGizmoVisibility[0];
+              this.control.showY = slotData.rotationGizmoVisibility[1];
+              this.control.showZ = slotData.rotationGizmoVisibility[2];
+            }
             return;
           } else if (this.mode === 'translate') {
-            this.control.showX = slotData.translationSnap !== null;
-            this.control.showY = this.control.showX;
-            this.control.showZ = slotData.enabledTranslationZSnap === true;
+            if (this.control.translationSnap === 0) {
+              this.control.showX = false;
+              this.control.showY = false;
+              this.control.showZ = false;
+            } else if (slotData.translationHandleVisibility === undefined) {
+              this.control.showX = true;
+              this.control.showY = true;
+              this.control.showZ = true;
+            } else {
+              this.control.showX = slotData.translationHandleVisibility[0];
+              this.control.showY = slotData.translationHandleVisibility[1];
+              this.control.showZ = slotData.translationHandleVisibility[2];
+            }
             return;
           }
         }
