@@ -78,6 +78,7 @@ class Handle { // eslint-disable-line no-unused-vars
       this.target.parent.remove(this.target);
       this.target = null;
     }
+    this.part = null;
   }
 
   showHandle() {

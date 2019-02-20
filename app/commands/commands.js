@@ -35,12 +35,15 @@ class Commands extends Observable { // eslint-disable-line no-unused-vars
   }
 
   addPart(parent, slot, part) {
+    var that = this;
     this._pushAction(
       function(redo, data) {
         if (redo)
           parent.addPart(slot, part);
-        else
+        else {
           parent.removePart(part);
+          that.notify('AnyPartRemoved', null);
+        }
       },
       []
     );
@@ -73,25 +76,30 @@ class Commands extends Observable { // eslint-disable-line no-unused-vars
   }
 
   addRootPart(robot, part) {
+    var that = this;
     this._pushAction(
       function(redo, data) {
         if (redo)
           robot.addRootPart(part);
-        else
+        else {
           robot.removePart();
+          that.notify('AnyPartRemoved', null);
+        }
       },
       []
     );
   }
 
   removePart(part) {
+    var that = this;
     var parent = part.parent;
     var slotName = parent.slotName(part);
     this._pushAction(
       function(redo, data) {
-        if (redo)
+        if (redo) {
           parent.removePart(part);
-        else
+          that.notify('AnyPartRemoved', null);
+        } else
           parent.addPart(slotName, part);
       },
       []
@@ -99,17 +107,20 @@ class Commands extends Observable { // eslint-disable-line no-unused-vars
   }
 
   removeRootPart(robot, part) {
+    var that = this;
     this._pushAction(
       function(redo, data) {
-        if (redo)
+        if (redo) {
           robot.removePart();
-        else
+          that.notify('AnyPartRemoved', null);
+        } else
           robot.addRootPart(part);
       },
       []
     );
+    this.notify('AnyPartRemoved', null);
   }
-        
+
   changeColor(part, color) {
     var previousColor = part.color;
     this._pushAction(
