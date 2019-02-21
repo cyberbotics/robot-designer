@@ -42,7 +42,7 @@ class RobotDesigner {
     this.robotMediator = new RobotMediator(this.robot);
     this.robotController = new RobotController(this.assetLibrary, this.commands, this.robot);
 
-    this.robotViewer = new RobotViewer(this.robotViewerElement, this.robotController);
+    this.robotViewer = new RobotViewer(this.robotViewerElement, this.robotController, this.commands);
     this.robotViewer.scene.add(this.robotMediator.rootObject);
     this.highlightOutlinePass = this.robotViewer.highlightOutlinePass;
 
@@ -162,8 +162,7 @@ function deleteSelectedPart() { // eslint-disable-line no-unused-vars
     } while (parent);
   }
 
-  designer.robotViewer.selector.clearSelection();
-  designer.robotViewer.handle.detach();
+  designer.robotViewer.clearSelection();
 }
 
 function mouseMove(ev) { // eslint-disable-line no-unused-vars

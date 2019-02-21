@@ -1,4 +1,4 @@
-/* global THREE */
+/* global THREE, Part, Robot */
 
 class Handle { // eslint-disable-line no-unused-vars
   constructor(robotController, domElement, camera, scene, orbitControls) {
@@ -78,6 +78,7 @@ class Handle { // eslint-disable-line no-unused-vars
       this.target.parent.remove(this.target);
       this.target = null;
     }
+    this.part = null;
   }
 
   showHandle() {
@@ -107,47 +108,68 @@ class Handle { // eslint-disable-line no-unused-vars
   }
 
   _updateConstraints() {
-    // TODO: the following should be defined in assets.json (and so Webots :-/ )
     if (!this.part)
       return;
-    var asset = this.part.asset;
-    if (asset.root) {
-      this.control.rotationSnap = null;
-      this.control.translationSnap = null;
-      this.control.showX = true;
-      this.control.showY = true;
-      this.control.showZ = true;
-    } else if (asset.slotType === 'tinkerbots') {
-      this.control.rotationSnap = Math.PI / 2.0;
-      this.control.translationSnap = null;
-      if (this.mode === 'rotate') {
-        this.control.showX = false;
-        this.control.showY = false;
-        this.control.showZ = true;
-      } else {
-        this.control.showX = false;
-        this.control.showY = false;
-        this.control.showZ = false;
-      }
-    } else if (asset.slotType.startsWith('lego')) {
-      this.control.rotationSnap = Math.PI / 2.0;
-      this.control.translationSnap = 0.02;
-      if (this.mode === 'rotate') {
-        this.control.showX = false;
-        this.control.showY = false;
-        this.control.showZ = true;
-      } else {
+
+    var parentPart = this.part.parent;
+    console.assert(parentPart);
+
+    if (this.mode !== 'select') {
+      if (parentPart instanceof Robot) {
+        this.control.rotationSnap = null;
+        this.control.translationSnap = null;
         this.control.showX = true;
         this.control.showY = true;
-        this.control.showZ = false;
+        this.control.showZ = true;
+        return;
       }
-    } else {
-      // normally unreachable.
-      this.control.rotationSnap = null;
-      this.control.translationSnap = null;
-      this.control.showX = false;
-      this.control.showY = false;
-      this.control.showZ = false;
+
+      if (parentPart instanceof Part) {
+        var slotName = parentPart.slotName(this.part);
+        if (slotName) {
+          var slotData = parentPart.asset.slots[slotName];
+          this.control.rotationSnap = slotData.rotationSnap === -1 ? null : slotData.rotationSnap;
+          this.control.translationSnap = slotData.translationSnap === -1 ? null : slotData.translationSnap;
+          if (this.mode === 'rotate') {
+            if (this.control.rotationSnap === 0) {
+              this.control.showX = false;
+              this.control.showY = false;
+              this.control.showZ = false;
+            } else if (slotData.rotationGizmoVisibility === undefined) {
+              this.control.showX = true;
+              this.control.showY = true;
+              this.control.showZ = true;
+            } else {
+              this.control.showX = slotData.rotationGizmoVisibility[0];
+              this.control.showY = slotData.rotationGizmoVisibility[1];
+              this.control.showZ = slotData.rotationGizmoVisibility[2];
+            }
+            return;
+          } else if (this.mode === 'translate') {
+            if (this.control.translationSnap === 0) {
+              this.control.showX = false;
+              this.control.showY = false;
+              this.control.showZ = false;
+            } else if (slotData.translationHandleVisibility === undefined) {
+              this.control.showX = true;
+              this.control.showY = true;
+              this.control.showZ = true;
+            } else {
+              this.control.showX = slotData.translationHandleVisibility[0];
+              this.control.showY = slotData.translationHandleVisibility[1];
+              this.control.showZ = slotData.translationHandleVisibility[2];
+            }
+            return;
+          }
+        }
+      }
     }
+
+    // select mode or invalid structure.
+    this.control.rotationSnap = null;
+    this.control.translationSnap = null;
+    this.control.showX = false;
+    this.control.showY = false;
+    this.control.showZ = false;
   }
 }
