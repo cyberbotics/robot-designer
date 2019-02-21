@@ -9,7 +9,7 @@
 // 6. mouse interactions
 
 class RobotViewer { // eslint-disable-line no-unused-vars
-  constructor(robotViewerElement, robotController) {
+  constructor(robotViewerElement, robotController, commands) {
     this.robotViewerElement = robotViewerElement;
     this.robotController = robotController;
 
@@ -63,6 +63,9 @@ class RobotViewer { // eslint-disable-line no-unused-vars
     this.highlightor = new Highlightor(this.highlightOutlinePass);
     this.selector = new Selector(this.selectionOutlinePass);
     this.handle = new Handle(this.robotController, this.robotViewerElement, this.camera, this.scene, this.controls);
+
+    // reset selection and handles when any part is removed
+    commands.addObserver('AnyPartRemoved', () => this.clearSelection());
 
     this.gpuPicker = new THREE.GPUPicker({renderer: this.renderer, debug: false});
     this.gpuPicker.setFilter(function(object) {
@@ -170,5 +173,10 @@ class RobotViewer { // eslint-disable-line no-unused-vars
       } while (parent);
     }
     this.handle.showHandle();
+  }
+
+  clearSelection() {
+    this.selector.clearSelection();
+    this.handle.detach();
   }
 }
