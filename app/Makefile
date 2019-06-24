@@ -46,7 +46,6 @@ THREEJS_EXAMPLE_URL = https://cdn.jsdelivr.net/gh/mrdoob/three.js@r$(THEEEJS_VER
 THREEJS_EXAMPLE_SOURCES = \
   controls/OrbitControls.js \
   controls/TransformControls.js \
-  postprocessing/OutlinePass.js
 LOCAL_THREEJS_EXAMPLE_SOURCES = $(addprefix $(DEPENDENCIES_PATH)/,$(THREEJS_EXAMPLE_SOURCES))
 
 # Token file used to determine when the last successful installation occurred.
