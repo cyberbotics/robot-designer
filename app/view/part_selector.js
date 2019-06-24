@@ -1,7 +1,7 @@
 /* global Observable */
 'use strict';
 
-class Selector extends Observable { // eslint-disable-line no-unused-vars
+class PartSelector extends Observable { // eslint-disable-line no-unused-vars
   constructor(outlinePass) {
     super();
     this.outlinePass = outlinePass;

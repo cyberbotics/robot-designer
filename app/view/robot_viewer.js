@@ -1,4 +1,4 @@
-/* global THREE, Handle, SlotAnchors, Selector, Highlightor */
+/* global THREE, Handle, PartSelector, SlotAnchors, Highlightor */
 'use strict';
 
 // 1. dom
@@ -61,7 +61,7 @@ class RobotViewer { // eslint-disable-line no-unused-vars
     this.resize();
 
     this.highlightor = new Highlightor(this.highlightOutlinePass);
-    this.selector = new Selector(this.selectionOutlinePass);
+    this.selector = new PartSelector(this.selectionOutlinePass);
     this.handle = new Handle(this.robotController, this.robotViewerElement, this.camera, this.scene, this.controls);
 
     // reset selection and handles when any part is removed

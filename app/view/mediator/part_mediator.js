@@ -14,8 +14,10 @@ class PartMediator { // eslint-disable-line no-unused-vars
     // Create the representation (async load).
     var model = '/robot-designer/assets/models/' + this.model.name + '/model.x3d';
     var loader = new THREE.X3DLoader();
-    loader.load(model, (object3d) => {
-      this.representation = object3d; // The THREEjs representation of the part.
+    loader.load(model, (object3dList) => {
+      if (!Array.isArray(object3dList) || object3dList.length === 0)
+        return;
+      this.representation = object3dList[0]; // The THREEjs representation of the part.
       this.representation.userData.isRepresentation = true;
       this.rootObject.add(this.representation);
     });
