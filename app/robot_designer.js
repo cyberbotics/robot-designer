@@ -1,4 +1,4 @@
-/* global RobotViewer, Robot, Dragger, RobotMediator, RobotController, PartBrowser, PartViewer, AssetLibrary, Commands */
+/* global RobotViewer, Robot, Dragger, RobotMediator, RobotController, PartBrowser, PartViewer, AssetLibrary, Commands, MouseEvents */
 'use strict';
 
 class RobotDesigner {
@@ -139,8 +139,9 @@ function changeMode(mode) { // eslint-disable-line no-unused-vars
 }
 
 function mousedown(ev) { // eslint-disable-line no-unused-vars
-  var relativePosition = designer.robotViewer.convertMouseEventPositionToRelativePosition(ev.clientX, ev.clientY);
-  var screenPosition = designer.robotViewer.convertMouseEventPositionToScreenPosition(ev.clientX, ev.clientY);
+  var domElement = designer.robotViewer.robotViewerElement;
+  var relativePosition = MouseEvents.convertMouseEventPositionToRelativePosition(domElement, ev.clientX, ev.clientY);
+  var screenPosition = MouseEvents.convertMouseEventPositionToScreenPosition(domElement, ev.clientX, ev.clientY);
   var part = designer.robotViewer.getPartAt(relativePosition, screenPosition);
   if (part) {
     designer.robotViewer.selector.selectPart(part);
@@ -166,8 +167,9 @@ function deleteSelectedPart() { // eslint-disable-line no-unused-vars
 }
 
 function mouseMove(ev) { // eslint-disable-line no-unused-vars
-  var relativePosition = designer.robotViewer.convertMouseEventPositionToRelativePosition(ev.clientX, ev.clientY);
-  var screenPosition = designer.robotViewer.convertMouseEventPositionToScreenPosition(ev.clientX, ev.clientY);
+  var domElement = designer.robotViewer.robotViewerElement;
+  var relativePosition = MouseEvents.convertMouseEventPositionToRelativePosition(domElement, ev.clientX, ev.clientY);
+  var screenPosition = MouseEvents.convertMouseEventPositionToScreenPosition(domElement, ev.clientX, ev.clientY);
   var part = designer.robotViewer.getPartAt(relativePosition, screenPosition);
   if (part)
     designer.robotViewer.highlightor.highlight(part);

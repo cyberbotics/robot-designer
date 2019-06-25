@@ -1,4 +1,4 @@
-/* global Ghost */
+/* global Ghost, MouseEvents */
 'use strict';
 
 class Dragger { // eslint-disable-line no-unused-vars
@@ -22,7 +22,8 @@ class Dragger { // eslint-disable-line no-unused-vars
   }
 
   dragOver(x, y) {
-    var screenPosition = this.robotViewer.convertMouseEventPositionToScreenPosition(x, y);
+    var domElement = this.robotViewer.robotViewerElement;
+    var screenPosition = MouseEvents.convertMouseEventPositionToScreenPosition(domElement, x, y);
 
     var projection = this.robotViewer.projectScreenPositionOnSlotsAnchors(screenPosition);
     if (projection) {
@@ -44,7 +45,8 @@ class Dragger { // eslint-disable-line no-unused-vars
   }
 
   drop(x, y) {
-    var screenPosition = this.robotViewer.convertMouseEventPositionToScreenPosition(x, y);
+    var domElement = this.robotViewer.robotViewerElement;
+    var screenPosition = MouseEvents.convertMouseEventPositionToScreenPosition(domElement, x, y);
     var closestSlot = this.robotViewer.getClosestSlot(screenPosition, this.slotType);
 
     if (closestSlot) {
