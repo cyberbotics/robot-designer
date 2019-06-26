@@ -180,7 +180,7 @@ THREE.OutlinePass.prototype = Object.assign(Object.create(THREE.Pass.prototype),
     }
 
     function VisibilityChangeCallBack(object) {
-      if (object.isMesh || object.isLine || object.isSprite || object.isTransformControls) { // robot-designer note: this cause issues with the selector mechanism.
+      if (object.isMesh || object.isLine || object.isSprite || object.isTransformControls) { // robot-designer note: this causes issues with the selector mechanism.
         var bFound = false;
 
         for (var i = 0; i < selectedMeshes.length; i++) {

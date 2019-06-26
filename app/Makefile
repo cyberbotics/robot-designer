@@ -40,7 +40,7 @@ BABEL_JS_SOURCES = \
   node_modules/@babel/polyfill/dist/polyfill.js
 
 DEPENDENCIES_PATH = dependencies
-THEEEJS_VERSION = 104
+THEEEJS_VERSION = 105
 
 # external sources to be downloaded and minified
 THREEJS_EXAMPLE_URL = https://cdn.jsdelivr.net/gh/mrdoob/three.js@r$(THEEEJS_VERSION)/examples/js/

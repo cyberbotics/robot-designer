@@ -13,7 +13,7 @@ class RobotViewer { // eslint-disable-line no-unused-vars
     this.robotViewerElement = robotViewerElement;
     this.robotController = robotController;
 
-    this.renderer = new THREE.WebGLRenderer({'antialias': true});
+    this.renderer = new THREE.WebGLRenderer({'antialias': false});
     this.renderer.setClearColor(0x000, 1.0);
     this.renderer.gammaInput = false;
     this.renderer.gammaOutput = false;
@@ -28,7 +28,7 @@ class RobotViewer { // eslint-disable-line no-unused-vars
     this.camera.position.z = 0.1;
     this.camera.lookAt(this.scene.position);
 
-    let light = new THREE.DirectionalLight(0xffffff, 1);
+    let light = new THREE.DirectionalLight(0xffffff, 1.8);
     light.userData = { 'x3dType': 'DirectionalLight' };
     this.scene.add(light);
     let light2 = new THREE.AmbientLight(0x404040);
@@ -140,7 +140,7 @@ class RobotViewer { // eslint-disable-line no-unused-vars
 
   getPartAt(relativePosition, screenPosition) {
     if (this.handle.control.pointerHover(screenPosition))
-      return;
+      return undefined;
     this.handle.hideHandle();
     this.gpuPicker.setScene(this.scene);
     this.gpuPicker.setCamera(this.camera);
@@ -159,6 +159,7 @@ class RobotViewer { // eslint-disable-line no-unused-vars
       } while (parent);
     }
     this.handle.showHandle();
+    return undefined;
   }
 
   clearSelection() {
