@@ -1,4 +1,4 @@
-/* global THREE, Handle, SlotAnchors, Selector, Highlightor */
+/* global THREE, Handle, PartSelector, SlotAnchors, Highlightor */
 'use strict';
 
 // 1. dom
@@ -13,20 +13,14 @@ class RobotViewer { // eslint-disable-line no-unused-vars
     this.robotViewerElement = robotViewerElement;
     this.robotController = robotController;
 
-    this.renderer = new THREE.WebGLRenderer({'antialias': true});
+    this.renderer = new THREE.WebGLRenderer({'antialias': false});
     this.renderer.setClearColor(0x000, 1.0);
+    this.renderer.gammaInput = false;
+    this.renderer.gammaOutput = false;
+    this.renderer.physicallyCorrectLights = true;
 
     this.scene = new THREE.Scene();
-
-    /* // how to set a textured background.
-    var loader = new THREE.CubeTextureLoader();
-    loader.setPath( '/robot-designer/assets/common/textures/cubic/' );
-    this.scene.background = loader.load( [
-      'noon_sunny_empty_right.jpg', 'noon_sunny_empty_left.jpg',
-      'noon_sunny_empty_top.jpg', 'noon_sunny_empty_bottom.jpg',
-      'noon_sunny_empty_front.jpg', 'noon_sunny_empty_back.jpg'
-    ] );
-    */
+    this.scene.background = new THREE.Color(0, 0, 0);
 
     this.camera = new THREE.PerspectiveCamera(45, 0.3, 0.001, 100);
     this.camera.position.x = 0.1;
@@ -34,20 +28,25 @@ class RobotViewer { // eslint-disable-line no-unused-vars
     this.camera.position.z = 0.1;
     this.camera.lookAt(this.scene.position);
 
-    var light = new THREE.DirectionalLight(0xffffff, 0.5);
+    let light = new THREE.DirectionalLight(0xffffff, 1.8);
+    light.userData = { 'x3dType': 'DirectionalLight' };
     this.scene.add(light);
-    var light2 = new THREE.AmbientLight(0x404040);
+    let light2 = new THREE.AmbientLight(0x404040);
     this.scene.add(light2);
 
-    var grid = new THREE.GridHelper(5, 50, 0x880088, 0x440044);
+    let grid = new THREE.GridHelper(5, 50, 0x880088, 0x440044);
     grid.matrixAutoUpdate = false;
     this.scene.add(grid);
 
     this.controls = new THREE.OrbitControls(this.camera, this.robotViewerElement);
 
     this.composer = new THREE.EffectComposer(this.renderer);
-    var renderPass = new THREE.RenderPass(this.scene, this.camera);
+    let renderPass = new THREE.RenderPass(this.scene, this.camera);
     this.composer.addPass(renderPass);
+    this.hdrResolvePass = new THREE.ShaderPass(THREE.HDRResolveShader);
+    this.composer.addPass(this.hdrResolvePass);
+    var fxaaPass = new THREE.ShaderPass(THREE.FXAAShader);
+    this.composer.addPass(fxaaPass);
     this.highlightOutlinePass = new THREE.OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), this.scene, this.camera);
     this.composer.addPass(this.highlightOutlinePass);
     this.selectionOutlinePass = new THREE.OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), this.scene, this.camera);
@@ -61,7 +60,7 @@ class RobotViewer { // eslint-disable-line no-unused-vars
     this.resize();
 
     this.highlightor = new Highlightor(this.highlightOutlinePass);
-    this.selector = new Selector(this.selectionOutlinePass);
+    this.selector = new PartSelector(this.selectionOutlinePass);
     this.handle = new Handle(this.robotController, this.robotViewerElement, this.camera, this.scene, this.controls);
 
     // reset selection and handles when any part is removed
@@ -74,7 +73,7 @@ class RobotViewer { // eslint-disable-line no-unused-vars
 
     this.slotAnchors = new SlotAnchors(this.scene);
 
-    this.render();
+    this.resize();
   }
 
   render() {
@@ -85,26 +84,13 @@ class RobotViewer { // eslint-disable-line no-unused-vars
   resize() {
     var width = this.robotViewerElement.clientWidth;
     var height = this.robotViewerElement.clientHeight;
-    this.renderer.setSize(width, height);
-    this.composer.setSize(width, height);
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
-  }
-
-  convertMouseEventPositionToScreenPosition(eventX, eventY) {
-    var rect = this.renderer.domElement.getBoundingClientRect();
-    var pos = new THREE.Vector2();
-    pos.x = ((eventX - rect.left) / (rect.right - rect.left)) * 2 - 1;
-    pos.y = -((eventY - rect.top) / (rect.bottom - rect.top)) * 2 + 1;
-    return pos;
-  }
-
-  convertMouseEventPositionToRelativePosition(eventX, eventY) {
-    var rect = this.renderer.domElement.getBoundingClientRect();
-    var pos = new THREE.Vector2();
-    pos.x = eventX - rect.left;
-    pos.y = eventY - rect.top;
-    return pos;
+    if (this.gpuPicker)
+      this.gpuPicker.resizeTexture(width, height);
+    this.renderer.setSize(width, height);
+    this.composer.setSize(width, height);
+    this.render();
   }
 
   getClosestSlot(screenPosition, slotType) {
@@ -154,7 +140,7 @@ class RobotViewer { // eslint-disable-line no-unused-vars
 
   getPartAt(relativePosition, screenPosition) {
     if (this.handle.control.pointerHover(screenPosition))
-      return;
+      return undefined;
     this.handle.hideHandle();
     this.gpuPicker.setScene(this.scene);
     this.gpuPicker.setCamera(this.camera);
@@ -173,6 +159,7 @@ class RobotViewer { // eslint-disable-line no-unused-vars
       } while (parent);
     }
     this.handle.showHandle();
+    return undefined;
   }
 
   clearSelection() {

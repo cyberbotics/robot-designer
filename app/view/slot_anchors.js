@@ -5,8 +5,8 @@ class SlotAnchors { // eslint-disable-line no-unused-vars
   constructor(scene) {
     this.scene = scene;
     this.slotRepresentation = new THREE.BoxGeometry(0.011, 0.011, 0.011);
-    this.regularMaterial = new THREE.MeshBasicMaterial({color: 0x00ff88, transparent: true, opacity: 0.8});
-    this.highlightedMaterial = new THREE.MeshBasicMaterial({color: 0x0088ff, transparent: true, opacity: 0.8});
+    this.regularMaterial = new THREE.MeshBasicMaterial({color: 0x10ff30, transparent: true, opacity: 0.8});
+    this.highlightedMaterial = new THREE.MeshBasicMaterial({color: 0x0040ff, transparent: true, opacity: 0.8});
     this.slotRepresentationList = [];
     this.highlightedMesh = null;
   }

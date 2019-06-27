@@ -6,38 +6,8 @@
   <title>NRP Robot Designer</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/bin/CopyShader.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/bin/EffectComposer.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/bin/Fullscreen.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/bin/GPUPicker.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/bin/Observable.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/bin/OrbitControls.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/bin/OutlinePass.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/bin/RenderPass.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/bin/ShaderPass.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/bin/TransformControls.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/bin/UndoStack.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/assets/asset.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/assets/asset_library.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/model/part.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/model/robot.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/commands/commands.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/controller/part_controller.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/controller/robot_controller.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/view/dragger.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/view/ghost.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/view/handle.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/view/highlightor.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/view/mediator/part_mediator.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/view/mediator/robot_mediator.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/view/part_browser.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/view/part_viewer.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/view/robot_viewer.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/view/selector.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/view/slot_anchors.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/view/x3d.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/robot_designer.js" defer></script>
+  <script type="text/javascript" src="https://cyberbotics.com/wwi/R2019b/webots.min.js"></script>
+  <script type="text/javascript" src="/robot-designer/app/robot-designer.min.js" defer></script>
   <link rel="stylesheet" href="/robot-designer/style.css">
   <style>
     body {
@@ -70,7 +40,7 @@
       <span>-</span>
       <i class="fas fa-window-maximize" onclick="toggleFullScreen()"></i>
     </div>
-    <div class="main" name="robotViewer" ondrop="drop(event)" ondragenter="dragEnter(event)" ondragover="dragOver(event)" ondragleave="dragLeave(event)" onmousemove="mouseMove(event)" onmousedown="mousedown(event)"></div>
+    <div class="main" name="robotViewer" ondrop="drop(event)" ondragenter="dragEnter(event)" ondragover="dragOver(event)" ondragleave="dragLeave(event)" onmousemove="mouseMove(event)" onmousedown="mouseDown(event)" onmouseup="mouseUp(event)"></div>
     <div class="sidebar designer-group"><p class="designer-group-title">Part viewer</p><div name="part-viewer"></div></div>
     <div class="footer designer-group" name="assets-library-component"></div>
   </div>

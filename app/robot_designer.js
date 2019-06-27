@@ -1,4 +1,4 @@
-/* global RobotViewer, Robot, Dragger, RobotMediator, RobotController, PartBrowser, PartViewer, AssetLibrary, Commands */
+/* global RobotViewer, Robot, Dragger, RobotMediator, RobotController, PartBrowser, PartViewer, AssetLibrary, Commands, MouseEvents */
 'use strict';
 
 class RobotDesigner {
@@ -138,14 +138,29 @@ function changeMode(mode) { // eslint-disable-line no-unused-vars
   designer.robotViewer.handle.setMode(mode);
 }
 
-function mousedown(ev) { // eslint-disable-line no-unused-vars
-  var relativePosition = designer.robotViewer.convertMouseEventPositionToRelativePosition(ev.clientX, ev.clientY);
-  var screenPosition = designer.robotViewer.convertMouseEventPositionToScreenPosition(ev.clientX, ev.clientY);
-  var part = designer.robotViewer.getPartAt(relativePosition, screenPosition);
-  if (part) {
-    designer.robotViewer.selector.selectPart(part);
-    designer.robotViewer.handle.attachToObject(part);
+function mouseDown(ev) { // eslint-disable-line no-unused-vars
+  var domElement = designer.robotViewer.robotViewerElement;
+  var relativePosition = MouseEvents.convertMouseEventPositionToRelativePosition(domElement, ev.clientX, ev.clientY);
+  var screenPosition = MouseEvents.convertMouseEventPositionToScreenPosition(domElement, ev.clientX, ev.clientY);
+  // get picked part that will be selected on mouseUp if the mouse doesn't move
+  designer.partToBeSelected = designer.robotViewer.getPartAt(relativePosition, screenPosition);
+  designer.mouseDownPosition = {x: ev.clientX, y: ev.clientY };
+}
+
+function mouseUp(ev) { // eslint-disable-line no-unused-vars
+  if (typeof designer.partToBeSelected === 'undefined' || typeof designer.mouseDownPosition === 'undefined')
+    return;
+
+  // compute Manhattan length
+  let length = Math.abs(designer.mouseDownPosition.x - ev.clientX) + Math.abs(designer.mouseDownPosition.y - ev.clientY);
+  if (length < 20) { // the mouse was moved by less than 20 pixels (determined empirically)
+    // select part
+    designer.robotViewer.selector.selectPart(designer.partToBeSelected);
+    designer.robotViewer.handle.attachToObject(designer.partToBeSelected);
   }
+
+  designer.partToBeSelected = undefined;
+  designer.mouseDownPosition = undefined;
 }
 
 function deleteSelectedPart() { // eslint-disable-line no-unused-vars
@@ -166,8 +181,12 @@ function deleteSelectedPart() { // eslint-disable-line no-unused-vars
 }
 
 function mouseMove(ev) { // eslint-disable-line no-unused-vars
-  var relativePosition = designer.robotViewer.convertMouseEventPositionToRelativePosition(ev.clientX, ev.clientY);
-  var screenPosition = designer.robotViewer.convertMouseEventPositionToScreenPosition(ev.clientX, ev.clientY);
+  if (designer.robotViewer.handle.isDragging())
+    return;
+
+  var domElement = designer.robotViewer.robotViewerElement;
+  var relativePosition = MouseEvents.convertMouseEventPositionToRelativePosition(domElement, ev.clientX, ev.clientY);
+  var screenPosition = MouseEvents.convertMouseEventPositionToScreenPosition(domElement, ev.clientX, ev.clientY);
   var part = designer.robotViewer.getPartAt(relativePosition, screenPosition);
   if (part)
     designer.robotViewer.highlightor.highlight(part);

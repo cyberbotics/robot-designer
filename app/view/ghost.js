@@ -13,16 +13,16 @@ class Ghost { // eslint-disable-line no-unused-vars
 
     var model = '/robot-designer/assets/models/' + modelName + '/model.x3d';
     var loader = new THREE.X3DLoader();
-    loader.load(model, (object3d) => {
-      if (this.ghost) {
-        this.ghost.add(object3d);
-        this.ghost.traverse(function(child) {
-          if (child instanceof THREE.Mesh) {
-            child.material.transparent = true;
-            child.material.opacity = 0.5;
-          }
-        });
-      }
+    loader.load(model, (object3dList) => {
+      if (!this.ghost || !Array.isArray(object3dList) || object3dList.length === 0)
+        return;
+      this.ghost.add(object3dList[0]);
+      this.ghost.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          child.material.transparent = true;
+          child.material.opacity = 0.5;
+        }
+      });
     });
 
     this.scene.add(this.ghost);

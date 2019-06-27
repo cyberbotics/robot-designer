@@ -89,6 +89,10 @@ class Handle { // eslint-disable-line no-unused-vars
     this.scene.remove(this.control);
   }
 
+  isDragging() {
+    return this.control.dragging;
+  }
+
   _updateTargetPosition() {
     if (!this.target)
       return;
