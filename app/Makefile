@@ -16,6 +16,7 @@ JS_SOURCES = \
   bin/fullscreen.js \
   bin/observable.js \
   bin/outline_pass.js \
+  bin/transform_controls.js \
   bin/undo_stack.js \
   assets/asset.js \
   assets/asset_library.js \
@@ -45,8 +46,7 @@ THEEEJS_VERSION = 105
 # external sources to be downloaded and minified
 THREEJS_EXAMPLE_URL = https://cdn.jsdelivr.net/gh/mrdoob/three.js@r$(THEEEJS_VERSION)/examples/js/
 THREEJS_EXAMPLE_SOURCES = \
-  controls/OrbitControls.js \
-  controls/TransformControls.js
+  controls/OrbitControls.js
 LOCAL_THREEJS_EXAMPLE_SOURCES = $(addprefix $(DEPENDENCIES_PATH)/,$(THREEJS_EXAMPLE_SOURCES))
 
 # Token file used to determine when the last successful installation occurred.

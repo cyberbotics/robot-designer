@@ -8,11 +8,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
   <script type="text/javascript" src="https://cyberbotics.com/wwi/R2019b/webots.min.js"></script>
   <script type="text/javascript" src="/robot-designer/app/dependencies/controls/OrbitControls.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/dependencies/controls/TransformControls.js"></script>
   <script type="text/javascript" src="/robot-designer/app/bin/fullscreen.js"></script>
   <script type="text/javascript" src="/robot-designer/app/bin/observable.js"></script>
   <script type="text/javascript" src="/robot-designer/app/bin/outline_pass.js"></script>
   <script type="text/javascript" src="/robot-designer/app/bin/undo_stack.js"></script>
+  <script type="text/javascript" src="/robot-designer/app/bin/transform_controls.js"></script>
   <script type="text/javascript" src="/robot-designer/app/assets/asset.js"></script>
   <script type="text/javascript" src="/robot-designer/app/assets/asset_library.js"></script>
   <script type="text/javascript" src="/robot-designer/app/model/part.js"></script>
@@ -63,7 +63,7 @@
       <span>-</span>
       <i class="fas fa-window-maximize" onclick="toggleFullScreen()"></i>
     </div>
-    <div class="main" name="robotViewer" ondrop="drop(event)" ondragenter="dragEnter(event)" ondragover="dragOver(event)" ondragleave="dragLeave(event)" onmousemove="mouseMove(event)" onmousedown="mousedown(event)"></div>
+    <div class="main" name="robotViewer" ondrop="drop(event)" ondragenter="dragEnter(event)" ondragover="dragOver(event)" ondragleave="dragLeave(event)" onmousemove="mouseMove(event)" onmousedown="mouseDown(event)" onmouseup="mouseUp(event)"></div>
     <div class="sidebar designer-group"><p class="designer-group-title">Part viewer</p><div name="part-viewer"></div></div>
     <div class="footer designer-group" name="assets-library-component"></div>
   </div>
