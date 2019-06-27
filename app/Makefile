@@ -37,9 +37,6 @@ JS_SOURCES = \
   view/slot_anchors.js \
   robot_designer.js
 
-BABEL_JS_SOURCES = \
-  node_modules/@babel/polyfill/dist/polyfill.js
-
 DEPENDENCIES_PATH = dependencies
 THEEEJS_VERSION = 105
 
@@ -65,7 +62,7 @@ endif
 
 robot-designer.min.js: $(JS_SOURCES) $(LOCAL_THREEJS_EXAMPLE_SOURCES) $(INSTALL_TOKEN)
 	@echo "# compressing robot-designer.min.js"
-	node_modules/.bin/babel $(LOCAL_THREEJS_EXAMPLE_SOURCES) $(JS_SOURCES) $(BABEL_JS_SOURCES) -o robot-designer.tmp1.js --presets "@babel/preset-env"
+	node_modules/.bin/babel $(LOCAL_THREEJS_EXAMPLE_SOURCES) $(JS_SOURCES) -o robot-designer.tmp1.js --presets "@babel/preset-env"
 	@node_modules/.bin/minify robot-designer.tmp1.js -o robot-designer.min.js
 	@rm robot-designer.tmp1.js
 
