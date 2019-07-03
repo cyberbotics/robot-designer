@@ -14,4 +14,8 @@ class Asset { // eslint-disable-line no-unused-vars
   getSlotNames() {
     return Object.keys(this.slots);
   }
+
+  getRobotName() {
+    return this.name.split('/')[0];
+  }
 }
