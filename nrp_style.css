@@ -1,0 +1,71 @@
+.nrp-robot-designer {
+  background-color: #f8f8f8;
+  grid-template-areas:
+    'toolbar part-browser main'
+    'toolbar part-viewer main';
+  grid-template-columns: 45px 290px auto;
+  grid-template-rows: auto 110px;
+}
+
+.nrp-robot-designer > div {
+  color: #333;
+}
+
+.menu {
+  background-color: #ddd;
+}
+
+.fas, .menu-item {
+  min-width: 40px;
+  min-height: 40px;
+  line-height: 40px;
+  margin: 2px;
+  padding: 0;
+  border-radius: 2px;
+  background-color: #f8f8f8;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+  color: #333;
+}
+
+.fas:hover, .menu-item:hover {
+  color: #333;
+  background-color: #e6e6e6;
+}
+
+.fa-disabled {
+  opacity: 0.4;
+}
+
+.fa-selected {
+  color: #333;
+  background-color: #bfbfbf;
+}
+
+.designer-group {
+  background-color: #f8f8f8;
+  border-radius: 5px 5px 0px 0px;
+  border: 1px solid #777;
+}
+
+.part-browser {
+  margin-top: 2px;
+}
+
+.nrp-robot-designer-part-browser-select {
+  background: #ddd;
+  border-color: #a2a2a2;
+}
+
+.nrp-robot-designer-part-browser-label {
+  color: #808080;
+  background: #eeeeee;
+  border-bottom: 1px solid #777;
+}
+
+.part-icon:hover {
+  background-color: #d9edf7;
+}
+
+.part-viewer {
+  margin-bottom: 2px;
+}

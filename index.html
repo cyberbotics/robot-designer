@@ -17,7 +17,12 @@
   </style>
   <script>
     window.addEventListener("load", function() {
-      var designer = new RobotDesigner(undefined, false);
+      var designer = new RobotDesigner();
+      // NRP version
+      // <link rel="stylesheet" href="/robot-designer/nrp_style.css">
+      // var designer = new RobotDesigner(undefined, 0xffffff, false);
+      // designer.resize(); // resize 3D scene
+      // designer.onExport = exportCallback; // define onExport callback function
     });
   </script>
 </head>

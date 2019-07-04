@@ -5,7 +5,7 @@
     'header header header'
     'toolbar part-browser main'
     'toolbar part-viewer main';
-  grid-template-columns: 45px 290px auto ;
+  grid-template-columns: 45px 290px auto;
   grid-template-rows: 35px auto 110px;
   grid-gap: 3px;
   background-color: #333;
@@ -38,7 +38,6 @@
 
 .part-viewer {
   grid-area: part-viewer;
-  margin-right: 2px;
   font-size: small;
 }
 
@@ -101,7 +100,8 @@
 
 .designer-group {
   background-color: #4c4c4c;
-  border-radius: 5px;
+  border-radius: 5px 5px 0px 0px;
+  border: 1px solid #545454;
   padding-left: 5px;
 }
 
@@ -176,17 +176,21 @@
  }
 
 .nrp-robot-designer-part-browser-select {
-  border-radius: 2px;
+  border-radius: 5px;
   float: left;
+  border-color:#666;
+  background-color:#c5c5c5;
 }
 
 .nrp-robot-designer-part-browser-label {
   display: flex;
   float: left;
   width: 100%;
-  background: #aaa;
+  background: #696969;
   margin: 0px;
   padding: 5px;
+  border-bottom: 1px solid #545454;
+  color: #afafaf;
 }
 
 .nrp-robot-designer-part-browser-label > p {
@@ -195,7 +199,6 @@
   padding-left: 5px;
 }
 
-/* Style the tab content */
 .nrp-robot-designer-part-browser-content {
   display: none;
   width: 100%;

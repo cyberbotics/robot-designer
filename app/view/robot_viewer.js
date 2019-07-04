@@ -9,7 +9,7 @@
 // 6. mouse interactions
 
 class RobotViewer { // eslint-disable-line no-unused-vars
-  constructor(robotViewerElement, robotController, commands) {
+  constructor(robotViewerElement, robotController, commands, sceneRgbColor) {
     this.robotViewerElement = robotViewerElement;
     this.robotController = robotController;
 
@@ -20,7 +20,7 @@ class RobotViewer { // eslint-disable-line no-unused-vars
     this.renderer.physicallyCorrectLights = true;
 
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0, 0, 0);
+    this.scene.background = new THREE.Color(sceneRgbColor);
 
     this.camera = new THREE.PerspectiveCamera(45, 0.3, 0.001, 100);
     this.camera.position.x = 0.1;

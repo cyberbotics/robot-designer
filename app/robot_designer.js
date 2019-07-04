@@ -1,23 +1,23 @@
-/* global RobotViewer, Robot, Dragger, RobotMediator, RobotController, PartBrowser, PartViewer, AssetLibrary, Commands, MouseEvents */
+/* global RobotViewer, Robot, Dragger, RobotMediator, RobotController, PartBrowser, PartViewer, AssetLibrary, Commands, MouseEvents, toggleFullScreen */
 'use strict';
 
 class RobotDesigner { // eslint-disable-line no-unused-vars
-  constructor(domElement, showHeader) {
-    this._createDomElements(domElement);
+  constructor(domElement = undefined, sceneRgbColor = 0x000, isStandAlone = true) {
+    this._createDomElements(domElement, isStandAlone);
 
     this.assetLibrary = new AssetLibrary();
     this.partBrowser = new PartBrowser(this.assetLibraryElement, this.assetLibrary, (event) => { this.dragStart(event); });
     this.assetLibrary.addObserver('loaded', () => { this.partBrowser.loadAssets(); });
 
     this.commands = new Commands();
-    this.commands.addObserver('updated', () => this.updateUndoRedoButtons());
+    this.commands.addObserver('updated', () => this._updateUndoRedoButtons());
     this.commands.addObserver('updated', () => this.partBrowser.update(this.robot));
 
     this.robot = new Robot();
     this.robotMediator = new RobotMediator(this.robot);
     this.robotController = new RobotController(this.assetLibrary, this.commands, this.robot);
 
-    this.robotViewer = new RobotViewer(this.robotViewerElement, this.robotController, this.commands);
+    this.robotViewer = new RobotViewer(this.robotViewerElement, this.robotController, this.commands, sceneRgbColor);
     this.robotViewer.scene.add(this.robotMediator.rootObject);
     this.highlightOutlinePass = this.robotViewer.highlightOutlinePass;
 
@@ -26,18 +26,11 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
     this.partViewer = new PartViewer(this.robotController, this.partViewerElement, this.robotViewer.selector);
   }
 
-  updateUndoRedoButtons() {
-    if (this.commands.canRedo())
-      this.redoButton.classList.remove('fa-disabled');
-    else
-      this.redoButton.classList.add('fa-disabled');
-    if (this.commands.canUndo())
-      this.undoButton.classList.remove('fa-disabled');
-    else
-      this.undoButton.classList.add('fa-disabled');
-  }
-
   // events
+
+  resize() {
+    this.robotViewer.resize();
+  }
 
   openExportModal() { // eslint-disable-line no-unused-vars
     var modal = document.getElementById('nrp-robot-designer-modal-window');
@@ -72,6 +65,11 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
       return;
     }
 
+    if (typeof this.onExport === 'function') {
+      this.onExport(data);
+      return;
+    }
+
     var blob = new Blob([data], {type: mimeType});
     var e = document.createEvent('MouseEvents');
     var a = document.createElement('a');
@@ -82,15 +80,7 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
     a.dispatchEvent(e);
   }
 
-  undo() { // eslint-disable-line no-unused-vars
-    this.commands.undo();
-  }
-
-  redo() { // eslint-disable-line no-unused-vars
-    this.commands.redo();
-  }
-
-  changeMode(mode) { // eslint-disable-line no-unused-vars
+  changeMode(mode) {
     this.selectButton.classList.remove('fa-selected');
     this.translateButton.classList.remove('fa-selected');
     this.rotateButton.classList.remove('fa-selected');
@@ -105,7 +95,7 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
     this.robotViewer.handle.setMode(mode);
   }
 
-  mouseDown(ev) { // eslint-disable-line no-unused-vars
+  mouseDown(ev) {
     var domElement = this.robotViewer.robotViewerElement;
     var relativePosition = MouseEvents.convertMouseEventPositionToRelativePosition(domElement, ev.clientX, ev.clientY);
     var screenPosition = MouseEvents.convertMouseEventPositionToScreenPosition(domElement, ev.clientX, ev.clientY);
@@ -114,7 +104,7 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
     this.mouseDownPosition = {x: ev.clientX, y: ev.clientY };
   }
 
-  mouseUp(ev) { // eslint-disable-line no-unused-vars
+  mouseUp(ev) {
     if (typeof this.partToBeSelected === 'undefined' || typeof this.mouseDownPosition === 'undefined')
       return;
 
@@ -130,7 +120,7 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
     this.mouseDownPosition = undefined;
   }
 
-  deleteSelectedPart() { // eslint-disable-line no-unused-vars
+  deleteSelectedPart() {
     var mesh = this.robotViewer.selector.selectedPart;
 
     if (mesh) {
@@ -147,7 +137,7 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
     this.robotViewer.clearSelection();
   }
 
-  mouseMove(ev) { // eslint-disable-line no-unused-vars
+  mouseMove(ev) {
     if (this.robotViewer.handle.isDragging())
       return;
 
@@ -161,13 +151,7 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
       this.robotViewer.highlightor.clearHighlight();
   }
 
-  drop(ev) { // eslint-disable-line no-unused-vars
-    ev.preventDefault();
-
-    this.dragger.drop(ev.clientX, ev.clientY);
-  }
-
-  dragStart(ev) { // eslint-disable-line no-unused-vars
+  dragStart(ev) {
     var part = ev.target.getAttribute('part');
     var slotType = ev.target.getAttribute('slotType');
     ev.dataTransfer.setData('text', part); // Cannot be used on Chrome. Cannot be dropped on Firefox.
@@ -180,23 +164,15 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
     this.dragger.dragStart(part, slotType);
   }
 
-  dragOver(ev) { // eslint-disable-line no-unused-vars
+  dragOver(ev) {
     ev.preventDefault();
     ev.dataTransfer.getData('text'); // Cannot be used on Chrome. Cannot be dropped on Firefox.
 
     this.dragger.dragOver(ev.clientX, ev.clientY);
   }
 
-  dragLeave(ev) { // eslint-disable-line no-unused-vars
-    this.dragger.dragLeave();
-  }
-
-  dragEnter(ev) { // eslint-disable-line no-unused-vars
-    this.dragger.dragEnter();
-  }
-
   // DOM setup
-  _createDomElements(domElement, showHeader) {
+  _createDomElements(domElement, isStandAlone) {
     this.part = document.createElement('div');
     this.part.classList.add('nrp-robot-designer');
     this.part.id = 'nrp-robot-designer';
@@ -205,11 +181,11 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
     else
       domElement.appendChild(this.part);
 
-    if (showHeader) {
+    if (isStandAlone) {
       let header = document.createElement('div');
       header.classList.add('header');
       header.innerHTML = `<span>NRP Robot Designer</span>
-        <i class="fas fa-robot"></i>'
+        <i class="fas fa-robot"></i>
         <span class="menu-item">File</span>
         <span class="menu-item">Help</span>`;
       this.part.appendChild(header);
@@ -218,7 +194,7 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
     this.toolbar = document.createElement('div');
     this.toolbar.classList.add('menu');
     this.toolbar.innerHTML = `
-      <i class="fas fa-file-export" onclick="openExportModal()"></i>
+      <i id="nrp-robot-designer-export-button" class="fas fa-file-export"></i>
       <span>-</span>
       <i id="nrp-robot-designer-undo-button" class="fas fa-undo fa-disabled"></i>
       <i id="nrp-robot-designer-redo-button" class="fas fa-redo fa-disabled"></i>
@@ -227,25 +203,31 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
       <i id="nrp-robot-designer-translate-button" class="fas fa-arrows-alt"></i>
       <i id="nrp-robot-designer-rotate-button" class="fas fa-sync-alt"></i>
       <span>-</span>
-      <i id="nrp-robot-designer-delete-button" class="fas fa-trash-alt"></i>
-      <span>-</span>
-      <i id="nrp-robot-designer-maximize-button" class="fas fa-window-maximize"></i>`;
+      <i id="nrp-robot-designer-delete-button" class="fas fa-trash-alt"></i>`;
+    if (isStandAlone) {
+      this.toolbar.innerHTML += `
+        <span>-</span>
+        <i id="nrp-robot-designer-maximize-button" class="fas fa-window-maximize"></i>`;
+    }
     this.part.appendChild(this.toolbar);
 
+    var exportButton = document.getElementById('nrp-robot-designer-export-button');
+    exportButton.addEventListener('click', () => { this.openExportModal(); });
     this.undoButton = document.getElementById('nrp-robot-designer-undo-button');
-    this.undoButton.addEventListener('click', () => { this.undo(); });
+    this.undoButton.addEventListener('click', () => { this.commands.undo(); });
     this.redoButton = document.getElementById('nrp-robot-designer-redo-button');
-    this.redoButton.addEventListener('click', () => { this.redo(); });
+    this.redoButton.addEventListener('click', () => { this.commands.redo(); });
+    this.selectButton = document.getElementById('nrp-robot-designer-select-button');
+    this.selectButton.addEventListener('click', () => { this.changeMode('select'); });
     this.translateButton = document.getElementById('nrp-robot-designer-translate-button');
     this.translateButton.addEventListener('click', () => { this.changeMode('translate'); });
     this.rotateButton = document.getElementById('nrp-robot-designer-rotate-button');
     this.rotateButton.addEventListener('click', () => { this.changeMode('rotate'); });
-    var selectButton = document.getElementById('nrp-robot-designer-select-button');
-    selectButton.addEventListener('click', () => { this.changeMode('select'); });
     var deleteButton = document.getElementById('nrp-robot-designer-delete-button');
-    deleteButton.addEventListener('click', () => { this.this.deleteSelectedPart(); });
+    deleteButton.addEventListener('click', () => { this.deleteSelectedPart(); });
     var maximizeButton = document.getElementById('nrp-robot-designer-maximize-button');
-    maximizeButton.addEventListener('click', () => { this.toggleFullScreen(); });
+    if (maximizeButton)
+      maximizeButton.addEventListener('click', () => { toggleFullScreen(); });
 
     this.assetLibraryElement = document.createElement('div');
     this.assetLibraryElement.classList.add('part-browser');
@@ -262,10 +244,13 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
 
     this.robotViewerElement = document.createElement('div');
     this.robotViewerElement.classList.add('main');
-    this.robotViewerElement.addEventListener('drop', (event) => { this.drop(event); });
-    this.robotViewerElement.addEventListener('dragenter', (event) => { this.dragEnter(event); });
+    this.robotViewerElement.addEventListener('drop', (event) => {
+      event.preventDefault();
+      this.dragger.drop(event.clientX, event.clientY);
+    });
+    this.robotViewerElement.addEventListener('dragenter', (event) => { this.dragger.dragEnter(); });
     this.robotViewerElement.addEventListener('dragover', (event) => { this.dragOver(event); });
-    this.robotViewerElement.addEventListener('dragleave', (event) => { this.dragLeave(event); });
+    this.robotViewerElement.addEventListener('dragleave', (event) => { this.dragger.dragLeave(); });
     this.robotViewerElement.addEventListener('mousemove', (event) => { this.mouseMove(event); });
     this.robotViewerElement.addEventListener('mousedown', (event) => { this.mouseDown(event); });
     this.robotViewerElement.addEventListener('mouseup', (event) => { this.mouseUp(event); });
@@ -276,14 +261,12 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
     modalWindow.id = 'nrp-robot-designer-modal-window';
     modalWindow.classList.add('modal');
     modalWindow.innerHTML =
-    `<div id="nrp-robot-designer-modal-window" class="modal">
-       <div class="modal-content">
-         <span class="modal-close-button">&times;</span>
-         <div class="modal-grid">
-           <button type="button" id="nrp-robot-designer-json-export-button"  class="nrp-button">Export to JSON</button>
-           <button type="button" id="nrp-robot-designer-webots-export-button" class="nrp-button">Export to Webots</button>
-           <button type="button" id="nrp-robot-designer-nrp-export-button" class="nrp-button nrp-button-disabled">Export to NRP</button>
-         </div>
+    `<div class="modal-content">
+       <span class="modal-close-button">&times;</span>
+       <div class="modal-grid">
+         <button type="button" id="nrp-robot-designer-json-export-button"  class="nrp-button">Export to JSON</button>
+         <button type="button" id="nrp-robot-designer-webots-export-button" class="nrp-button">Export to Webots</button>
+         <button type="button" id="nrp-robot-designer-nrp-export-button" class="nrp-button nrp-button-disabled">Export to NRP</button>
        </div>
      </div>`;
     this.part.appendChild(modalWindow);
@@ -294,5 +277,16 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
     webotsExportButton.addEventListener('click', () => { this.exportToFile('webots'); });
     var nrpExportButton = document.getElementById('nrp-robot-designer-nrp-export-button');
     nrpExportButton.addEventListener('click', () => { alert('Coming soon...'); });
+  }
+
+  _updateUndoRedoButtons() {
+    if (this.commands.canRedo())
+      this.redoButton.classList.remove('fa-disabled');
+    else
+      this.redoButton.classList.add('fa-disabled');
+    if (this.commands.canUndo())
+      this.undoButton.classList.remove('fa-disabled');
+    else
+      this.undoButton.classList.add('fa-disabled');
   }
 }

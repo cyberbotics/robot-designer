@@ -29,16 +29,22 @@ class Ghost { // eslint-disable-line no-unused-vars
   }
 
   moveGhostToFloor(projection) {
+    if (!this.ghost)
+      return;
     this.scene.add(this.ghost);
     this.ghost.position.copy(projection);
   }
 
   moveGhostToSlot(slot) {
+    if (!this.ghost)
+      return;
     this.ghost.position.copy(new THREE.Vector3());
     slot.add(this.ghost);
   }
 
   removeGhost() {
+    if (!this.ghost)
+      return;
     this.ghost.parent.remove(this.ghost);
     this.ghost = null;
   }
