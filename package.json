@@ -1,0 +1,33 @@
+{
+  "name": "@cyberbotics/robot-designer",
+  "version": "0.0.1",
+  "description": "Simple tool to design robots",
+  "main": "app/robot-desiger.js",
+  "files": [
+    "/app/assets",
+    "/app/bin",
+    "/app/commands",
+    "/app/controller",
+    "/app/model",
+    "/app/view",
+    "/app/Makefile",
+    "/app/robot-designer.js",
+    "/app/robot-designer.min.js",
+    "/assets",
+    "nrp_style.css",
+    "style.css"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omichel/robot-designer.git"
+  },
+  "author": "Cyberbotics Ltd.",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/omichel/robot-designer/issues"
+  },
+  "homepage": "https://github.com/omichel/robot-designer#readme"
+}
