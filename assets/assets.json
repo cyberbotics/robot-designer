@@ -1,5 +1,5 @@
 {
-  "tink/base": {
+  "tinkerbots/base": {
     "proto": "TinkerbotsBase",
     "icon": "/robot-designer/assets/models/tinkerbots/base/icon.png",
     "root": true,
@@ -449,7 +449,7 @@
       }
     }
   },
-  "tink/light_sensor": {
+  "tinkerbots/light_sensor": {
     "proto": "TinkerbotsLightSensor",
     "icon": "/robot-designer/assets/models/tinkerbots/light_sensor/icon.png",
     "slotType": "tinkerbots",
