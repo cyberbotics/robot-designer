@@ -17,7 +17,7 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
 
     this._createDomElements(domElement, isStandAlone);
 
-    this.assetLibrary = new AssetLibrary(this.packagePath, this.pathPrefix);
+    this.assetLibrary = new AssetLibrary(this.pathPrefix);
     this.partBrowser = new PartBrowser(this.assetLibraryElement, this.assetLibrary, (event) => { this.dragStart(event); });
     this.assetLibrary.addObserver('loaded', () => { this.partBrowser.loadAssets(); });
 
