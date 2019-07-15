@@ -5,13 +5,17 @@ class Ghost { // eslint-disable-line no-unused-vars
   constructor(scene) {
     this.scene = scene;
     this.ghost = null;
+
+    this.pathPrefix = '/robot-designer/assets/models/';
+    if (typeof Ghost.pathPrefix !== 'undefined')
+      this.pathPrefix = Ghost.pathPrefix + this.pathPrefix;
   }
 
   addGhost(modelName) {
     this.ghost = new THREE.Object3D();
     this.ghost.userData.isGhost = true;
 
-    var model = '/robot-designer/assets/models/' + modelName + '/model.x3d';
+    var model = this.pathPrefix + modelName + '/model.x3d';
     var loader = new THREE.X3DLoader();
     loader.load(model, (object3dList) => {
       if (!this.ghost || !Array.isArray(object3dList) || object3dList.length === 0)

@@ -1,13 +1,29 @@
-/* global RobotViewer, Robot, Dragger, RobotMediator, RobotController, PartBrowser, PartViewer, AssetLibrary, Commands, MouseEvents, toggleFullScreen */
+/* global AssetLibrary, Commands, Dragger, Ghost, PartBrowser, PartMediator, PartViewer, Robot, RobotController, RobotMediator, RobotViewer */
+/* global MouseEvents, TextureLoader */
+/* global toggleFullScreen */
 'use strict';
 
 class RobotDesigner { // eslint-disable-line no-unused-vars
   constructor(domElement = undefined, sceneRgbColor = 0x000, isStandAlone = true) {
+    this.pathPrefix = '';
+    let scripts = document.getElementsByTagName('script');
+    for (var i = 0; i < scripts.length; i++) {
+      let url = scripts[i].src;
+      if (url && (url.endsWith('robot_designer.js') || url.endsWith('robot-designer.min.js'))) {
+        this.pathPrefix = url.substring(0, url.lastIndexOf('/', url.lastIndexOf('/', url.lastIndexOf('/') - 1) - 1) + 1);
+        break;
+      }
+    }
+
     this._createDomElements(domElement, isStandAlone);
 
-    this.assetLibrary = new AssetLibrary();
+    this.assetLibrary = new AssetLibrary(this.packagePath, this.pathPrefix);
     this.partBrowser = new PartBrowser(this.assetLibraryElement, this.assetLibrary, (event) => { this.dragStart(event); });
     this.assetLibrary.addObserver('loaded', () => { this.partBrowser.loadAssets(); });
+
+    TextureLoader.setTexturePathPrefix(this.pathPrefix);
+    Ghost.pathPrefix = this.pathPrefix;
+    PartMediator.pathPrefix = this.pathPrefix;
 
     this.commands = new Commands();
     this.commands.addObserver('updated', () => this._updateUndoRedoButtons());

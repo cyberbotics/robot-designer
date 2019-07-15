@@ -4,6 +4,9 @@
 class PartMediator { // eslint-disable-line no-unused-vars
   constructor(part) {
     this.model = part;
+    this.pathPrefix = '/robot-designer/assets/models/';
+    if (typeof PartMediator.pathPrefix !== 'undefined')
+      this.pathPrefix = PartMediator.pathPrefix + this.pathPrefix;
 
     // Create the root container.
     this.rootObject = new THREE.Object3D(); // The THREEjs container (contains the slots container and the part representation.)
@@ -12,7 +15,7 @@ class PartMediator { // eslint-disable-line no-unused-vars
     this.rootObject.userData.isPartContainer = true;
 
     // Create the representation (async load).
-    var model = '/robot-designer/assets/models/' + this.model.name + '/model.x3d';
+    var model = this.pathPrefix + this.model.name + '/model.x3d';
     var loader = new THREE.X3DLoader();
     loader.load(model, (object3dList) => {
       if (!Array.isArray(object3dList) || object3dList.length === 0)
