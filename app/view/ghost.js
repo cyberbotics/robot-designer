@@ -6,9 +6,9 @@ class Ghost { // eslint-disable-line no-unused-vars
     this.scene = scene;
     this.ghost = null;
 
-    this.pathPrefix = '/robot-designer/assets/models/';
-    if (typeof Ghost.pathPrefix !== 'undefined')
-      this.pathPrefix = Ghost.pathPrefix + this.pathPrefix;
+    this.pathPrefix = 'models/';
+    if (typeof Ghost.assetsPathPrefix !== 'undefined')
+      this.pathPrefix = Ghost.assetsPathPrefix + this.pathPrefix;
   }
 
   addGhost(modelName) {

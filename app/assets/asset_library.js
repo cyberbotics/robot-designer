@@ -13,8 +13,8 @@ class AssetLibrary extends Observable { // eslint-disable-line no-unused-vars
       .then((txt) => this._loadAssets(JSON.parse(txt)));
   }
 
-  getAssetsLibraryPath() {
-    return this.packagePath + 'robot-designer/assets/';
+  getPath() {
+    return this.pathPrefix + 'robot-designer/assets/';
   }
 
   getRobotNames() {

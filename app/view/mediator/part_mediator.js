@@ -4,9 +4,9 @@
 class PartMediator { // eslint-disable-line no-unused-vars
   constructor(part) {
     this.model = part;
-    this.pathPrefix = '/robot-designer/assets/models/';
-    if (typeof PartMediator.pathPrefix !== 'undefined')
-      this.pathPrefix = PartMediator.pathPrefix + this.pathPrefix;
+    this.pathPrefix = 'models/';
+    if (typeof PartMediator.assetsPathPrefix !== 'undefined')
+      this.pathPrefix = PartMediator.assetsPathPrefix + this.pathPrefix;
 
     // Create the root container.
     this.rootObject = new THREE.Object3D(); // The THREEjs container (contains the slots container and the part representation.)

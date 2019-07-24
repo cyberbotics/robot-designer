@@ -22,8 +22,8 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
     this.assetLibrary.addObserver('loaded', () => { this.partBrowser.loadAssets(); });
 
     TextureLoader.setTexturePathPrefix(this.pathPrefix);
-    Ghost.pathPrefix = this.pathPrefix;
-    PartMediator.pathPrefix = this.pathPrefix;
+    Ghost.assetsPathPrefix = this.assetLibrary.getPath();
+    PartMediator.assetsPathPrefix = this.assetLibrary.getPath();
 
     this.commands = new Commands();
     this.commands.addObserver('updated', () => this._updateUndoRedoButtons());
