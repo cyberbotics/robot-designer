@@ -9,7 +9,7 @@ class RobotDesigner { // eslint-disable-line no-unused-vars
     let scripts = document.getElementsByTagName('script');
     for (var i = 0; i < scripts.length; i++) {
       let url = scripts[i].src;
-      if (url && (url.endsWith('robot_designer.js') || url.endsWith('robot-designer.min.js'))) {
+      if (url && (url.endsWith('robot_designer.js') || url.endsWith('web-robot-designer.js'))) {
         this.pathPrefix = url.substring(0, url.lastIndexOf('/', url.lastIndexOf('/', url.lastIndexOf('/') - 1) - 1) + 1);
         break;
       }

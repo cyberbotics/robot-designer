@@ -6,9 +6,10 @@
   <title>NRP Robot Designer</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-  <script type="text/javascript" src="https://cyberbotics.com/wwi/R2019b/webots.min.js"></script>
-  <script type="text/javascript" src="/robot-designer/app/robot-designer.min.js" defer></script>
-  <link rel="stylesheet" href="/robot-designer/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.js"></script>
+  <script type="text/javascript" src="app/web-robot-designer.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="nrp_style.css">
   <style>
     body {
       margin: 0px;
@@ -17,11 +18,8 @@
   </style>
   <script>
     window.addEventListener("load", function() {
-      var designer = new RobotDesigner();
-      // NRP version
-      // <link rel="stylesheet" href="/robot-designer/nrp_style.css">
-      // var designer = new RobotDesigner(undefined, 0xffffff, false);
-      // designer.resize(); // resize 3D scene
+      var designer = new RobotDesigner(undefined, 0xffffff, false);
+      designer.resize(); // resize 3D scene
       // designer.onExport = exportCallback; // define onExport callback function
     });
   </script>

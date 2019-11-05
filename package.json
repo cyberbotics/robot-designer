@@ -1,23 +1,26 @@
 {
   "name": "robot-designer",
-  "version": "0.0.6",
-  "description": "Simple tool to design robots",
-  "main": "./app/robot-designer.min.js",
+  "version": "0.0.8",
+  "description": "Simple web tool to design robots",
+  "main": "./app/web-robot-designer.js",
   "files": [
-    "/app/assets",
-    "/app/bin",
-    "/app/commands",
-    "/app/controller",
-    "/app/dependencies",
-    "/app/model",
-    "/app/view",
-    "/app/Makefile",
-    "/app/robot_designer.js",
-    "/app/robot-designer.min.js",
+    "/app/web-robot-designer.js",
     "/assets",
     "nrp_style.css",
-    "style.css"
+    "style.css",
+    "index.html"
   ],
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "babel-minify": "^0.5.0",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/polyfill": "^7.4.3"
+  },
+  "babel": {
+    "presets": [],
+    "plugins": []
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
