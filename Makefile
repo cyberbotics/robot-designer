@@ -17,7 +17,7 @@ THEEEJS_VERSION = 105
 WEBOTS_VERSION = R2020a
 
 JS_SOURCES = \
-  $(DEPENDENCIES_PATH)/webots-module.js \
+  $(DEPENDENCIES_PATH)/webots.lib.js \
   app/bin/fullscreen.js \
   app/bin/observable.js \
   app/bin/outline_pass.js \
@@ -72,10 +72,10 @@ $(LOCAL_THREEJS_EXAMPLE_SOURCES):
 	@mkdir -p $(dir $@)
 	@wget -qN -O $@ $(THREEJS_EXAMPLE_URL)$(FILENAME)
 
-$(DEPENDENCIES_PATH)/webots-module.js:
+$(DEPENDENCIES_PATH)/webots.lib.js:
 	@echo "# downloading $@"
 	@mkdir -p $(dir $@)
-	@wget -qN -O $@ https://www.cyberbotics.com/files/repository/www/wwi/$(WEBOTS_VERSION)/webots-module.js
+	@wget -qN -O $@ https://www.cyberbotics.com/files/repository/www/wwi/$(WEBOTS_VERSION)/webots.lib.js
 
 $(INSTALL_TOKEN): package.json
 	@echo "# installing npm dependencies"
