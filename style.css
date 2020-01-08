@@ -151,19 +151,19 @@
     cursor: move;
 }
 
-.fas, .menu-item {
+.nrp-robot-designer-fas, .menu-item {
   margin: 5px;
 }
 
-.fas:hover, .menu-item:hover {
+.nrp-robot-designer-fas:hover, .menu-item:hover {
   color: #68E
 }
 
-.fa-disabled {
+.nrp-robot-designer-fas-disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.fa-selected {
+.nrp-robot-designer-fas-selected {
   color: #6E6;
 }
