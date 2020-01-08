@@ -11550,10 +11550,10 @@ function () {
   }, {
     key: "changeMode",
     value: function changeMode(mode) {
-      this.selectButton.classList.remove('fa-selected');
-      this.translateButton.classList.remove('fa-selected');
-      this.rotateButton.classList.remove('fa-selected');
-      if (mode === 'select') this.selectButton.classList.add('fa-selected');else if (mode === 'translate') this.translateButton.classList.add('fa-selected');else if (mode === 'rotate') this.rotateButton.classList.add('fa-selected');
+      this.selectButton.classList.remove('nrp-robot-designer-fas-selected');
+      this.translateButton.classList.remove('nrp-robot-designer-fas-selected');
+      this.rotateButton.classList.remove('nrp-robot-designer-fas-selected');
+      if (mode === 'select') this.selectButton.classList.add('nrp-robot-designer-fas-selected');else if (mode === 'translate') this.translateButton.classList.add('nrp-robot-designer-fas-selected');else if (mode === 'rotate') this.rotateButton.classList.add('nrp-robot-designer-fas-selected');
       this.robotViewer.handle.setMode(mode);
     }
   }, {
@@ -11651,16 +11651,16 @@ function () {
       if (isStandAlone) {
         var header = document.createElement('div');
         header.classList.add('header');
-        header.innerHTML = "<span>NRP Robot Designer</span>\n        <i class=\"fas fa-robot\"></i>\n        <span class=\"menu-item\">File</span>\n        <span class=\"menu-item\">Help</span>";
+        header.innerHTML = "<span>NRP Robot Designer</span>\n        <i class=\"nrp-robot-designer-fas fas fa-robot\"></i>\n        <span class=\"menu-item\">File</span>\n        <span class=\"menu-item\">Help</span>";
         this.part.appendChild(header);
       }
 
       this.toolbar = document.createElement('div');
       this.toolbar.classList.add('menu');
-      this.toolbar.innerHTML = "\n      <i id=\"nrp-robot-designer-export-button\" class=\"fas fa-file-export\"></i>\n      <span>-</span>\n      <i id=\"nrp-robot-designer-undo-button\" class=\"fas fa-undo fa-disabled\"></i>\n      <i id=\"nrp-robot-designer-redo-button\" class=\"fas fa-redo fa-disabled\"></i>\n      <span>-</span>\n      <i id=\"nrp-robot-designer-select-button\" class=\"fas fa-selected fa-mouse-pointer\"></i>\n      <i id=\"nrp-robot-designer-translate-button\" class=\"fas fa-arrows-alt\"></i>\n      <i id=\"nrp-robot-designer-rotate-button\" class=\"fas fa-sync-alt\"></i>\n      <span>-</span>\n      <i id=\"nrp-robot-designer-delete-button\" class=\"fas fa-trash-alt\"></i>";
+      this.toolbar.innerHTML = "\n      <i id=\"nrp-robot-designer-export-button\" class=\"nrp-robot-designer-fas fas fa-file-export\"></i>\n      <span>-</span>\n      <i id=\"nrp-robot-designer-undo-button\" class=\"nrp-robot-designer-fas fas fa-undo nrp-robot-designer-fas-disabled\"></i>\n      <i id=\"nrp-robot-designer-redo-button\" class=\"nrp-robot-designer-fas fas fa-redo nrp-robot-designer-fas-disabled\"></i>\n      <span>-</span>\n      <i id=\"nrp-robot-designer-select-button\" class=\"nrp-robot-designer-fas fas nrp-robot-designer-fas-selected fa-mouse-pointer\"></i>\n      <i id=\"nrp-robot-designer-translate-button\" class=\"nrp-robot-designer-fas fas fa-arrows-alt\"></i>\n      <i id=\"nrp-robot-designer-rotate-button\" class=\"nrp-robot-designer-fas fas fa-sync-alt\"></i>\n      <span>-</span>\n      <i id=\"nrp-robot-designer-delete-button\" class=\"nrp-robot-designer-fas fas fa-trash-alt\"></i>";
 
       if (isStandAlone) {
-        this.toolbar.innerHTML += "\n        <span>-</span>\n        <i id=\"nrp-robot-designer-maximize-button\" class=\"fas fa-window-maximize\"></i>";
+        this.toolbar.innerHTML += "\n        <span>-</span>\n        <i id=\"nrp-robot-designer-maximize-button\" class=\"nrp-robot-designer-fas fas fa-window-maximize\"></i>";
       }
 
       this.part.appendChild(this.toolbar);
@@ -11755,8 +11755,8 @@ function () {
   }, {
     key: "_updateUndoRedoButtons",
     value: function _updateUndoRedoButtons() {
-      if (this.commands.canRedo()) this.redoButton.classList.remove('fa-disabled');else this.redoButton.classList.add('fa-disabled');
-      if (this.commands.canUndo()) this.undoButton.classList.remove('fa-disabled');else this.undoButton.classList.add('fa-disabled');
+      if (this.commands.canRedo()) this.redoButton.classList.remove('nrp-robot-designer-fas-disabled');else this.redoButton.classList.add('nrp-robot-designer-fas-disabled');
+      if (this.commands.canUndo()) this.undoButton.classList.remove('nrp-robot-designer-fas-disabled');else this.undoButton.classList.add('nrp-robot-designer-fas-disabled');
     }
   }]);
 
