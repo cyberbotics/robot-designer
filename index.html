@@ -22,23 +22,23 @@
   <div class="nrp-robot-designer" id="nrp-robot-designer">
     <div class="header">
       <span>NRP Robot Designer</span>
-      <i class="fas fa-robot"></i>
+      <i class="nrp-robot-designer-fas fas fa-robot"></i>
       <span class="menu-item">File</span>
       <span class="menu-item">Help</span>
     </div>
     <div class="menu">
-      <i class="fas fa-file-export" onclick="openExportModal()"></i>
+      <i class="nrp-robot-designer-fas fas fa-file-export" onclick="openExportModal()"></i>
       <span>-</span>
-      <i id='nrp-robot-designer-undo-button' class="fas fa-undo fa-disabled" onclick="undo()"></i>
-      <i id='nrp-robot-designer-redo-button' class="fas fa-redo fa-disabled" onclick="redo()"></i>
+      <i id='nrp-robot-designer-undo-button' class="nrp-robot-designer-fas fas fa-undo nrp-robot-designer-fas-disabled" onclick="undo()"></i>
+      <i id='nrp-robot-designer-redo-button' class="nrp-robot-designer-fas fas fa-redo nrp-robot-designer-fas-disabled" onclick="redo()"></i>
       <span>-</span>
-      <i id='nrp-robot-designer-select-button' class="fas fa-selected fa-mouse-pointer" onclick="changeMode('select')"></i>
-      <i id='nrp-robot-designer-translate-button' class="fas fa-arrows-alt" onclick="changeMode('translate')"></i>
-      <i id='nrp-robot-designer-rotate-button' class="fas fa-sync-alt" onclick="changeMode('rotate')"></i>
+      <i id='nrp-robot-designer-select-button' class="nrp-robot-designer-fas fas nrp-robot-designer-fas-selected fa-mouse-pointer" onclick="changeMode('select')"></i>
+      <i id='nrp-robot-designer-translate-button' class="nrp-robot-designer-fas fas fa-arrows-alt" onclick="changeMode('translate')"></i>
+      <i id='nrp-robot-designer-rotate-button' class="nrp-robot-designer-fas fas fa-sync-alt" onclick="changeMode('rotate')"></i>
       <span>-</span>
-      <i class="fas fa-trash-alt" onclick="deleteSelectedPart()"></i>
+      <i class="nrp-robot-designer-fas fas fa-trash-alt" onclick="deleteSelectedPart()"></i>
       <span>-</span>
-      <i class="fas fa-window-maximize" onclick="toggleFullScreen()"></i>
+      <i class="nrp-robot-designer-fas fas fa-window-maximize" onclick="toggleFullScreen()"></i>
     </div>
     <div class="main" name="robotViewer" ondrop="drop(event)" ondragenter="dragEnter(event)" ondragover="dragOver(event)" ondragleave="dragLeave(event)" onmousemove="mouseMove(event)" onmousedown="mouseDown(event)" onmouseup="mouseUp(event)"></div>
     <div class="sidebar designer-group"><p class="designer-group-title">Part viewer</p><div name="part-viewer"></div></div>

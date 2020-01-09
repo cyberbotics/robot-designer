@@ -53,13 +53,13 @@ class RobotDesigner {
 
   updateUndoRedoButtons() {
     if (this.commands.canRedo())
-      this.redoButton.classList.remove('fa-disabled');
+      this.redoButton.classList.remove('nrp-robot-designer-fas-disabled');
     else
-      this.redoButton.classList.add('fa-disabled');
+      this.redoButton.classList.add('nrp-robot-designer-fas-disabled');
     if (this.commands.canUndo())
-      this.undoButton.classList.remove('fa-disabled');
+      this.undoButton.classList.remove('nrp-robot-designer-fas-disabled');
     else
-      this.undoButton.classList.add('fa-disabled');
+      this.undoButton.classList.add('nrp-robot-designer-fas-disabled');
   }
 }
 
@@ -124,16 +124,16 @@ function redo() { // eslint-disable-line no-unused-vars
 }
 
 function changeMode(mode) { // eslint-disable-line no-unused-vars
-  designer.selectButton.classList.remove('fa-selected');
-  designer.translateButton.classList.remove('fa-selected');
-  designer.rotateButton.classList.remove('fa-selected');
+  designer.selectButton.classList.remove('nrp-robot-designer-fas-selected');
+  designer.translateButton.classList.remove('nrp-robot-designer-fas-selected');
+  designer.rotateButton.classList.remove('nrp-robot-designer-fas-selected');
 
   if (mode === 'select')
-    designer.selectButton.classList.add('fa-selected');
+    designer.selectButton.classList.add('nrp-robot-designer-fas-selected');
   else if (mode === 'translate')
-    designer.translateButton.classList.add('fa-selected');
+    designer.translateButton.classList.add('nrp-robot-designer-fas-selected');
   else if (mode === 'rotate')
-    designer.rotateButton.classList.add('fa-selected');
+    designer.rotateButton.classList.add('nrp-robot-designer-fas-selected');
 
   designer.robotViewer.handle.setMode(mode);
 }
