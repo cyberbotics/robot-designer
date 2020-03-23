@@ -40,6 +40,8 @@ Other optional properties:
 
 * `slotType`: string that specifies the slot type of the current part.
 
+* `parameters`: list of customizable parameters for the current part.
+
 ### Slot Properties
 
 In order to have a user-friendly slot snap system, slots have different properties.
@@ -58,3 +60,16 @@ It is important that the slot identifier matched the Webots PROTO model slot nam
 - `rotationSnap`: size of rotation step used when moving the connected part using the rotation gizmo: for example *1.5708*. Default value is *-1* that corresponds to an infinitesimal step size. Setting `rotationSnap` to *0* will disable rotating the connected part.
 
 - `rotationGizmoVisibility`: boolean array that specifies which of the *x*, *y*, or *z* rotation axis are enabled: for example *[false, false, true]* will only enable rotation on the *z*-axis. Default value is *[true, true, true]*.
+
+### Parameter Properties
+
+The customizable parameter property should have the format ``<field name>: [option1, option2, ...]``, where `<field name>` corresponds to an existing field in the part model.
+For example:
+```
+"parameters": {
+  "color" : [
+    "yellow",
+    "blue"
+  ]
+}
+```
