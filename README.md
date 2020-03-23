@@ -47,7 +47,7 @@ Parts that need a slot connection that it is currently not available with the ro
 ## Part Viewer
 ![Part Viewer](docs/images/user_manual_part_viewer.png)
 
-The part viewer shows the properties of the selected part and lets customize it
+The part viewer shows the properties of the selected part and lets the user customize it
 In particular it includes the name of the part and all the parameters, if any, that can be modified.
 
 ## How to build a robot
