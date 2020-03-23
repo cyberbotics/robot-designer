@@ -2,7 +2,7 @@
 
 ## Demo
 
-https://omichel.github.io/robot-designer/
+https://cyberbotics.github.io/robot-designer/
 
 ## Run locally
 
