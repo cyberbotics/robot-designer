@@ -86,7 +86,8 @@ Note that all the children parts connected to the selected part will also be del
 ### Object Selection
 
 If you move your mouse pointer over a robot part, a white outline of the part is displayed.
-It is possible to select an object or a robot in the 3D scene by clicking on it using the left mouse button. Once selected, a blue outline is displayed.
+It is possible to select an object or a robot in the 3D scene by clicking on it using the left mouse button.
+Once selected, a blue outline is displayed.
 
 ### Navigation in 3D
 
