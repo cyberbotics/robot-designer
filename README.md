@@ -93,7 +93,8 @@ Once selected, a blue outline is displayed.
 
 #### Rotate Viewpoint
 
-To rotate the camera around the x and y axis, you have to set the mouse pointer in the 3D scene, press the left mouse button, and drag the mouse. The rotation is centered around the scene center.
+To rotate the camera around the x and y axis, you have to set the mouse pointer in the 3D scene, press the left mouse button, and drag the mouse.
+The rotation is centered around the scene center.
 
 #### Translate Viewpoint
 
